@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    min-height: 78vh;
+    color: var(--color2);
+}
+
+.logInTitle{
+    font-size: xx-large;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 10%;
+}
+
+.logInButton{
+    padding: 4px;
+    border: solid 2px var(--color2);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logInButton:hover{
+    color: var(--color7);
+    background-color: var(--color2);
+}

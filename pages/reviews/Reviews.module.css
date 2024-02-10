@@ -1,0 +1,85 @@
+.reviewsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 78vh;
+  color: var(--color2)
+}
+
+.topRow {
+  width: 100%;
+  height: 25vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.titleContainer {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.title {
+  font-size: 80px;
+  color: var(--color2)
+}
+
+.addContainer {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.addButton{
+  width: 180px;
+  height: 50px;
+  border-radius: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  color: var(--color2);
+  border: 1px solid var(--color2);
+  cursor: pointer;
+}
+
+.addButton:hover{
+  background-color: var(--color3shadow);
+}
+
+.content {
+  width: 100%;
+  min-height: 90vh;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px 30px;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding-bottom: 20px;
+}
+
+/************************
+Filters
+*************************/
+
+.sortFilterContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex: 1;
+}

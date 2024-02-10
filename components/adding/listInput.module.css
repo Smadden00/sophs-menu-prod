@@ -1,0 +1,21 @@
+.listContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.listButton{
+    height: 20px;
+    font-size: x-small;
+}
+
+.listTitleContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.listTitle{
+    margin: 0;
+}

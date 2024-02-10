@@ -1,0 +1,79 @@
+.inputWrapper{
+    padding-top: 30px;
+}
+
+.inputBox{
+    position: relative;
+    display: inline-block;
+}
+
+.input{
+    border: none;
+    border-bottom: 2px solid var(--color2);
+    resize: none;
+    outline-color: var(--color2); 
+    border-radius: 5px 5px 0 0px;
+    padding: 5px;
+    font-size: large;
+    min-width: 140px;
+}
+
+.inputTitle{
+    position: absolute;
+    user-select: none;
+    z-index: 90;
+    top: -5px;
+    left: 0;
+    margin-left: 5px;
+    color: #858585;
+    font-weight: 100;
+    font-size: large;
+    transition: all .4s ease;
+}
+
+.inputTitleFocused{
+    top: -32px;
+    left: 0;
+    margin-left: 0;
+    font-size: medium;
+    transition: all .4s ease;
+}
+
+.subtext{
+    font-weight: 100;
+    color: #858585;
+    font-size: small;
+    margin: 0;
+    padding-top: 3px;
+}
+
+/***** City *****/
+
+.citySearchContainer{
+    position: relative;
+    width: auto;
+    background-color: #4e94e9;
+}
+
+.citiesSearchDropdown{
+    position: absolute;
+    width: 100%;
+    background-color: #646652;
+    border-left: thin solid #808275;
+    border-bottom: 2px solid #808275;
+    border-right: 2px solid #808275;
+    margin-top: -6px;
+    border-radius: 0 0 8px 8px;
+    padding: 2px 4px 2px 4px;
+    color: var(--color7);
+    z-index: 99;
+}
+
+.cityOption{
+    padding: 3px;
+    border-radius: 2px;
+}
+
+.cityOptionHover {
+    background-color: #4e94e9;
+}

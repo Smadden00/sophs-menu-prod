@@ -1,0 +1,347 @@
+.homeContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+/*Section 1*/
+.section1{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(var(--color2) 80%, var(--color7));  
+  padding-left: 5vw;
+}
+
+.section1TitleContainer{
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Snell Roundhand;
+  font-family: 600;
+}
+
+.section1Title1 {
+  color: var(--color7);
+  font-size: 150px;
+  margin: 0;
+  padding-top: 40px;
+  padding-left: 40px;
+}
+
+.section1Title2 {
+  color: var(--color7);
+  font-size: 130px;
+  margin: 0;
+  padding: 0;
+}
+
+.section1Content {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar{
+  padding-top: 40px;
+  padding-left: 40px;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: flex-end;
+  padding-right: 40px;
+}
+
+.linkText {
+  font-size: medium;
+}
+
+.reels {
+  height: 90%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+}
+
+/* Section2 */
+
+.section2{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color7);  
+  padding-left: 5vw;
+  padding-right: 5vw;
+  position: relative;
+}
+
+@keyframes scrollBackground {
+  from {
+    transform: translateX(122%);
+  }
+  to {
+    transform: translateX(-122%);
+  }
+}
+
+.section2Background {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.section2Text {
+  position: absolute;
+  width: 53%;
+  background-image: linear-gradient( to right, transparent, var(--color7Transparent) 20%, var(--color7Transparent) 80%, transparent);
+  border-radius: 15px;
+  color: var(--color2);
+  padding-right: 10%;
+  padding-left: 10%;
+  right: 5%;
+  top: 24%;
+  font-size: 25px;
+}
+
+/*top of section2 background*/
+.section2BackgroundContent {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.section2Image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 22%;
+  animation: scrollBackground 25s linear infinite; /* Adjust animation speed as needed */
+  /*position: relative;*/
+}
+
+.section2Image:nth-child(1) {
+  animation-delay: 0s;
+  top: 30%
+}
+
+.section2Image:nth-child(2) {
+  animation-delay: 3s;
+  top: 5%;
+}
+
+.section2Image:nth-child(3) {
+  animation-delay: 6s;
+  top: 25%;
+}
+
+.section2Image:nth-child(4) {
+  animation-delay: 9s;
+  top: 10%;
+}
+
+.section2Image:nth-child(5) {
+  animation-delay: 12s;
+  top: 20%;
+}
+
+/*bottom of section2 background*/
+
+.section2BackgroundContent2 {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.section2Image2 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 22%;
+  animation: scrollBackground 26s linear infinite; /* Adjust animation speed as needed */
+  /*position: relative;*/
+}
+
+.section2Image2:nth-child(1) {
+  animation-delay: 2s;
+  top: 15%
+}
+
+.section2Image2:nth-child(2) {
+  animation-delay: 6s;
+  top: 5%;
+}
+
+.section2Image2:nth-child(3) {
+  animation-delay: 9s;
+  top: 25%;
+}
+
+.section2Image2:nth-child(4) {
+  animation-delay: 12s;
+  top: 10%;
+}
+
+.section2Image2:nth-child(5) {
+  animation-delay: 15s;
+  top: 20%;
+}
+
+
+/* Section 3 */
+.section3{
+  height: 115vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-image: linear-gradient( var(--color7), var(--color2) 15%);
+}
+
+.section3LeftContainer {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section3TitleContainer {
+  height: 25%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 40px;
+  font-size: 20px;
+}
+
+.section3ImageContainer {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 13%;
+}
+
+.section3Image{
+  border: 0.5rem outset transparent;
+  outline: 0.5rem solid var(--color3);
+  border-radius: 5px;
+
+}
+
+.section3TextContainer {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 100px;
+}
+
+.section3InspirationContainer {
+  width: 80%;
+  height: 10%;
+}
+
+.section3LinkText{
+  margin-top: 10%;
+  font-size: 40px;
+  text-decoration: none;
+}
+
+.subtextContainer {
+  margin-top: -20px;
+  width: 350px;
+  height: 50px;
+}
+
+.subtext {
+  font-size: large;
+}
+
+.image {
+  fill: cover;
+}
+
+.content{
+  width: 66%;
+  height: 100%;
+  position: relative;
+}
+
+/*** Section 4 ***/
+
+.section4 {
+  height: 110vh;
+  width: 100%;
+  background-color: var(--color2);
+}
+
+.section4TitleContainer {
+  height: 11%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding-left: 40px;
+  font-size: 20px;
+}
+
+.section4Content {
+  height: 89%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.section4ImageContainer{
+  width: 33.3%;
+  height: 100%;
+  position: relative;
+}
+
+.section4Image {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  object-fit: cover;
+}
+
+.section4TextContainer {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  bottom: 20px;
+  height: 20%;
+}
+
+.section4Text {
+  color: white;
+  font-size: 40px;
+  z-index: 99;
+  padding-left: 10px;
+  background-color: rgba(0, 0, 0, 0.253);
+}
+
+.section4Text:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color3);
+}

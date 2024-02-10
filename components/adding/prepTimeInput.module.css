@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    padding-top: 30px;
+    margin: 0;
+}
+
+.inputsContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

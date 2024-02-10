@@ -1,0 +1,39 @@
+.tableContainer {
+    overflow-x: auto;
+    min-width: 70%;
+  }
+  
+  .title {
+    text-align: left;
+    font-size: 24px;
+  }
+  
+    
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .table th, .table td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .table th {
+    background-color: var(--color2);
+    color: white;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table tr:hover {
+    background-color: #ddd;
+  }
+
+  .tableItem{
+    cursor: pointer;
+  }
+  
