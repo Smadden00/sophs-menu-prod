@@ -1,6 +1,11 @@
-import styles from './fileInput.module.css'
+import styles from './fileInput.module.css';
+import { ChangeEvent } from 'react';
 
-export default function FileInput({handleFileChange}) {
+interface FileInputProps {
+  handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function FileInput({handleFileChange}: FileInputProps) {
 
 
   return (
