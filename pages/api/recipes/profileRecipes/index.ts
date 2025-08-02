@@ -12,14 +12,16 @@ export default async function handler(req, res){
         try{
             const session = await getServerSession(req, res, authOptions);
             if (!session) {
-                return res.status(500).json({ message: 'The profile recipes request was unauthorized' });
+                return res.status(401).json({ message: 'Unauthorized' });
             }
 
             const encrypted_identifier = Encrypt(session.user.email);
 
-
             //ensure the session identifier is the same as the identifier requested
-            const data = await pool.query(`SELECT recipe_name, rating, user_encrypted, recipe_id FROM recipes WHERE user_encrypted='${encrypted_identifier}';`); 
+            const data = await pool.query(
+                'SELECT recipe_name, rating, user_encrypted, recipe_id FROM recipes WHERE user_encrypted = $1',
+                [encrypted_identifier]
+            ); 
             res.status(200).json({ body: data.rows });    
         } catch (error) {
             res.status(500).json({message: "There was an error while fetching the recipe and we could not complete your request. Error: "+ error});

@@ -4,7 +4,9 @@
     "build": "next build",
     "dev": "next dev",
     "start": "NODE_ENV=production ts-node server.ts",
-    "type-check": "tsc --noEmit"
+    "start:pm2": "pm2 start ecosystem.config.js",
+    "type-check": "tsc --noEmit",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "aws-sdk": "^2.1542.0",
@@ -12,23 +14,23 @@
     "dotenv": "^16.3.1",
     "formidable": "^3.5.1",
     "knex": "^3.1.0",
-    "next": "latest",
+    "next": "^15.4.5",
     "next-auth": "^4.24.5",
     "pg": "^8.11.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "recharts": "^2.10.3"
   },
   "devDependencies": {
     "@types/formidable": "^3.4.0",
     "@types/node": "^20.0.0",
     "@types/pg": "^8.11.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.0.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18.18"
   }
 }

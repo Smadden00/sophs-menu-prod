@@ -16,7 +16,28 @@ export const authOptions: NextAuthOptions = {
         }
       }
     })
-  ]
+  ],
+  session: {
+    strategy: "jwt",
+    maxAge: 24 * 60 * 60, // 24 hours
+  },
+  jwt: {
+    maxAge: 24 * 60 * 60, // 24 hours
+  },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production'
+      }
+    }
+  },
+  pages: {
+    error: '/auth/error',
+  }
 };
 
 export default NextAuth(authOptions);

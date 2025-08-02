@@ -27,6 +27,15 @@ const nextConfig = {
   // Optimize for production
   compress: true,
   poweredByHeader: false,
+  reactStrictMode: true,
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
 }
 
 module.exports = nextConfig
