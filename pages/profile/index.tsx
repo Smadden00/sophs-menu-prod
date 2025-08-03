@@ -11,7 +11,7 @@ export default function Profile() {
 
   return (
     <>
-        <Header Title="Profile" />
+        <Header />
         {session ? <LoggedInProfileBody /> : <LogInBody pagePurpose={"view your profile"}/>}
     </>
 )}

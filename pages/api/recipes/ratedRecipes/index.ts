@@ -1,5 +1,5 @@
 /*
-This function will handle the get profile recipes request
+This function will handle the get rated recipes request - recipes that the user has given ratings to
 */
 import pool from "../../../../backend-utils";
 import { getServerSession } from "next-auth/next";
@@ -17,23 +17,20 @@ export default async function handler(req, res){
 
             const encrypted_identifier = Encrypt(session.user.email);
 
-            //Get user's recipes with average ratings from all users
+            // Get recipes that the user has rated along with their ratings
             const data = await pool.query(
-                `SELECT r.recipe_name, r.recipe_id, r.user_encrypted,
-                        COALESCE(ROUND(AVG(rr.rating), 1), 0) as avg_rating
+                `SELECT r.recipe_name, r.recipe_id, rr.rating 
                  FROM recipes r 
-                 LEFT JOIN recipe_ratings rr ON r.recipe_id = rr.recipe_id 
-                 WHERE r.user_encrypted = $1
-                 GROUP BY r.recipe_id, r.recipe_name, r.user_encrypted
+                 INNER JOIN recipe_ratings rr ON r.recipe_id = rr.recipe_id 
+                 WHERE rr.user_encrypted = $1
                  ORDER BY r.recipe_name`,
                 [encrypted_identifier]
             ); 
             res.status(200).json({ body: data.rows });    
         } catch (error) {
-            res.status(500).json({message: "There was an error while fetching the recipe and we could not complete your request. Error: "+ error});
+            res.status(500).json({message: "There was an error while fetching the rated recipes and we could not complete your request. Error: "+ error});
         }
     } else {
-        console.error('Error: the method of the recipe request wasnt GET');
+        console.error('Error: the method of the rated recipes request wasnt GET');
     }
-
 }

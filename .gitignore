@@ -89,3 +89,6 @@ temp/
 
 # OS generated files
 Thumbs.db
+
+#database file
+description_of_database.txt

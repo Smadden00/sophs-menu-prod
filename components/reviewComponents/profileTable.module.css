@@ -1,6 +1,7 @@
 .tableContainer {
     overflow-x: auto;
-    min-width: 70%;
+    width: 450px;
+    min-width: 450px;
   }
   
   .title {
