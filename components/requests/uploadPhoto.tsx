@@ -46,8 +46,8 @@ export default async function UploadPhoto(formidableFiles, photoKey) {
             console.log('Resizing image...');
             imageBuffer = await originalImage
                 .resize(MAX_WIDTH, MAX_HEIGHT, {
-                    fit: 'inside', // Maintain aspect ratio
-                    withoutEnlargement: true // Don't upscale smaller images
+                    fit: 'inside',
+                    withoutEnlargement: true
                 })
                 .jpeg({ quality: JPEG_QUALITY }) // Convert to JPEG with compression
                 .toBuffer();
@@ -69,18 +69,18 @@ export default async function UploadPhoto(formidableFiles, photoKey) {
             region: process.env.S3_BUCKET_REGION || process.env.AWS_REGION
         };
         
-        // Only use access keys if not running on EC2 with IAM role
+        /*// Only use access keys if not running on EC2 with IAM role
         if (process.env.S3_ACCESS_KEY && process.env.S3_SECRET_ACCESS_KEY) {
             s3Config.accessKeyId = process.env.S3_ACCESS_KEY;
             s3Config.secretAccessKey = process.env.S3_SECRET_ACCESS_KEY;
-        }
+        }*/
         
         const s3 = new AWS.S3(s3Config);
 
         //Upload the image to S3
         const s3Response = await s3.putObject({
             Body: imageData,
-            Bucket: "sophs-menu-bucket",
+            Bucket: "sophs-menu-imgs",
             Key: photoKey,
             ContentType: 'image/jpeg', // Always JPEG after processing
             ContentLength: imageData.length
