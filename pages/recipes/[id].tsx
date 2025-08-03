@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import AddAComment from "../../components/adding/addAComment";
 import ConvertMinToHoursAndMin from "../../components/functions/convertMinToHoursAndMin";
 import FetchRecipe from "../../components/requests/fetchRecipe";
+import RecipeRating from "../../components/rating/RecipeRating";
 import type { Recipe } from "../../types";
 
 export default function Recipe() {
@@ -50,15 +51,19 @@ export default function Recipe() {
                         <div className={styles.subTitleContainer}>
                             <p>{meal}</p>
                             <p>Prep Time: {prepTime}</p>
-                            <p>Rating</p>
+                            <p>Recipe Rating</p>
                         </div>
-                    </div>
+                    </div>                    
                     <div className={styles.reviewContainer}> 
                         <p>Ingredients:</p>
                         <ul>{ingredientsListItems}</ul>
                         <p>Instructions:</p>
                         <ul>{instructionsListItems}</ul>
                     </div>
+                    <RecipeRating 
+                        recipeId={id as string}
+                        currentAverageRating={rating}
+                    />
                     <div className={styles.commentsContainer}>
                         <p className={styles.commentsTitle}>Comments</p>
                         <AddAComment usersComment={usersComment} setUsersComment={setUsersComment} id={id} recipeData={recipeData} setRecipeData={setRecipeData} />
