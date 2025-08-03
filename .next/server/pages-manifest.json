@@ -2,9 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/reviews": "pages/reviews.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/reviews/addReview": "pages/reviews/addReview.js",
-  "/": "pages/index.js",
-  "/api/reviews": "pages/api/reviews.js"
+  "/reviews": "pages/reviews.js"
 }

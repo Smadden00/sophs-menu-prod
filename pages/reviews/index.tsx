@@ -8,6 +8,7 @@ import FiltersButton from "../../components/filters/filtersButton";
 import AddClipboardIcon from "../../components/svgs/addClipboardIcon";
 import QuickSort from "../../components/functions/quickSort";
 import SeparateSortBy from "../../components/functions/separateSortBy";
+import SortButton from "../../components/SortButton";
 
 export default function AddReview() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function AddReview() {
   const [lowerPriceVal, setLowerPriceVal] = useState(0);
   const [upperPriceVal, setUpperPriceVal] = useState(4);
   const [selectedStates, setSelectedStates] = useState([]);
-  const [sortBy, setSortBy] = useState(["Rating", "High to Low"]);
+  const [sortBy, setSortBy] = useState<[string, string]>(["Rating", "High to Low"]);
   
   //create an object with all of the filters and filter callbacks so that it is easier to pass down 
   const filterValuesAndCallbacks = {
@@ -81,14 +82,7 @@ export default function AddReview() {
           <h1 className={styles.title}>Reviews</h1>
         </div>
         <div className={styles.sortFilterContainer}>
-          <div className={styles.sortContainer}>
-            <select className={styles.stateDropdown} id="sort-dropdown" value={sortBy[0] + ", " + sortBy[1]} onChange={(e)=>setSortBy(SeparateSortBy(e.target.value))}>
-              <option key="RatingHigh" value="Rating, High to Low">Rating, High to Low</option>
-              <option key="RatingLow" value="Rating, Low to High">Rating, Low to High</option>
-              <option key="PriceHigh" value="Price, High to Low">Price, High to Low</option>
-              <option key="PriceLow" value="Price, Low to High">Price, Low to High</option>
-            </select>
-          </div>
+          <SortButton sortBy={sortBy} setSortBy={setSortBy} />
           <FiltersButton filterValuesAndCallbacks={filterValuesAndCallbacks} isReview={true}/>
         </div>
       </div>
