@@ -125,7 +125,7 @@ export default function RecipeRating({recipeId, userRating = 0 }: RecipeRatingPr
             return (
                 <div className={styles.ratingContainer}>
                     <div className={styles.userRating}>
-                        <h4>Please log in to rate this recipe</h4>
+                        <h4>Please log in to rate this recipe and leave comments</h4>
                         <div className={styles.starRating} onMouseLeave={() => setHoveredRating(0)}>
                             {[1, 2, 3, 4, 5].map((star) => (
                                 <span

@@ -51,8 +51,7 @@
 }
 
 .commentsContainer{
-    margin-top: 30px;
-    border-top: medium solid var(--color2);
+    margin-top: 15px;
     width: 100%
 }
 

@@ -36,12 +36,20 @@ export default async function handler(req, res){
             const commentsResponse = await pool.query('SELECT comment FROM recipesComments WHERE recipe_id = $1', [recipeId]);  
             const comments = commentsResponse.rows.map( ({comment}) => comment);
 
+            //get the average rating from the recipe_ratings table
+            const ratingsResponse = await pool.query(
+                'SELECT AVG(rating)::numeric(3,1) as average_rating FROM recipe_ratings WHERE recipe_id = $1', 
+                [recipeId]
+            );
+            const averageRating = ratingsResponse.rows[0]?.average_rating ? parseFloat(ratingsResponse.rows[0].average_rating) : null;
+
             //combine the data of the recipesData and instructions
             const combinedData = recipesData.rows.map(item => ({
                 ...item,
                 ingredients: ingredients,
                 instructions: instructions,
-                comments: comments
+                comments: comments,
+                averageRating: averageRating,
             }));
             
             res.status(200).json({ body: combinedData });
