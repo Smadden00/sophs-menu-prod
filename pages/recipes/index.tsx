@@ -7,6 +7,7 @@ import AddClipboardIcon from '../../components/svgs/addClipboardIcon'
 import FiltersButton from "../../components/filters/filtersButton";
 import QuickSort from "../../components/functions/quickSort";
 import SeparateSortBy from "../../components/functions/separateSortBy";
+import SortButton from "../../components/SortButton";
 
 export default function Recipes() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function Recipes() {
   const [lowerPrepTime, setLowerPrepTime] = useState(0);
   const [upperPrepTime, setUpperPrepTime] = useState(1500);
   const [mealFilter, setMealFilter] = useState(['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert']);
-  const [sortBy, setSortBy] = useState(['Prep Time', 'Low to High']);
+  const [sortBy, setSortBy] = useState<[string, string]>(['Prep Time', 'Low to High']);
 
   const filterValuesAndCallbacks = {
     lowerPrepTime: lowerPrepTime,
@@ -81,12 +82,7 @@ export default function Recipes() {
           <h1 className={styles.title}>Recipes</h1>
         </div>
         <div className={styles.sortFilterContainer}>
-          <div className={styles.sortContainer}>
-            <select className={styles.stateDropdown} id="sort-dropdown" value={sortBy[0] + ", " + sortBy[1]} onChange={(e)=>setSortBy(SeparateSortBy(e.target.value))}>
-              <option key="PrepTimeHigh" value="Prep Time, High to Low">Prep Time, High to Low</option>
-              <option key="PrepTimeLow" value="Prep Time, Low to High">Prep Time, Low to High</option>
-            </select>
-          </div>
+          <SortButton sortBy={sortBy} setSortBy={setSortBy} isReview={false} />
           <FiltersButton filterValuesAndCallbacks={filterValuesAndCallbacks} isReview={false}/>
         </div>
       </div>

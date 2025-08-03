@@ -4,9 +4,10 @@ import styles from "./SortButton.module.css";
 interface SortButtonProps {
   sortBy: [string, string];
   setSortBy: (sortBy: [string, string]) => void;
+  isReview?: boolean;
 }
 
-export default function SortButton({ sortBy, setSortBy }: SortButtonProps) {
+export default function SortButton({ sortBy, setSortBy, isReview = true }: SortButtonProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
@@ -19,42 +20,67 @@ export default function SortButton({ sortBy, setSortBy }: SortButtonProps) {
       </div>
       {isDropdownOpen && (
         <div className={styles.dropdownMenu}>
-          <div 
-            className={styles.dropdownOption}
-            onClick={() => {
-              setSortBy(["Rating", "High to Low"]);
-              setIsDropdownOpen(false);
-            }}
-          >
-            Rating, High to Low
-          </div>
-          <div 
-            className={styles.dropdownOption}
-            onClick={() => {
-              setSortBy(["Rating", "Low to High"]);
-              setIsDropdownOpen(false);
-            }}
-          >
-            Rating, Low to High
-          </div>
-          <div 
-            className={styles.dropdownOption}
-            onClick={() => {
-              setSortBy(["Price", "High to Low"]);
-              setIsDropdownOpen(false);
-            }}
-          >
-            Price, High to Low
-          </div>
-          <div 
-            className={styles.dropdownOption}
-            onClick={() => {
-              setSortBy(["Price", "Low to High"]);
-              setIsDropdownOpen(false);
-            }}
-          >
-            Price, Low to High
-          </div>
+          {isReview ? (
+            <>
+              <div 
+                className={styles.dropdownOption}
+                onClick={() => {
+                  setSortBy(["Rating", "High to Low"]);
+                  setIsDropdownOpen(false);
+                }}
+              >
+                Rating, High to Low
+              </div>
+              <div 
+                className={styles.dropdownOption}
+                onClick={() => {
+                  setSortBy(["Rating", "Low to High"]);
+                  setIsDropdownOpen(false);
+                }}
+              >
+                Rating, Low to High
+              </div>
+              <div 
+                className={styles.dropdownOption}
+                onClick={() => {
+                  setSortBy(["Price", "High to Low"]);
+                  setIsDropdownOpen(false);
+                }}
+              >
+                Price, High to Low
+              </div>
+              <div 
+                className={styles.dropdownOption}
+                onClick={() => {
+                  setSortBy(["Price", "Low to High"]);
+                  setIsDropdownOpen(false);
+                }}
+              >
+                Price, Low to High
+              </div>
+            </>
+          ) : (
+            <>
+              <div 
+                className={styles.dropdownOption}
+                onClick={() => {
+                  setSortBy(["Prep Time", "High to Low"]);
+                  setIsDropdownOpen(false);
+                }}
+              >
+                Prep Time, High to Low
+              </div>
+              <div 
+                className={styles.dropdownOption}
+                onClick={() => {
+                  setSortBy(["Prep Time", "Low to High"]);
+                  setIsDropdownOpen(false);
+                }}
+              >
+                Prep Time, Low to High
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

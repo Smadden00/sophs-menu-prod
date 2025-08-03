@@ -82,7 +82,7 @@ export default function AddReview() {
           <h1 className={styles.title}>Reviews</h1>
         </div>
         <div className={styles.sortFilterContainer}>
-          <SortButton sortBy={sortBy} setSortBy={setSortBy} />
+          <SortButton sortBy={sortBy} setSortBy={setSortBy} isReview={true} />
           <FiltersButton filterValuesAndCallbacks={filterValuesAndCallbacks} isReview={true}/>
         </div>
       </div>
