@@ -4,7 +4,7 @@ module.exports = {
     script: 'npm',
     args: 'start',
     cwd: '/home/ec2-user/sophs-menu-prod',
-    instances: 1,
+    instances: '1',
     exec_mode: 'fork',
     env: {
       NODE_ENV: 'production',
