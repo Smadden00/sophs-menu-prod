@@ -61,7 +61,7 @@ export default function Recipes() {
   const sortedFilteredReviews = QuickSort(filteredRecipes, sortBy);
 
   //build the images of each recipe
-  const recipesImages = sortedFilteredReviews.map((recipeData, i) => <RecipeListImage title={recipeData.recipe_name} prep_time_in_min={recipeData.prep_time_in_min} meal={recipeData.meal} id={recipeData.recipe_id} key={i} />);
+  const recipesImages = sortedFilteredReviews.map((recipeData, i) => <RecipeListImage title={recipeData.recipe_name} prep_time_in_min={recipeData.prep_time_in_min} meal={recipeData.meal} id={recipeData.recipe_id} rec_img_url={recipeData.rec_img_url} key={i} />);
 
   return (
     <>

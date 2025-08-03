@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import ConvertMinToHoursAndMin from '../components/functions/convertMinToHoursAndMin';
 
-export default function RecipeListImage({title, prep_time_in_min, meal, id}) {
+export default function RecipeListImage({title, prep_time_in_min, meal, id, rec_img_url}) {
   const router = useRouter();
   const [hover, setHover] = useState(false);
   const {hours, min} = ConvertMinToHoursAndMin(prep_time_in_min);
@@ -34,8 +34,8 @@ export default function RecipeListImage({title, prep_time_in_min, meal, id}) {
           height={250}
           width={250}
           className={hover ? styles.darken : undefined}
-          src={`https://sophs-menu-bucket.s3.us-east-2.amazonaws.com/${id}`} 
-          alt={"Food"}
+          src={rec_img_url ? rec_img_url : `https://sophs-menu-bucket.s3.us-east-2.amazonaws.com/${id}`}
+          alt={title || "Food"}
       />
       {hover ? textBox : undefined}
     </div>

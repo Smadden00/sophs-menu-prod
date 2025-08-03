@@ -20,7 +20,7 @@ export default async function handler(req, res){
     if (method == 'GET'){
         try{
             const client = await pool.connect()
-            const data = await client.query('SELECT recipe_id, recipe_name, prep_time_in_min, rating, meal FROM recipes;');
+            const data = await client.query('SELECT recipe_id, recipe_name, prep_time_in_min, rating, meal, rec_img_url FROM recipes;');
             res.status(200).json({ body: data });
         } catch (error) {
             res.status(500).json({message: 'There was an error and we could not complete your get all recipes request. Error: '+ error});
