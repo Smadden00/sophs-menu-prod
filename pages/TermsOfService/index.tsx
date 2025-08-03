@@ -1,10 +1,8 @@
 import React from 'react';
-import Layout from '../components/layout';
 import styles from './Legal.module.css';
 
 export default function TermsOfService() {
   return (
-    <Layout>
       <div className={styles.legalContainer}>
         <div className={styles.legalContent}>
           <h1>Terms of Service</h1>
@@ -145,6 +143,5 @@ export default function TermsOfService() {
           </section>
         </div>
       </div>
-    </Layout>
   );
 }
