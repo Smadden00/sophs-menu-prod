@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0 -p 3000",
     "start": "NODE_ENV=production ts-node server.ts",
     "start:pm2": "pm2 start ecosystem.config.js",
     "type-check": "tsc --noEmit",
