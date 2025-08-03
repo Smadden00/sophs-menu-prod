@@ -1,5 +1,6 @@
 import styles from './filters.module.css';
 import MinMaxSliders from "../minMaxSliders";
+import StateCodes from "../consts/state_codes";
 
 export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShowDropdown}) {
     const {
@@ -10,8 +11,20 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
         lowerPriceVal: lowerPriceVal, 
         setLowerPriceVal: setLowerPriceVal, 
         upperPriceVal: upperPriceVal, 
-        setUpperPriceVal: setUpperPriceVal
+        setUpperPriceVal: setUpperPriceVal,
+        selectedStates: selectedStates,
+        setSelectedStates: setSelectedStates
     } = filterValuesAndCallbacks;
+
+    const stateCodes = StateCodes();
+
+    const handleStateChange = (stateCode) => {
+        if (selectedStates.includes(stateCode)) {
+            setSelectedStates(selectedStates.filter(state => state !== stateCode));
+        } else {
+            setSelectedStates([...selectedStates, stateCode]);
+        }
+    };
 
   return (
     <>
@@ -24,6 +37,7 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
                         setUpperRatingVal(10);
                         setLowerPriceVal(1);
                         setUpperPriceVal(4);
+                        setSelectedStates([]);
                     }}
                 >
                     <p style={{margin: "2px"}}>Clear Filters</p>
@@ -55,6 +69,20 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
                     max={4}
                     step={1}
                 />
+                <p className={styles.filterCategory}>States</p>
+                <div className={styles.stateFilterContainer}>
+                    <div className={styles.stateGrid}>
+                        {stateCodes.map((stateCode) => (
+                            <div 
+                                key={stateCode}
+                                className={`${styles.stateOption} ${selectedStates.includes(stateCode) ? styles.selectedState : ''}`}
+                                onClick={() => handleStateChange(stateCode)}
+                            >
+                                {stateCode}
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
         <div className={styles.filterDropdownArrow} ></div>

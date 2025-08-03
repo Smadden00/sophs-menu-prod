@@ -18,7 +18,26 @@ export default function ListInput({listTitle, array, callback}) {
         callback(newArray);
     }
 
-    const inputs = array.map((arrayItem, i) => <TextInput inputTitle={`${individualInputTitle} ${i+1}`} value={arrayItem} callback={updateArray} index={i} key={`${individualInputTitle} ${i+1}`} isDescriptionBox={false}/>)
+    // New: Remove an item at a given index
+    const removeValueFromArray = (index) => {
+        const newArray = array.filter((_, i) => i !== index);
+        callback(newArray);
+    }
+
+    const inputs = array.map((arrayItem, i) => (
+        <div key={`${individualInputTitle} ${i+1}`} className={styles.inputRow}>
+            <TextInput inputTitle={`${individualInputTitle} ${i+1}`} value={arrayItem} callback={updateArray} index={i} isDescriptionBox={false}/>
+            <button
+                type="button"
+                className={styles.deleteButton}
+                aria-label={`Delete ${individualInputTitle} ${i+1}`}
+                onClick={() => removeValueFromArray(i)}
+                style={{color: 'red', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3em', alignSelf: 'center', padding: 0, margin: 0, height: '32px', width: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+            >
+                x
+            </button>
+        </div>
+    ))
 
   return (
     <div className={styles.listContainer}>

@@ -17,6 +17,7 @@ export default function AddReview() {
   const [upperRatingVal, setUpperRatingVal] = useState(10);
   const [lowerPriceVal, setLowerPriceVal] = useState(0);
   const [upperPriceVal, setUpperPriceVal] = useState(4);
+  const [selectedStates, setSelectedStates] = useState([]);
   const [sortBy, setSortBy] = useState(["Rating", "High to Low"]);
   
   //create an object with all of the filters and filter callbacks so that it is easier to pass down 
@@ -28,7 +29,9 @@ export default function AddReview() {
     lowerPriceVal: lowerPriceVal, 
     setLowerPriceVal: setLowerPriceVal, 
     upperPriceVal: upperPriceVal, 
-    setUpperPriceVal: setUpperPriceVal
+    setUpperPriceVal: setUpperPriceVal,
+    selectedStates: selectedStates,
+    setSelectedStates: setSelectedStates
   };
 
   //Load in all the data
@@ -40,11 +43,14 @@ export default function AddReview() {
 
   //filter out reviews based on filters
   const filteredReviews = reviewsData.filter((review) => {
+    const stateMatch = selectedStates.length === 0 || selectedStates.includes(review.state_code);
+    
     if(
       review.o_rating >= lowerRatingVal && 
       review.o_rating <= upperRatingVal &&
       review.price >= lowerPriceVal &&
-      review.price <= upperPriceVal
+      review.price <= upperPriceVal &&
+      stateMatch
     ){
       return review
     } 

@@ -53,21 +53,17 @@ export default async function handler(req, res){
 
             const { id } = req.query;
             
-            console.log("1")
-
             // Validate and sanitize ID parameter
             const recipeId = parseInt(id as string, 10);
             if (isNaN(recipeId) || recipeId <= 0) {
                 return res.status(400).json({ message: 'Invalid recipe ID' });
             }
 
-            console.log("2")
             const session = await getServerSession(req, res, authOptions);
             if (!session) { //return an error message if the user is unauthorized
                 return res.status(401).json({ message: 'Unauthorized' });
             }
 
-            console.log("3")
             const user_encrypted = Encrypt(session.user.email);
 
             const {comment} = JSON.parse(req.body);
@@ -76,7 +72,7 @@ export default async function handler(req, res){
             if (!comment || typeof comment !== 'string' || comment.trim().length === 0) {
                 return res.status(400).json({ message: 'Comment is required' });
             }
-            console.log("4")
+
             // Sanitize comment (limit length)
             const sanitizedComment = comment.trim().substring(0, 1000);
 

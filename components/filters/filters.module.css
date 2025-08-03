@@ -39,7 +39,7 @@
   .filterDropdownContainer{
     position: absolute;
     width: 15vw;
-    height: 40vh;
+    height: 55vh;
     background-color: var(--color7);
     border: 2px solid var(--color2);
     top: 90px;
@@ -101,4 +101,41 @@
     top: 78px;
     left: 45%;
   }
-  
+
+  .stateFilterContainer {
+    margin: 10px 0;
+  }
+
+  .stateGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .stateOption {
+    padding: 5px 8px;
+    border: 1px solid var(--color2);
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .stateOption:hover {
+    background-color: var(--color3shadow);
+    border-color: var(--color9);
+  }
+
+  .selectedState {
+    background-color: var(--color2);
+    color: var(--color7);
+    border-color: var(--color2);
+  }
+
+  .selectedState:hover {
+    background-color: var(--color9);
+    border-color: var(--color9);
+  }

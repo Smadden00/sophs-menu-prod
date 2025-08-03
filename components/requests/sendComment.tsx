@@ -12,7 +12,6 @@ export default async function SendComment(recipeId, comment, commentCallback, re
             });
 
             if (!response.ok) {
-                console.log("in send comment error")
                 throw new Error('Could not make recipe put request.');
             }
             

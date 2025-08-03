@@ -19,3 +19,9 @@
 .listTitle{
     margin: 0;
 }
+
+.inputRow{
+    display: flex; 
+    align-items: flex-start; 
+    gap: 4px;
+}
