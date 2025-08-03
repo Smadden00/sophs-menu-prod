@@ -2,10 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/reviews/[id]": "pages/reviews/[id].js",
-  "/": "pages/index.js",
   "/reviews": "pages/reviews.js",
-  "/api/reviews": "pages/api/reviews.js",
-  "/api/reviews/[id]": "pages/api/reviews/[id].js",
+  "/recipes": "pages/recipes.js",
+  "/api/recipes": "pages/api/recipes.js",
+  "/": "pages/index.js",
   "/reviews/addReview": "pages/reviews/addReview.js"
 }

@@ -21,6 +21,7 @@ export interface Review {
   state_code: string;
   cuisine?: string;
   location?: string;
+  rest_type?: string;
 }
 
 export interface Comment {

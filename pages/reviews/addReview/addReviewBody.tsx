@@ -57,10 +57,10 @@ export default function AddReviewBody() {
                 <InputCity currCityVal={city} currCityValCallback={setCity}/>
                 <DropdownInput title={"Restaurant Type"} list={restaurantTypes} value={restaurantType} callback={setRestaurantType}/>
                 <h2 className={styles.secondSectionHeader}>Your Ratings</h2>
-                <NumberInput type={'Rating 1-10'} inputTitle="Overall Rating" value={overallRating} callback={setOverallRating} />
-                <NumberInput type={'Rating 1-4'} inputTitle="Price" value={price} callback={setPrice} />
-                <NumberInput type={'Rating 1-10'} inputTitle="Taste" value={taste} callback={setTaste} />
-                <NumberInput type={'Rating 1-10'} inputTitle="Experience" value={experience} callback={setExperience} />
+                <NumberInput type={'Rating 1-10'} inputTitle="Overall Rating" value={overallRating} callback={setOverallRating} subtext="Rate from 1-10" />
+                <NumberInput type={'Rating 1-4'} inputTitle="Price" value={price} callback={setPrice} subtext="Rate from 1-4 ($ to $$$$)" />
+                <NumberInput type={'Rating 1-10'} inputTitle="Taste" value={taste} callback={setTaste} subtext="Rate from 1-10" />
+                <NumberInput type={'Rating 1-10'} inputTitle="Experience" value={experience} callback={setExperience} subtext="Rate from 1-10" />
                 <TextInput inputTitle="Description" value={description} callback={setDescription} isDescriptionBox={true}/>
             </div>
             <input 
