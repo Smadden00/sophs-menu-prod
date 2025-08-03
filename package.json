@@ -3,7 +3,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev -H 0.0.0.0 -p 3000",
-    "start": "NODE_ENV=production ts-node server.ts",
+    "start": "NODE_ENV=production next start -H 0.0.0.0 -p 3000",
+    "start:custom": "NODE_ENV=production node --loader ts-node/esm server.ts",
     "start:pm2": "pm2 start ecosystem.config.js",
     "type-check": "tsc --noEmit",
     "postinstall": "npm run build"
