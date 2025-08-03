@@ -26,7 +26,7 @@ export default function ProfileRecipesTable({profileRecipesData, profileRecipesL
                 <thead>
                 <tr>
                     <th>Recipe</th>
-                    <th>Average Rating</th>
+                    <th>Your Rating</th>
                 </tr>
                 </thead>
                 {tableBody}

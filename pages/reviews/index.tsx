@@ -7,7 +7,6 @@ import FetchAllReviews from "../../components/requests/fetchAllReviews";
 import FiltersButton from "../../components/filters/filtersButton";
 import AddClipboardIcon from "../../components/svgs/addClipboardIcon";
 import QuickSort from "../../components/functions/quickSort";
-import SeparateSortBy from "../../components/functions/separateSortBy";
 import SortButton from "../../components/SortButton";
 
 export default function AddReview() {
@@ -82,8 +81,8 @@ export default function AddReview() {
           <h1 className={styles.title}>Reviews</h1>
         </div>
         <div className={styles.sortFilterContainer}>
-          <SortButton sortBy={sortBy} setSortBy={setSortBy} isReview={true} />
           <FiltersButton filterValuesAndCallbacks={filterValuesAndCallbacks} isReview={true}/>
+          <SortButton sortBy={sortBy} setSortBy={setSortBy} isReview={true} />
         </div>
       </div>
       <div className={styles.content}>

@@ -82,8 +82,8 @@ export default function Recipes() {
           <h1 className={styles.title}>Recipes</h1>
         </div>
         <div className={styles.sortFilterContainer}>
-          <SortButton sortBy={sortBy} setSortBy={setSortBy} isReview={false} />
           <FiltersButton filterValuesAndCallbacks={filterValuesAndCallbacks} isReview={false}/>
+          <SortButton sortBy={sortBy} setSortBy={setSortBy} isReview={false} />
         </div>
       </div>
       <div className={styles.content}>
