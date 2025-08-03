@@ -30,5 +30,13 @@ ALTER TABLE rest_type_review_ref ADD PRIMARY KEY (rest_type_id, review_id);
 ALTER TABLE rest_type_review_ref ADD FOREIGN KEY (rest_type_id) REFERENCES rest_types(rest_type_id) ON DELETE CASCADE;
 ALTER TABLE rest_type_review_ref ADD FOREIGN KEY (review_id) REFERENCES reviews(review_id) ON DELETE CASCADE;
 
+--------NEWNEWNEWNEW---------
+CREATE TABLE recipe_ratings(rating_id SERIAL UNIQUE NOT NULL PRIMARY KEY, recipe_id INTEGER NOT NULL, user_encrypted VARCHAR(64) NOT NULL, rating SMALLINT NOT NULL CHECK (rating >= 1 AND rating <= 5));
+ALTER TABLE recipe_ratings ADD FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE;
+ALTER TABLE recipe_ratings ADD CONSTRAINT unique_user_recipe_rating UNIQUE (recipe_id, user_encrypted);
+CREATE INDEX idx_recipe_ratings_recipe_id ON recipe_ratings(recipe_id);
+CREATE INDEX idx_recipe_ratings_user ON recipe_ratings(user_encrypted);
+------------------------------
+
 Initiating the types of cuisines table
 INSERT INTO rest_types(rest_type) VALUES (‘American’), (‘Fast Food’), (‘Italian’), (‘Mexican’), (‘Burger Joint’), (‘Pizza Place’), (‘Asian Fusion’), (‘Seafood’), (‘Steakhouse’), (‘Barbecue’), (‘Breakfast/Brunch’), (‘Sushi’), (‘Food Truck’), (‘Vegetarian/Vegan’), (‘Mediterranean’), (‘Coffee Shop/Cafe’), (‘French’), (‘Brewpubs/Craft Beer Bar’), (‘Southern/Soul Food’), (‘Thai’);

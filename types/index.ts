@@ -7,6 +7,9 @@ export interface Recipe {
   meal: string;
   instructions: string[];
   comments?: Comment[];
+  averageRating?: number;
+  totalRatings?: number;
+  userRating?: number;
 }
 
 export interface Review {
