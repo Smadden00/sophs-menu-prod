@@ -17,7 +17,7 @@ export default function Recipe() {
     const [usersComment, setUsersComment] = useState("");
 
     const recipe = recipeData as Recipe;
-    const {recipe_name, ingredients, prep_time_in_min, rating, meal, instructions, comments, averageRating} = recipe;
+    const {recipe_name, ingredients, prep_time_in_min, meal, instructions, comments, averageRating} = recipe;
     const {hours, min} = ConvertMinToHoursAndMin(prep_time_in_min);
     const prepTime = (hours > 1) ? `${hours} hrs ${min} min` : (hours == 1) ? `${hours} hr ${min} min` : `${min} min`;
 
@@ -67,7 +67,6 @@ export default function Recipe() {
                     </div>
                     <RecipeRating 
                         recipeId={id as string}
-                        currentAverageRating={rating}
                     />
                     <div className={styles.commentsContainer}>
                         <p className={styles.commentsTitle}>Comments</p>

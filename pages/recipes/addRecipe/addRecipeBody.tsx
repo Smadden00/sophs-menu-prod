@@ -17,7 +17,6 @@ export default function AddRecipeBody() {
     const [recipeName, setRecipeName] = useState('');
     const [ingredients, setIngredients] = useState([]);
     const [totalPrepTimeInMin, setTotalPrepTimeInMin] = useState(0);
-    const [rating, setRating] = useState('');
     const [meal, setMeal] = useState('');
     const [instructions, setInstructions] = useState([]);
     const [imageFile, setImageFile] = useState(undefined);
@@ -65,7 +64,6 @@ export default function AddRecipeBody() {
             </div>
             <div className={styles.inputsContainer}>
                 <TextInput inputTitle="Recipe Name" value={recipeName} callback={setRecipeName} isDescriptionBox={false} />
-                <NumberInput type={'Rating 1-10'} inputTitle="Rating" value={rating} callback={setRating} subtext={"1-10"}/>
                 <DropdownInput title="Meal" list={['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert']} value={meal} callback={setMeal} />
                 <PrepTimeInput setTotalPrepTimeInMin={setTotalPrepTimeInMin} />
                 <ListInput listTitle="Ingredients" array={ingredients} callback={setIngredients}/>
@@ -77,7 +75,7 @@ export default function AddRecipeBody() {
                 value="Submit Recipe"
                 style={{margin: '10px'}}
                 onClick={() => {
-                  SendRecipe(router, recipeName, ingredients, totalPrepTimeInMin, rating, meal, instructions, imageFile, setUploading, setInputError);
+                  SendRecipe(router, recipeName, ingredients, totalPrepTimeInMin, meal, instructions, imageFile, setUploading, setInputError);
                 }}
             />
             {errorAlert}

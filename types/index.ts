@@ -3,7 +3,6 @@ export interface Recipe {
   recipe_name: string;
   ingredients: string[];
   prep_time_in_min: number;
-  rating: number;
   meal: string;
   instructions: string[];
   comments?: Comment[];

@@ -1,10 +1,10 @@
 import SendRecipeSafetyChecks from "../safetyChecks/sendRecipeSafetyChecks";
 import AddSingleQuoteInFrontOfSingleQuote from "../functions/addSingleQuoteInFrontOfSingleQuote";
 
-export default async function SendRecipe(router, recipeName, ingredients, prepTime, rating, meal, instructions, imageFile, setUploading, setInputError) {
+export default async function SendRecipe(router, recipeName, ingredients, prepTime, meal, instructions, imageFile, setUploading, setInputError) {
 
     try {
-            const safetyResponse = SendRecipeSafetyChecks(recipeName, ingredients, prepTime, rating, meal, instructions)
+            const safetyResponse = SendRecipeSafetyChecks(recipeName, ingredients, prepTime, meal, instructions)
             if (safetyResponse.isError){
                 setInputError(safetyResponse);
                 throw new Error(safetyResponse.message);
@@ -23,7 +23,6 @@ export default async function SendRecipe(router, recipeName, ingredients, prepTi
                 recipe_name: recipeNameWithSingleQuotesEscaped,
                 ingredients: ingredientsWithSingleQuotesEscaped, 
                 prep_time: prepTime, 
-                rating: rating, 
                 meal: meal, 
                 instructions: instructionsWithSingleQuotesEscaped
             }));
