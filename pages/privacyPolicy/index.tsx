@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Legal.module.css';
 
 export default function PrivacyPolicy() {
