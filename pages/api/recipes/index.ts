@@ -113,6 +113,15 @@ export default async function handler(req, res){
                 throw new Error(uploadPhotoResponse.err);
             }
             
+            // Save the image URL to the database
+            const s3Bucket = "sophs-menu-imgs";
+            const s3Region = "us-east-1";
+            const imageUrl = `https://${s3Bucket}.s3.${s3Region}.amazonaws.com/${recipe_id}`;
+            await client.query(
+                'UPDATE recipes SET rec_img_url = $1 WHERE recipe_id = $2',
+                [imageUrl, recipe_id]
+            );
+            
             console.log("10")
 
             // commit the transaction

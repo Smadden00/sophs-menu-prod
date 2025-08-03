@@ -21,14 +21,14 @@ ALTER TABLE allergen_recipe_ref ADD FOREIGN KEY (recipe_id) REFERENCES recipes(r
 CREATE TABLE cuisines(cuisine_id SERIAL UNIQUE NOT NULL PRIMARY KEY, cuisine TEXT NOT NULL UNIQUE);
 CREATE TABLE cuisine_recipe_ref(cuisine_id INTEGER NOT NULL, recipe_id INTEGER NOT NULL);
 ALTER TABLE cuisine_recipe_ref ADD PRIMARY KEY (cuisine_id, recipe_id);
-ALTER TABLE cuisine_recipe_ref ADD FOREIGN KEY (cuisine_id) REFERENCES cuisines(cuisine_id);
-ALTER TABLE cuisine_recipe_ref ADD FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id);
+ALTER TABLE cuisine_recipe_ref ADD FOREIGN KEY (cuisine_id) REFERENCES cuisines(cuisine_id) ON DELETE CASCADE;
+ALTER TABLE cuisine_recipe_ref ADD FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE;
 
 CREATE TABLE rest_types(rest_type_id SERIAL UNIQUE NOT NULL PRIMARY KEY, rest_type TEXT NOT NULL UNIQUE);
 CREATE TABLE rest_type_review_ref(rest_type_id INTEGER NOT NULL, review_id INTEGER NOT NULL);
 ALTER TABLE rest_type_review_ref ADD PRIMARY KEY (rest_type_id, review_id);
-ALTER TABLE rest_type_review_ref ADD FOREIGN KEY (rest_type_id) REFERENCES rest_types(rest_type_id);
-ALTER TABLE rest_type_review_ref ADD FOREIGN KEY (review_id) REFERENCES reviews(review_id);
+ALTER TABLE rest_type_review_ref ADD FOREIGN KEY (rest_type_id) REFERENCES rest_types(rest_type_id) ON DELETE CASCADE;
+ALTER TABLE rest_type_review_ref ADD FOREIGN KEY (review_id) REFERENCES reviews(review_id) ON DELETE CASCADE;
 
 Initiating the types of cuisines table
 INSERT INTO rest_types(rest_type) VALUES (‘American’), (‘Fast Food’), (‘Italian’), (‘Mexican’), (‘Burger Joint’), (‘Pizza Place’), (‘Asian Fusion’), (‘Seafood’), (‘Steakhouse’), (‘Barbecue’), (‘Breakfast/Brunch’), (‘Sushi’), (‘Food Truck’), (‘Vegetarian/Vegan’), (‘Mediterranean’), (‘Coffee Shop/Cafe’), (‘French’), (‘Brewpubs/Craft Beer Bar’), (‘Southern/Soul Food’), (‘Thai’);
