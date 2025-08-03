@@ -2,9 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/reviews": "pages/reviews.js",
-  "/recipes": "pages/recipes.js",
-  "/api/recipes": "pages/api/recipes.js",
-  "/": "pages/index.js",
-  "/reviews/addReview": "pages/reviews/addReview.js"
+  "/recipes/addRecipe": "pages/recipes/addRecipe.js"
 }

@@ -1,7 +1,7 @@
 Commands to create the database
 CREATE TABLE reviews(review_id SERIAL UNIQUE NOT NULL PRIMARY KEY, rest_name TEXT NOT NULL, o_rating NUMERIC(3,1) NOT NULL CHECK (o_rating >= 0 AND o_rating <=10), price SMALLINT NOT NULL CHECK (price >= 1 AND price <= 4), taste NUMERIC(3,1) NOT NULL CHECK (taste >= 0 AND taste <=10), experience NUMERIC(3,1) NOT NULL CHECK (experience >= 0 AND experience <=10), description TEXT NOT NULL, user_encrypted VARCHAR(64) NOT NULL, city VARCHAR(50) NOT NULL, soph_submitted BOOLEAN NOT NULL, state_code CHAR(2) NOT NULL);
 
-CREATE TABLE recipes(recipe_id SERIAL UNIQUE NOT NULL PRIMARY KEY, recipe_name TEXT NOT NULL, user_encrypted VARCHAR(64) NOT NULL, ingredients TEXT[], prep_time INTEGER NOT NULL CHECK (prep_time > 0), rating NUMERIC(3,1) NOT NULL CHECK (rating >= 0 AND rating <=10), meal TEXT, rec_img_url TEXT);
+CREATE TABLE recipes(recipe_id SERIAL UNIQUE NOT NULL PRIMARY KEY, recipe_name TEXT NOT NULL, user_encrypted VARCHAR(64) NOT NULL, prep_time INTEGER NOT NULL CHECK (prep_time > 0), rating NUMERIC(3,1) NOT NULL CHECK (rating >= 0 AND rating <=10), meal TEXT, rec_img_url TEXT);
 
 CREATE TABLE recipesComments(comment_id SERIAL UNIQUE NOT NULL PRIMARY KEY, recipe_id INT NOT NULL, comment VARCHAR(150) NOT NULL, user_encrypted VARCHAR(64) NOT NULL);
 ALTER TABLE recipesComments ADD FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE;

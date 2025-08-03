@@ -1,14 +1,67 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
+const sharp = require('sharp');
 
 export default async function UploadPhoto(formidableFiles, photoKey) {
     /*
     This function takes in formidable file data, uploads it to the s3 bucket, then deletes the image data off of the server if the upload was successful.
     */
     try {
+        // Validate file exists
+        if (!formidableFiles.imageFile || !formidableFiles.imageFile[0]) {
+            throw new Error("No image file provided");
+        }
+
+        const file = formidableFiles.imageFile[0];
+        
+        // Validate file type
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+        if (!allowedTypes.includes(file.mimetype)) {
+            throw new Error(`Invalid file type: ${file.mimetype}. Only JPEG, JPG, PNG, and WebP are allowed.`);
+        }
+
+        // Validate file size (e.g., max 25MB for original upload, we'll compress it down)
+        const maxSize = 25 * 1024 * 1024; // 25MB in bytes
+        if (file.size > maxSize) {
+            throw new Error(`File too large: ${file.size} bytes. Maximum size is ${maxSize} bytes.`);
+        }
+
         //get the data of the image saved on the server
-        const imageFilePath = formidableFiles.imageFile[0].filepath;
-        const imageData = await fs.promises.readFile(imageFilePath);
+        const imageFilePath = file.filepath;
+        
+        // Read and process the image with sharp
+        let imageBuffer;
+        const originalImage = sharp(imageFilePath);
+        const metadata = await originalImage.metadata();
+        
+        console.log(`Original image: ${metadata.width}x${metadata.height}, ${Math.round(file.size / 1024)}KB`);
+        
+        // Define max dimensions and quality settings
+        const MAX_WIDTH = 1200;
+        const MAX_HEIGHT = 1200;
+        const JPEG_QUALITY = 80;
+        
+        // Resize if image is too large
+        if (metadata.width > MAX_WIDTH || metadata.height > MAX_HEIGHT) {
+            console.log('Resizing image...');
+            imageBuffer = await originalImage
+                .resize(MAX_WIDTH, MAX_HEIGHT, {
+                    fit: 'inside', // Maintain aspect ratio
+                    withoutEnlargement: true // Don't upscale smaller images
+                })
+                .jpeg({ quality: JPEG_QUALITY }) // Convert to JPEG with compression
+                .toBuffer();
+        } else {
+            // Optimize existing image without resizing
+            console.log('Optimizing image without resizing...');
+            imageBuffer = await originalImage
+                .jpeg({ quality: JPEG_QUALITY })
+                .toBuffer();
+        }
+        
+        console.log(`Processed image size: ${Math.round(imageBuffer.length / 1024)}KB`);
+        
+        const imageData = imageBuffer;
 
         //establish connection with S3 using IAM role or access keys
         const s3Config: any = {
@@ -28,7 +81,9 @@ export default async function UploadPhoto(formidableFiles, photoKey) {
         const s3Response = await s3.putObject({
             Body: imageData,
             Bucket: "sophs-menu-bucket",
-            Key: photoKey
+            Key: photoKey,
+            ContentType: 'image/jpeg', // Always JPEG after processing
+            ContentLength: imageData.length
         }).promise();
 
         //Delete the file from the server afterwards
