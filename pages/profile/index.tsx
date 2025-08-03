@@ -4,7 +4,10 @@ import { useSession } from "next-auth/react"
 import LoggedInProfileBody from "./loggedInProfileBody";
 
 export default function Profile() {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+
+  console.log("Session status:", status)
+  console.log("Session data:", session)
 
   return (
     <>

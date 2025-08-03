@@ -7,18 +7,16 @@ import { useEffect } from "react";
 import DropdownInput from "../../../components/adding/dropdownInput"
 import StateCodes from "../../../components/consts/state_codes";
 import SendReview from "../../../components/requests/sendReview";
-import FetchCities from "../../../components/requests/fetchCities";
-import SearchCities from "../../../components/adding/searchCities";
 import AddingError from "../../../components/adding/addingError";
+import InputCity from "../../../components/adding/inputCity";
 
 export default function AddReviewBody() {
     const router = useRouter();
 
     const [restaurantName, setRestaurantName] = useState('');
     const [state, setState] = useState('');
-    const [cities, setCities] = useState([]);
-    const [citiesLoading, setCitiesLoading] = useState(true);
     const [city, setCity] = useState('')
+    const [restaurantType, setRestaurantType] = useState('');
     const [type, setType] = useState([]);
     const [overallRating, setOverallRating] = useState('');
     const [price, setPrice] = useState('');
@@ -28,13 +26,14 @@ export default function AddReviewBody() {
     const [inputError, setInputError] = useState(null);
 
     const state_codes=StateCodes();
-
-    useEffect(() => {
-        if(state!==''){
-            setCitiesLoading(true);
-            FetchCities(state, setCities, setCitiesLoading);
-        }
-      },[state]);
+    
+    const restaurantTypes = [
+        'American', 'Fast Food', 'Italian', 'Mexican', 'Burger Joint', 
+        'Pizza Place', 'Asian Fusion', 'Seafood', 'Steakhouse', 'Barbecue', 
+        'Breakfast/Brunch', 'Sushi', 'Food Truck', 'Vegetarian/Vegan', 
+        'Mediterranean', 'Coffee Shop/Cafe', 'French', 'Brewpubs/Craft Beer Bar', 
+        'Southern/Soul Food', 'Thai'
+    ];
 
     // Scroll to the top when inputError is not null
     useEffect(() => {
@@ -55,7 +54,8 @@ export default function AddReviewBody() {
                 <h2 className={styles.firstSectionHeader}>Restaurant Information</h2>
                 <TextInput inputTitle="Restaurant Name" value={restaurantName} callback={setRestaurantName} isDescriptionBox={false} />
                 <DropdownInput title={"State"} list={state_codes} value={state} callback={setState}/>
-                <SearchCities cities={cities} currCityVal={city} currCityValCallback={setCity}/>
+                <InputCity currCityVal={city} currCityValCallback={setCity}/>
+                <DropdownInput title={"Restaurant Type"} list={restaurantTypes} value={restaurantType} callback={setRestaurantType}/>
                 <h2 className={styles.secondSectionHeader}>Your Ratings</h2>
                 <NumberInput type={'Rating 1-10'} inputTitle="Overall Rating" value={overallRating} callback={setOverallRating} />
                 <NumberInput type={'Rating 1-4'} inputTitle="Price" value={price} callback={setPrice} />
@@ -68,7 +68,7 @@ export default function AddReviewBody() {
                 value="Submit Review"
                 style={{margin: '10px'}}
                 onClick={() => {
-                    SendReview(router, restaurantName, overallRating, price, taste, experience, description, state, city, cities, setInputError);
+                    SendReview(router, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError);
                 }}
             />
             {errorAlert}

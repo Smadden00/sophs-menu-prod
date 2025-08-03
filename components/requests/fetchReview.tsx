@@ -9,7 +9,6 @@ export default async function FetchReview(id, dataCallback, loadingCallback) {
         dataCallback(reviewData);
         loadingCallback(false)
     } catch (error) {
-        console.log('caught an error while fetching the review data');
         console.error('Error:', error);    
     }
 };

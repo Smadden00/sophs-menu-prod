@@ -1,9 +1,9 @@
-export default function SendReviewSafetyChecks(restaurantName, overallRating, price, taste, experience, description, city, cities) {
+export default function SendReviewSafetyChecks(restaurantName, restaurantType, overallRating, price, taste, experience, description, city) {
         //perform initial safety checks on the data that the client gave
         if( restaurantName.trim() == '' ){
             return {field: 'Restaurant Name', message: 'There must be a restaurant name.', isError: true}
-        } else if(!cities.includes(city)){
-            return {field: 'City', message: 'The city that is input is not in the list of cities.', isError: true}
+        }else if( restaurantType.trim() == '' ){
+            return {field: 'Restaurant Type', message: 'You must select a restaurant type.', isError: true}
         }else if( !(overallRating >= 0 && overallRating <= 10) ){
             return {field: 'Overall Rating', message: 'The value must be between 0 and 10.', isError: true}
         }else if( !(price >= 1 && price <= 4) ){

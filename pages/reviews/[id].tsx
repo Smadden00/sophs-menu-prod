@@ -15,7 +15,7 @@ export default function Review() {
     const [loading, setLoading] = useState(true);
 
     const review = reviewData as Review;
-    const {rest_name, description, experience, o_rating, price, taste, city, state_code} = review;
+    const {rest_name, description, experience, o_rating, price, taste, city, state_code, rest_type} = review;
 
     //Fetch the review data
     useEffect(() => {
@@ -42,8 +42,8 @@ export default function Review() {
                         <h1 className={styles.title}>{rest_name}</h1>
                         <div className={styles.subTitleContainer}>
                             <p>{city}, {state_code}</p>
-                            <p>{BuildPriceSigns(price)}</p>
-                            <p>Cuisines</p>
+                            <p className={styles.centerPrice}>{BuildPriceSigns(price)}</p>
+                            <p>{rest_type || 'Restaurant type not specified'}</p>
                         </div>
                     </div>
                     <div className={styles.reviewSectionContainer}>
@@ -53,8 +53,8 @@ export default function Review() {
                         </div>
                     </div>
                     <div className={styles.reviewSectionContainer}>
-                        <h1>Descriptions</h1>
-                        <p>Description: {description}</p>
+                        <h1>Description</h1>
+                        <p>{description}</p>
                     </div>
                 </div>
             </>

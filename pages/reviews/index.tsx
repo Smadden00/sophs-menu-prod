@@ -36,6 +36,8 @@ export default function AddReview() {
     FetchAllReviews(setReviewsData, setLoading);
   },[]);
 
+  console.log(reviewsData)
+
   //filter out reviews based on filters
   const filteredReviews = reviewsData.filter((review) => {
     if(
@@ -52,7 +54,7 @@ export default function AddReview() {
   const sortedFilteredReviews = QuickSort(filteredReviews, sortBy);
 
   //build the images of each review
-  const reviewsImages = sortedFilteredReviews.map((reviewData, i) => <ReviewCard title={reviewData.rest_name} rating={reviewData.o_rating} price={reviewData.price} id={reviewData.review_id} location={`${reviewData.city}, ${reviewData.state_code}`} cuisine={reviewData.cuisine || 'Not specified'} key={i} />);
+  const reviewsImages = sortedFilteredReviews.map((reviewData, i) => <ReviewCard title={reviewData.rest_name} rating={reviewData.o_rating} price={reviewData.price} id={reviewData.review_id} location={`${reviewData.city}, ${reviewData.state_code}`} restType={reviewData.rest_type || 'Not specified'} key={i} />);
 
 
   return (
