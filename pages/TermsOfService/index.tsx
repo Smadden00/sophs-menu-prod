@@ -136,8 +136,7 @@ export default function TermsOfService() {
               If you have any questions about these Terms of Service, please contact us at:
             </p>
             <p>
-              Email: legal@sophsmenu.com<br />
-              Address: [Your Business Address]
+              Email: Smadden1234567890@gmail.com<br />
             </p>
           </section>
         </div>
