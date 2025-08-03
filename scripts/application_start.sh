@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /home/ec2-user/app-frontend
+cd /home/ec2-user/sophs-menu-prod
 
 # Build the application
 npm run build

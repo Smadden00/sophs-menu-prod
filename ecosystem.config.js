@@ -3,9 +3,9 @@ module.exports = {
     name: 'sophsmenu',
     script: 'npm',
     args: 'start',
-    cwd: '/home/ec2-user/app-frontend',
-    instances: 'max',
-    exec_mode: 'cluster',
+    cwd: '/home/ec2-user/sophs-menu-prod',
+    instances: 1,
+    exec_mode: 'fork',
     env: {
       NODE_ENV: 'production',
       PORT: 3000
