@@ -44,7 +44,6 @@ export default function AddReviewBody() {
 
     const errorAlert = inputError ? <AddingError error={inputError} setInputError={setInputError} /> : null;
 
-  
   return (
         <div className={styles.container}>
             <div className={styles.titleContainer}>

@@ -48,7 +48,7 @@ export default async function handler(req, res){
             
             // Validate numeric fields
             const numericFields = [o_rating, taste, experience];
-            if (numericFields.some(field => isNaN(field) || field <= 0 || field >= 10)) {
+            if (numericFields.some(field => isNaN(field) || field <= 0 || field > 10)) {
                 return res.status(400).json({ message: 'overall rating, taste, and experience fields must be numbers between 1-5' });
             }
 
