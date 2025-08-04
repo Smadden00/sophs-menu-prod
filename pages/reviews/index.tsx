@@ -42,6 +42,16 @@ export default function AddReview() {
     FetchAllReviews(setReviewsData, setLoading);
   },[]);
 
+  //Check for URL query parameters to set filters
+  useEffect(() => {
+    if (router.isReady) {
+      const { sophOnly } = router.query;
+      if (sophOnly === 'true') {
+        setSophSubmittedOnly(true);
+      }
+    }
+  }, [router.isReady, router.query]);
+
   console.log(reviewsData)
 
   //filter out reviews based on filters

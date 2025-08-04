@@ -62,7 +62,7 @@ export default function Section3() {
           >Explore Sophia's Recipes</h1></Link>
           <Link 
             style={{textDecoration: "none"}} 
-            href={{pathname: '/reviews'}}
+            href={{pathname: '/reviews', query: {sophOnly: 'true'}}}
             onMouseEnter={() => setHover(2)}
             onMouseLeave={() => setHover(false)}
           ><h1 
