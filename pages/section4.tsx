@@ -12,7 +12,7 @@ export default function Section4() {
       className={`${styles.image} ${styles.section3Image}`} 
       height={350} 
       width={350} 
-      src="/images/bigImgs/duckduckGoat.jpeg" 
+      src="/images/bigImgs/duckDuckGoat.jpeg" 
       alt="Food from Galit restaurant"
       quality={75}
       loading="lazy"

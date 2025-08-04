@@ -12,7 +12,7 @@ export default function Section2() {
               className={styles.image}
               width={200}
               height={213}
-              src="/images/newimgs/bigSalad.jpg"
+              src="/images/smallImgs/salad.jpg"
               alt={"Food"}
             />
           </div>
@@ -39,7 +39,7 @@ export default function Section2() {
               className={styles.image}
               width={200}
               height={199}
-              src="/images/smallImgs/salad.jpg"
+              src="/images/newimgs/bigSalad.jpg"
               alt={"Food"}
             />
           </div>

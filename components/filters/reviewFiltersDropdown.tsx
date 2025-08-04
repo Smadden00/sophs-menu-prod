@@ -37,7 +37,7 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
                     onClick={() => {
                         setLowerRatingVal(0);
                         setUpperRatingVal(10);
-                        setLowerPriceVal(1);
+                        setLowerPriceVal(0);
                         setUpperPriceVal(4);
                         setSelectedStates([]);
                         setSophSubmittedOnly(false);

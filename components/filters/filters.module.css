@@ -48,6 +48,15 @@
     fill: var(--color7);
   }
 
+  .filterButtonActive {
+    background-color: var(--color2) !important;
+    color: var(--color7) !important;
+  }
+
+  .filterButtonActive .filterIcon {
+    fill: var(--color7) !important;
+  }
+
   .filterDropdownContainer{
     position: absolute;
     width: 18vw;
