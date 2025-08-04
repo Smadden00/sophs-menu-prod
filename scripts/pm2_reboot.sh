@@ -12,4 +12,4 @@ git pull
 npm run build
 
 # Restart with pm2
-npm run pm2:start
+npm run start:pm2
