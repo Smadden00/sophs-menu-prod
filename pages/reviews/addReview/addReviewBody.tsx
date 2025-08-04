@@ -55,7 +55,11 @@ export default function AddReviewBody() {
                 <TextInput inputTitle="Restaurant Name" value={restaurantName} callback={setRestaurantName} isDescriptionBox={false} />
                 <DropdownInput title={"State"} list={state_codes} value={state} callback={setState}/>
                 <InputCity currCityVal={city} currCityValCallback={setCity}/>
-                <DropdownInput title={"Restaurant Type"} list={restaurantTypes} value={restaurantType} callback={setRestaurantType}/>
+                {loadingRestaurantTypes ? (
+                    <DropdownInput title={"Restaurant Type"} list={["Loading restaurant types..."]} value="" callback={() => {}}/>
+                ) : (
+                    <DropdownInput title={"Restaurant Type"} list={restaurantTypes} value={restaurantType} callback={setRestaurantType}/>
+                )}
                 <h2 className={styles.secondSectionHeader}>Your Ratings</h2>
                 <NumberInput type={'Rating 1-10'} inputTitle="Overall Rating" value={overallRating} callback={setOverallRating} subtext="Rate from 1-10" />
                 <NumberInput type={'Rating 1-4'} inputTitle="Price" value={price} callback={setPrice} subtext="Rate from 1-4 ($ to $$$$)" />
