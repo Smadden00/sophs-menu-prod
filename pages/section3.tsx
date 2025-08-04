@@ -12,7 +12,7 @@ export default function Section3() {
       className={`${styles.image} ${styles.section3Image}`} 
       height={350} 
       width={350} 
-      src="/images/smallImgs/spread.jpg" 
+      src="/images/bigImgs/mountainSandwich.jpeg" 
       alt="Food from Galit restaurant"
       quality={75}
       loading="lazy"
@@ -22,7 +22,7 @@ export default function Section3() {
       className={`${styles.image} ${styles.section3Image}`} 
       height={350} 
       width={350} 
-      src="/images/smallImgs/pizza.jpg" 
+      src="/images/bigImgs/duckDuckGoat.jpeg" 
       alt="Food from Duck Duck Goat restaurant"
       quality={75}
       loading="lazy"
@@ -31,7 +31,7 @@ export default function Section3() {
       className={`${styles.image} ${styles.section3Image}`} 
       height={350} 
       width={350} 
-      src="/images/smallImgs/soph.jpg" 
+      src="/images/bigImgs/sophia.jpg" 
       alt="Default food image"
       priority={true}
       quality={75}

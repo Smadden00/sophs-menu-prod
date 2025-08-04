@@ -12,7 +12,7 @@ export default function Section4() {
       className={`${styles.image} ${styles.section3Image}`} 
       height={350} 
       width={350} 
-      src="/images/smallImgs/spread.jpg" 
+      src="/images/bigImgs/duckduckGoat.jpeg" 
       alt="Food from Galit restaurant"
       quality={75}
       loading="lazy"
@@ -31,7 +31,7 @@ export default function Section4() {
       className={`${styles.image} ${styles.section3Image}`} 
       height={350} 
       width={350} 
-      src="/images/smallImgs/pizza.jpg" 
+      src="/images/bigImgs/galit.jpeg" 
       alt="Default food image"
       priority={true}
       quality={75}

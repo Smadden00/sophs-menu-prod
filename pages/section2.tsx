@@ -10,9 +10,9 @@ export default function Section2() {
           <div className={`${styles.section2Image}`} >
             <Image 
               className={styles.image}
-              src="/images/smallImgs/soph.jpg"
-              width={194}
-              height={200}
+              width={200}
+              height={213}
+              src="/images/newimgs/bigSalad.jpg"
               alt={"Food"}
             />
           </div>
@@ -21,7 +21,7 @@ export default function Section2() {
               className={styles.image}
               width={200}
               height={213}
-              src="/images/smallImgs/biscuit.jpg"
+              src="/images/bigImgs/galit.jpeg"
               alt={"Food"}
             />
           </div>
@@ -66,9 +66,9 @@ export default function Section2() {
           <div className={`${styles.section2Image2}`} >
             <Image 
               className={styles.image}
-              width={200}
-              height={213}
-              src="/images/smallImgs/biscuit.jpg"
+              src="/images/smallImgs/soph.jpg"
+              width={194}
+              height={200}
               alt={"Food"}
             />
           </div>
@@ -77,7 +77,7 @@ export default function Section2() {
               className={styles.image}
               width={200}
               height={213}
-              src="/images/smallImgs/biscuit.jpg"
+              src="/images/newimgs/cuc.jpg"
               alt={"Food"}
             />
           </div>
@@ -86,7 +86,7 @@ export default function Section2() {
               className={styles.image}
               width={200}
               height={213}
-              src="/images/smallImgs/biscuit.jpg"
+              src="/images/newimgs/platter.jpg"
               alt={"Food"}
             />
           </div>
@@ -95,7 +95,7 @@ export default function Section2() {
               className={styles.image}
               width={200}
               height={213}
-              src="/images/smallImgs/biscuit.jpg"
+              src="/images/newimgs/steak.jpg"
               alt={"Food"}
             />
           </div>
