@@ -9,6 +9,7 @@ import StateCodes from "../../../components/consts/state_codes";
 import SendReview from "../../../components/requests/sendReview";
 import AddingError from "../../../components/adding/addingError";
 import InputCity from "../../../components/adding/inputCity";
+import FetchRestaurantTypes from "../../../components/requests/fetchRestaurantTypes";
 
 export default function AddReviewBody() {
     const router = useRouter();
@@ -24,16 +25,15 @@ export default function AddReviewBody() {
     const [experience, setExperience] = useState('');
     const [description, setDescription] = useState('');
     const [inputError, setInputError] = useState(null);
+    const [restaurantTypes, setRestaurantTypes] = useState([]);
+    const [loadingRestaurantTypes, setLoadingRestaurantTypes] = useState(true);
 
     const state_codes=StateCodes();
     
-    const restaurantTypes = [
-        'American', 'Fast Food', 'Italian', 'Mexican', 'Burger Joint', 
-        'Pizza Place', 'Asian Fusion', 'Seafood', 'Steakhouse', 'Barbecue', 
-        'Breakfast/Brunch', 'Sushi', 'Food Truck', 'Vegetarian/Vegan', 
-        'Mediterranean', 'Coffee Shop/Cafe', 'French', 'Brewpubs/Craft Beer Bar', 
-        'Southern/Soul Food', 'Thai'
-    ];
+    // Fetch restaurant types from database on component mount
+    useEffect(() => {
+        FetchRestaurantTypes(setRestaurantTypes, setLoadingRestaurantTypes);
+    }, []);
 
     // Scroll to the top when inputError is not null
     useEffect(() => {
