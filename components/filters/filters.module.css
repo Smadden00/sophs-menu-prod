@@ -139,3 +139,27 @@
     background-color: var(--color9);
     border-color: var(--color9);
   }
+
+  .checkboxContainer {
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--color2);
+  }
+
+  .checkbox {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .checkboxLabel:hover {
+    color: var(--color5);
+  }

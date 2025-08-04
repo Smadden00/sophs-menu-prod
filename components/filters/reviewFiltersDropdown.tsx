@@ -13,7 +13,9 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
         upperPriceVal: upperPriceVal, 
         setUpperPriceVal: setUpperPriceVal,
         selectedStates: selectedStates,
-        setSelectedStates: setSelectedStates
+        setSelectedStates: setSelectedStates,
+        sophSubmittedOnly: sophSubmittedOnly,
+        setSophSubmittedOnly: setSophSubmittedOnly
     } = filterValuesAndCallbacks;
 
     const stateCodes = StateCodes();
@@ -38,6 +40,7 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
                         setLowerPriceVal(1);
                         setUpperPriceVal(4);
                         setSelectedStates([]);
+                        setSophSubmittedOnly(false);
                     }}
                 >
                     <p style={{margin: "2px"}}>Clear Filters</p>
@@ -69,6 +72,18 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
                     max={4}
                     step={1}
                 />
+                <p className={styles.filterCategory}>Soph's Reviews</p>
+                <div className={styles.checkboxContainer}>
+                    <label className={styles.checkboxLabel}>
+                        <input 
+                            type="checkbox" 
+                            checked={sophSubmittedOnly}
+                            onChange={(e) => setSophSubmittedOnly(e.target.checked)}
+                            className={styles.checkbox}
+                        />
+                        Show only Soph's  reviews
+                    </label>
+                </div>
                 <p className={styles.filterCategory}>States</p>
                 <div className={styles.stateFilterContainer}>
                     <div className={styles.stateGrid}>
