@@ -46,8 +46,8 @@ export default function AddReview() {
     const stateMatch = selectedStates.length === 0 || selectedStates.includes(review.state_code);
     
     if(
-      review.o_rating >= lowerRatingVal && 
-      review.o_rating <= upperRatingVal &&
+      Number(review.o_rating) >= lowerRatingVal && 
+      Number(review.o_rating) <= upperRatingVal &&
       review.price >= lowerPriceVal &&
       review.price <= upperPriceVal &&
       stateMatch

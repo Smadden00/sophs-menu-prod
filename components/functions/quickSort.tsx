@@ -22,7 +22,7 @@ export default function QuickSort (arr, sortBy){
         } else if (sortBy[0] === "Rating"){
         //if it is not sorting by price then it is sorting by o_rating
             for (let i = 1; i < arr.length; i++) {
-                if (arr[i].o_rating < pivot.o_rating) {
+                if (Number(arr[i].o_rating) < Number(pivot.o_rating)) {
                     leftArr.push(arr[i]);
                 } else {
                     rightArr.push(arr[i]);
@@ -51,7 +51,7 @@ export default function QuickSort (arr, sortBy){
         } else if (sortBy[0] === "Rating"){
         //if it is not sorting by price then it is sorting by o_rating
             for (let i = 1; i < arr.length; i++) {
-                if (arr[i].o_rating > pivot.o_rating) {
+                if (Number(arr[i].o_rating) > Number(pivot.o_rating)) {
                     leftArr.push(arr[i]);
                 } else {
                     rightArr.push(arr[i]);
