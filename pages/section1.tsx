@@ -13,7 +13,7 @@ export default function Section1() {
         <div className={styles.section1Content}>
             <div className={styles.navbar}>
                 <Link className="link" href={{pathname: '/reviews', query: {sophOnly: 'true'}}}><h1 className={styles.linkText}>Soph's Reviews</h1></Link>
-                <Link className="link" href={{pathname: '/recipes'}}><h1 className={styles.linkText}>Soph's Recipes</h1></Link>
+                <Link className="link" href={{pathname: '/recipes', query: {sophOnly: 'true'}}}><h1 className={styles.linkText}>Soph's Recipes</h1></Link>
                 <Link className="link" href={{pathname: '/reviews'}}><h1 className={styles.linkText}>Community Reviews</h1></Link>
                 <Link className="link" href={{pathname: '/recipes'}}><h1 className={styles.linkText}>Community Recipes</h1></Link>
                 <Link className="link" href={{pathname: '/profile'}}>

@@ -8,7 +8,9 @@ export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShow
         upperPrepTime: upperPrepTime, 
         setUpperPrepTime: setUpperPrepTime, 
         mealFilter: mealFilter,
-        setMealFilter: setMealFilter
+        setMealFilter: setMealFilter,
+        sophSubmittedOnly: sophSubmittedOnly,
+        setSophSubmittedOnly: setSophSubmittedOnly
     } = filterValuesAndCallbacks;
 
     const meals = ['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert'];
@@ -51,6 +53,7 @@ export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShow
                         setLowerPrepTime(0);
                         setUpperPrepTime(1500);
                         setMealFilter(['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert']);
+                        setSophSubmittedOnly(false);
                     }}
                 >
                     <p style={{margin: "2px"}}>Clear Filters</p>
@@ -72,6 +75,16 @@ export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShow
                     max={240} 
                     step={15}
                 /> 
+                <p className={styles.filterCategory}>Soph's Recipes</p>
+                <div className={styles.mealFiltersContainer}>
+                    <label>
+                        <input 
+                            type='checkbox'
+                            checked={sophSubmittedOnly}
+                            onChange={(e) => setSophSubmittedOnly(e.target.checked)}
+                        />Show only Soph's recipes
+                    </label>
+                </div>
                 <p className={styles.filterCategory}>Meal</p>
                 <div className={styles.mealFiltersContainer}>
                     {mealRadioInputs}

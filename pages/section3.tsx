@@ -54,7 +54,7 @@ export default function Section3() {
         <div className={styles.section3InspirationContainer}>
           <Link 
             style={{textDecoration: "none"}} 
-            href={{pathname: '/recipes'}}
+            href={{pathname: '/recipes', query: {sophOnly: 'true'}}}
             onMouseEnter={() => setHover(1)}
             onMouseLeave={() => setHover(false)}
           >

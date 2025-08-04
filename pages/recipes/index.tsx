@@ -16,6 +16,7 @@ export default function Recipes() {
   const [lowerPrepTime, setLowerPrepTime] = useState(0);
   const [upperPrepTime, setUpperPrepTime] = useState(1500);
   const [mealFilter, setMealFilter] = useState(['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert']);
+  const [sophSubmittedOnly, setSophSubmittedOnly] = useState(false);
   const [sortBy, setSortBy] = useState<[string, string]>(['Prep Time', 'Low to High']);
 
   const filterValuesAndCallbacks = {
@@ -24,7 +25,9 @@ export default function Recipes() {
     upperPrepTime: upperPrepTime,
     setUpperPrepTime: setUpperPrepTime,
     mealFilter: mealFilter,
-    setMealFilter: setMealFilter
+    setMealFilter: setMealFilter,
+    sophSubmittedOnly: sophSubmittedOnly,
+    setSophSubmittedOnly: setSophSubmittedOnly
   };
 
   //Load in all the data
@@ -47,12 +50,25 @@ export default function Recipes() {
     fetchAllRecipes();
   },[]);
 
-  //filter out reviews based on filters
+  //Check for URL query parameters to set filters
+  useEffect(() => {
+    if (router.isReady) {
+      const { sophOnly } = router.query;
+      if (sophOnly === 'true') {
+        setSophSubmittedOnly(true);
+      }
+    }
+  }, [router.isReady, router.query]);
+
+  //filter out recipes based on filters
   const filteredRecipes = recipesData.filter((recipe) => {
+    const sophSubmittedMatch = !sophSubmittedOnly || recipe.soph_submitted === true;
+    
     if(
       recipe.prep_time_in_min >= lowerPrepTime && 
       recipe.prep_time_in_min <= upperPrepTime &&
-      mealFilter.includes(recipe.meal)
+      mealFilter.includes(recipe.meal) &&
+      sophSubmittedMatch
     ){
       return recipe
     } 

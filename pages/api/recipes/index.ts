@@ -20,7 +20,7 @@ export default async function handler(req, res){
     if (method == 'GET'){
         try{
             const client = await pool.connect()
-            const data = await client.query('SELECT recipe_id, recipe_name, prep_time_in_min, meal, rec_img_url FROM recipes;');
+            const data = await client.query('SELECT recipe_id, recipe_name, prep_time_in_min, meal, rec_img_url, soph_submitted FROM recipes;');
             res.status(200).json({ body: data });
         } catch (error) {
             res.status(500).json({message: 'There was an error and we could not complete your get all recipes request. Error: '+ error});
@@ -60,8 +60,8 @@ export default async function handler(req, res){
             const sanitizedMeal = meal.trim().substring(0, 50);
             
             const recipesResponse = await client.query(
-                'INSERT INTO recipes(recipe_name, prep_time_in_min, meal, user_encrypted) VALUES ($1, $2, $3, $4) RETURNING recipe_id',
-                [sanitizedRecipeName, prep_time, sanitizedMeal, user_encrypted]
+                'INSERT INTO recipes(recipe_name, prep_time_in_min, meal, user_encrypted, soph_submitted) VALUES ($1, $2, $3, $4, $5) RETURNING recipe_id',
+                [sanitizedRecipeName, prep_time, sanitizedMeal, user_encrypted, false]
             );
             const [{recipe_id}] = recipesResponse.rows
             
