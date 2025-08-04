@@ -17,132 +17,243 @@
   .filterButton {
     width: 120px;
     height: 50px;
-    border-radius: 500px;
+    border-radius: 25px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 12px 16px;
     color: var(--color2);
-    border: 1px solid var(--color2);
+    border: 2px solid var(--color2);
     cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(137, 199, 231, 0.1);
   }
   
   .filterButton:hover{
-    background-color: var(--color3shadow);
+    background-color: var(--color2);
+    color: var(--color7);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(137, 199, 231, 0.3);
   }
   
   .filterIcon {
     fill: var(--color2);
+    transition: fill 0.3s ease;
+  }
+  
+  .filterButton:hover .filterIcon {
+    fill: var(--color7);
   }
 
   .filterDropdownContainer{
     position: absolute;
-    width: 15vw;
-    height: 55vh;
+    width: 18vw;
+    min-width: 280px;
+    max-height: 60vh;
     background-color: var(--color7);
     border: 2px solid var(--color2);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
     top: 90px;
     left: -2.7vw;
-    padding: 5px;
-    z-index: 1;
+    padding: 8px;
+    z-index: 1000;
     margin: 0;
+    backdrop-filter: blur(8px);
+    animation: dropdownFadeIn 0.2s ease-out;
+  }
+  
+  @keyframes dropdownFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
   
   .filterDropdownCommandsContainer{
-    height: 15%;
-    border-bottom: 1px solid var(--color2);
-    padding: 0 5px 0 5px;
+    height: auto;
+    min-height: 45px;
+    border-bottom: 1px solid var(--color4);
+    padding: 8px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 12px;
   }
   
   .filtersSelectorsContainer{
-    height: 85%;
-    overflow-y: scroll;
+    height: auto;
+    max-height: 45vh;
+    overflow-y: auto;
+    padding: 0 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color2) transparent;
+  }
+  
+  .filtersSelectorsContainer::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .filtersSelectorsContainer::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .filtersSelectorsContainer::-webkit-scrollbar-thumb {
+    background-color: var(--color2);
+    border-radius: 3px;
+  }
+  
+  .filtersSelectorsContainer::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color5);
   }
   
   .filtersButton{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     color: var(--color2);
-    border-radius: 5px;
-    border: 1px solid var(--color2);
+    border-radius: 8px;
+    border: 1.5px solid var(--color2);
     cursor: pointer;
+    padding: 6px 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: transparent;
+    font-size: 13px;
   }
   
   .filtersButton:hover{
     color: var(--color9);
-    border: 1px solid var(--color9);
+    border-color: var(--color9);
   }
 
   .filterCategory{
-    font-size:large;
-    margin: 5px 0 5px 0;
-    font-weight: 600;
+    font-size: 16px;
+    margin: 20px 0 12px 0;
+    font-weight: 700;
+    color: var(--color1);
+    border-bottom: 2px solid var(--color4);
+    padding-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .filterCategory:first-of-type {
+    margin-top: 8px;
   }
   
   .mealFiltersContainer{
     display: flex;
     flex-direction: column;
-    
+    margin: 12px 0;
+    padding: 12px;
+    background-color: var(--color4);
+    border-radius: 8px;
+    border: 1px solid var(--color6);
+    gap: 8px;
+  }
+  
+  .mealFilterItem {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--color1);
+    font-weight: 500;
+    transition: color 0.2s ease;
+    user-select: none;
+    padding: 4px 0;
+  }
+  
+  .mealFilterItem input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color2);
+    transform: scale(1.1);
+  }
+  
+  .mealFilterItem:hover {
+    color: var(--color5);
   }
 
   .filterDropdownArrow{
     position: absolute;
     width: 0px; 
     height: 0px; 
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-bottom: 12px solid var(--color2);
-    top: 78px;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-bottom: 14px solid var(--color2);
+    top: 76px;
     left: 45%;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   }
 
   .stateFilterContainer {
-    margin: 10px 0;
+    margin: 12px 0;
   }
 
   .stateGrid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-    max-height: 200px;
+    gap: 8px;
+    max-height: 220px;
     overflow-y: auto;
+    padding: 8px;
+    background-color: var(--color4);
+    border-radius: 8px;
+    border: 1px solid var(--color6);
   }
 
   .stateOption {
-    padding: 5px 8px;
-    border: 1px solid var(--color2);
-    border-radius: 4px;
+    padding: 8px 6px;
+    border: 1.5px solid var(--color2);
+    border-radius: 6px;
     text-align: center;
     cursor: pointer;
     font-size: 12px;
+    font-weight: 600;
     transition: all 0.2s ease;
+    background-color: var(--color7);
+    color: var(--color1);
+    user-select: none;
   }
 
   .stateOption:hover {
-    background-color: var(--color3shadow);
-    border-color: var(--color9);
+    background-color: var(--color6);
+    border-color: var(--color5);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(137, 199, 231, 0.2);
   }
 
   .selectedState {
     background-color: var(--color2);
     color: var(--color7);
     border-color: var(--color2);
+    box-shadow: 0 2px 8px rgba(137, 199, 231, 0.4);
   }
 
   .selectedState:hover {
-    background-color: var(--color9);
-    border-color: var(--color9);
+    background-color: var(--color5);
+    border-color: var(--color5);
+    transform: translateY(-1px);
   }
 
   .checkboxContainer {
-    margin: 10px 0;
-    padding: 10px;
+    margin: 12px 0;
+    padding: 12px;
+    background-color: var(--color4);
+    border-radius: 8px;
+    border: 1px solid var(--color6);
   }
 
   .checkboxLabel {
@@ -150,14 +261,19 @@
     align-items: center;
     cursor: pointer;
     font-size: 14px;
-    color: var(--color2);
+    color: var(--color1);
+    font-weight: 500;
+    transition: color 0.2s ease;
+    user-select: none;
   }
 
   .checkbox {
-    margin-right: 8px;
-    width: 16px;
-    height: 16px;
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
     cursor: pointer;
+    accent-color: var(--color2);
+    transform: scale(1.1);
   }
 
   .checkboxLabel:hover {

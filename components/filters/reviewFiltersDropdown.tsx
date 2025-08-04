@@ -42,14 +42,28 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
                         setSelectedStates([]);
                         setSophSubmittedOnly(false);
                     }}
+                    style={{
+                        fontSize: '13px',
+                        fontWeight: '600'
+                    }}
                 >
-                    <p style={{margin: "2px"}}>Clear Filters</p>
+                    Clear Filters
                 </div>
-                <p 
-                    className={styles.filtersButton} 
-                    style={{padding: "2px"}}
+                <div 
+                    className={styles.filtersButton}
                     onClick={() => setShowDropdown(false)}
-                >X</p>
+                    style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '50%',
+                        padding: '0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '16px',
+                        fontWeight: 'bold'
+                    }}
+                >×</div>
             </div>
             <div className={styles.filtersSelectorsContainer}>
                 <p className={styles.filterCategory}>Ratings</p>

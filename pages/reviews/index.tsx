@@ -88,7 +88,7 @@ export default function AddReview() {
             className={styles.addButton} 
             onClick={() => router.push('reviews/addReview')}
           >
-            <h2>Add Review</h2>
+            <p>Add Review</p>
             <AddClipboardIcon />
           </div>
         </div>

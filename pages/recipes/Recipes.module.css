@@ -39,25 +39,46 @@
 }
 
 .addButton{
-  width: 180px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 200px;
   height: 50px;
-  border-radius: 500px;
+  border-radius: 25px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 12px 16px;
   color: var(--color2);
-  border: 1px solid var(--color2);
+  border: 2px solid var(--color2);
   cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  box-shadow: 0 2px 8px rgba(137, 199, 231, 0.1);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .addButton:hover{
-  background-color: var(--color3shadow);
+  background-color: var(--color2);
+  color: var(--color7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(137, 199, 231, 0.3);
 }
 
-.addIcon{
-  fill: var(--color2);
+/* Add icon transition effect */
+.addButton svg {
+  transition: all 0.3s ease;
+  fill: var(--color2) !important;
+  width: 24px;
+  height: 24px;
+  transform: translateY(-2px);
+}
+
+.addButton:hover svg {
+  fill: var(--color7) !important;
 }
 
 .filterContainer {

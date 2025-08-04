@@ -12,11 +12,9 @@ Sort
   -webkit-appearance: none;
   -moz-appearance: none;
   background: transparent;
-  border: 1px solid var(--color2);
+  border: 2px solid var(--color2);
   border-radius: 25px;
   padding: 12px 40px 12px 20px;
-  font-size: 16px;
-  font-weight: 400;
   color: var(--color2);
   cursor: pointer;
   outline: none;
@@ -27,15 +25,22 @@ Sort
   align-items: center;
   justify-content: flex-start;
   height: 50px;
+  box-shadow: 0 2px 8px rgba(137, 199, 231, 0.1);
 }
 
 .sortDropdown:hover {
-  background-color: var(--color3shadow);
+  background-color: var(--color2);
+  color: var(--color7);
   border-color: var(--color2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(137, 199, 231, 0.3);
 }
 
 .sortDropdown:focus {
   border-color: var(--color2);
+  background-color: var(--color2);
+  color: var(--color7);
+  box-shadow: 0 4px 15px rgba(137, 199, 231, 0.3);
 }
 
 .dropdownMenu {
@@ -44,24 +49,43 @@ Sort
   left: 0;
   right: 0;
   background-color: var(--color7);
-  border: 1px solid var(--color2);
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--color2);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  margin-top: 5px;
+  margin-top: 8px;
   overflow: hidden;
+  backdrop-filter: blur(8px);
+  animation: dropdownFadeIn 0.2s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .dropdownOption {
-  padding: 12px 20px;
+  padding: 14px 20px;
   color: var(--color1);
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--color4);
+}
+
+.dropdownOption:last-child {
+  border-bottom: none;
 }
 
 .dropdownOption:hover {
-  background-color: var(--color3shadow);
+  color: var(--color2);
 }
 
 /* Custom arrow */
@@ -74,6 +98,11 @@ Sort
   color: var(--color2);
   font-size: 12px;
   pointer-events: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   z-index: 1;
+}
+
+.sortContainer:hover::after {
+  color: var(--color7);
+  transform: translateY(-50%) translateY(-2px);
 }

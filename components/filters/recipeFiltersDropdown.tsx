@@ -30,14 +30,15 @@ export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShow
 
     const mealRadioInputs = meals.map((meal)=>{
         return (
-            <label key={`${meal} label`}>
+            <label key={`${meal} label`} className={styles.mealFilterItem}>
                 <input 
                 type='checkbox'
                 key={meal}
                 value={meal}
                 checked={mealFilter.includes(meal)}
                 onChange={handleCheckboxChange}
-                />{meal}
+                />
+                {meal}
             </label>
         )
     })
@@ -55,14 +56,28 @@ export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShow
                         setMealFilter(['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert']);
                         setSophSubmittedOnly(false);
                     }}
+                    style={{
+                        fontSize: '13px',
+                        fontWeight: '600'
+                    }}
                 >
-                    <p style={{margin: "2px"}}>Clear Filters</p>
+                    Clear Filters
                 </div>
-                <p 
-                    className={styles.filtersButton} 
-                    style={{padding: "2px"}}
+                <div 
+                    className={styles.filtersButton}
                     onClick={() => setShowDropdown(false)}
-                >X</p>
+                    style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '50%',
+                        padding: '0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '16px',
+                        fontWeight: 'bold'
+                    }}
+                >×</div>
             </div>
             <div className={styles.filtersSelectorsContainer}>
                 <p className={styles.filterCategory}>Prep Time <span style={{fontSize: 'small'}}>(in min)</span></p>
@@ -76,13 +91,15 @@ export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShow
                     step={15}
                 /> 
                 <p className={styles.filterCategory}>Soph's Recipes</p>
-                <div className={styles.mealFiltersContainer}>
-                    <label>
+                <div className={styles.checkboxContainer}>
+                    <label className={styles.checkboxLabel}>
                         <input 
-                            type='checkbox'
+                            type="checkbox"
                             checked={sophSubmittedOnly}
                             onChange={(e) => setSophSubmittedOnly(e.target.checked)}
-                        />Show only Soph's recipes
+                            className={styles.checkbox}
+                        />
+                        Show only Soph's recipes
                     </label>
                 </div>
                 <p className={styles.filterCategory}>Meal</p>
