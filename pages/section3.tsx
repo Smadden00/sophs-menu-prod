@@ -31,7 +31,7 @@ export default function Section3() {
       className={`${styles.image} ${styles.section3Image}`} 
       height={350} 
       width={350} 
-      src="/images/smallImgs/salad.jpg" 
+      src="/images/smallImgs/soph.jpg" 
       alt="Default food image"
       priority={true}
       quality={75}
