@@ -10,15 +10,11 @@ export default async function SendRecipe(router, recipeName, ingredients, prepTi
                 throw new Error(safetyResponse.message);
             }
 
-            console.log("111")
-
             setUploading(true);
 
             const recipeNameWithSingleQuotesEscaped = AddSingleQuoteInFrontOfSingleQuote(recipeName);
             const instructionsWithSingleQuotesEscaped = instructions.map((instruction) => AddSingleQuoteInFrontOfSingleQuote(instruction));
             const ingredientsWithSingleQuotesEscaped = ingredients.map((ingredient) => AddSingleQuoteInFrontOfSingleQuote(ingredient));
-
-            console.log("222")
 
             //construct the form to send to the api endpoint
             const formData = new FormData();
@@ -37,9 +33,6 @@ export default async function SendRecipe(router, recipeName, ingredients, prepTi
             });
 
             if (!response.ok) {
-                console.log("in here")
-                console.log(response.body)
-                console.log("in send recipe error")
                 throw new Error('Could not make recipe put request.');
             }
 

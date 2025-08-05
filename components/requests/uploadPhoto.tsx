@@ -20,12 +20,6 @@ export default async function UploadPhoto(formidableFiles, photoKey) {
             throw new Error(`Invalid file type: ${file.mimetype}. Only JPEG, JPG, PNG, and WebP are allowed.`);
         }
 
-        // Validate file size (e.g., max 25MB for original upload, we'll compress it down)
-        const maxSize = 25 * 1024 * 1024; // 25MB in bytes
-        if (file.size > maxSize) {
-            throw new Error(`File too large: ${file.size} bytes. Maximum size is ${maxSize} bytes.`);
-        }
-
         //get the data of the image saved on the server
         const imageFilePath = file.filepath;
         
@@ -68,13 +62,7 @@ export default async function UploadPhoto(formidableFiles, photoKey) {
             apiVersion: '2006-03-01',
             region: process.env.S3_BUCKET_REGION || process.env.AWS_REGION
         };
-        
-        /*// Only use access keys if not running on EC2 with IAM role
-        if (process.env.S3_ACCESS_KEY && process.env.S3_SECRET_ACCESS_KEY) {
-            s3Config.accessKeyId = process.env.S3_ACCESS_KEY;
-            s3Config.secretAccessKey = process.env.S3_SECRET_ACCESS_KEY;
-        }*/
-        
+                
         const s3 = new AWS.S3(s3Config);
 
         //Upload the image to S3
