@@ -12,6 +12,8 @@ import formidable from 'formidable';
 export const config = {
     api: {
       bodyParser: false, // Disable the default bodyParser
+      responseLimit: false, // Disable response limit
+      sizeLimit: '50mb', // Set upload limit to 50MB
     },
   };
 
