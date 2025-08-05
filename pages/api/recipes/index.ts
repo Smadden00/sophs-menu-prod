@@ -59,12 +59,16 @@ export default async function handler(req, res){
             const sanitizedRecipeName = recipe_name.trim().substring(0, 255);
             const sanitizedMeal = meal.trim().substring(0, 50);
             
+            console.log("1")
+
             const recipesResponse = await client.query(
                 'INSERT INTO recipes(recipe_name, prep_time_in_min, meal, user_encrypted, soph_submitted) VALUES ($1, $2, $3, $4, $5) RETURNING recipe_id',
                 [sanitizedRecipeName, prep_time, sanitizedMeal, user_encrypted, false]
             );
             const [{recipe_id}] = recipesResponse.rows
-            
+
+            console.log("2")
+
             //Insert the instructions into the database. I create separate SQL inserts for each instruction by creating a long string, then insert them all in one command
             const instructionPromises = instructions.map((instruction, i) => {
                 const sanitizedInstruction = instruction.trim().substring(0, 1000);
@@ -74,6 +78,8 @@ export default async function handler(req, res){
                 );
             });
             await Promise.all(instructionPromises);
+
+            console.log("3")
 
             //Here, I build the value portion of the ingredients SQL put query (as a string) that will go into the database
             const ingredientPromises = ingredients.map((ingredient) => {
@@ -85,6 +91,8 @@ export default async function handler(req, res){
             });
             await Promise.all(ingredientPromises);
 
+            console.log("4")
+
             //Upload the image file to an S3 bucket before committing the transaction
             const uploadPhotoResponse = await UploadPhoto(files, `${recipe_id}`);
             if (uploadPhotoResponse.err && uploadPhotoResponse.status==='Failure'){
@@ -92,6 +100,8 @@ export default async function handler(req, res){
                 console.log(uploadPhotoResponse.response)
                 throw new Error(uploadPhotoResponse.err);
             }
+
+            console.log("5")
             
             // Save the image URL to the database
             const s3Bucket = "sophs-menu-imgs";
@@ -101,7 +111,9 @@ export default async function handler(req, res){
                 'UPDATE recipes SET rec_img_url = $1 WHERE recipe_id = $2',
                 [imageUrl, recipe_id]
             );
-            
+
+            console.log("6");
+
             // commit the transaction
             await client.query('COMMIT');
 
