@@ -96,8 +96,6 @@ export default async function handler(req, res){
             //Upload the image file to an S3 bucket before committing the transaction
             const uploadPhotoResponse = await UploadPhoto(files, `${recipe_id}`);
             if (uploadPhotoResponse.err && uploadPhotoResponse.status==='Failure'){
-                console.log('S3Response: ')
-                console.log(uploadPhotoResponse.response)
                 throw new Error(uploadPhotoResponse.err);
             }
 
