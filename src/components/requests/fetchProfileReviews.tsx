@@ -1,4 +1,4 @@
-export default async function FetchProfileReviews(dataCallback, loadingCallback) {
+export default async function FetchProfileReviews(dataCallback: (data: any[]) => void, loadingCallback: (loading: boolean) => void) {
     try{      
       const response = await fetch(`/api/reviews/profileReviews`);
       if (!response.ok) {

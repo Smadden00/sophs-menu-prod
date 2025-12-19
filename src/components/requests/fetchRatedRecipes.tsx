@@ -1,4 +1,4 @@
-export default async function FetchRatedRecipes(dataCallback, loadingCallback) {
+export default async function FetchRatedRecipes(dataCallback: (data: any[]) => void, loadingCallback: (loading: boolean) => void) {
     try{      
       const response = await fetch(`/api/recipes/ratedRecipes`);
       if (!response.ok) {
