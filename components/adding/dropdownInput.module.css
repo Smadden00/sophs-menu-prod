@@ -1,0 +1,38 @@
+
+.inputWrapper{
+    padding-top: 30px;
+}
+
+.inputBox{
+    position: relative;
+}
+
+.input{
+    border: none;
+    border-bottom: 2px solid var(--color2);
+    resize: none;
+    outline-color: var(--color2); 
+    border-radius: 5px 5px 0 0px;
+    padding: 5px;
+    font-size: large;
+}
+
+.inputTitle{
+    position: absolute;
+    z-index: 99;
+    top: -5px;
+    left: 0;
+    margin-left: 5px;
+    color: #858585;
+    font-weight: 100;
+    font-size: large;
+    transition: all .4s ease;
+}
+
+.inputTitleFocused{
+    top: -32px;
+    left: 0;
+    margin-left: 0;
+    font-size: medium;
+    transition: all .4s ease;
+}

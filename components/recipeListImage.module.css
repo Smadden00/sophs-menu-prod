@@ -1,0 +1,138 @@
+.recipesContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 80vh;
+  color: var(--color2)
+}
+
+.topRow {
+  width: 100%;
+  height: 25vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.titleContainer {
+  width: 25%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 80px;
+  color: var(--color2)
+}
+
+.addContainer {
+  width: 15%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.addButton{
+  width: 180px;
+  height: 50px;
+  border-radius: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  color: var(--color2);
+  border: 1px solid var(--color2);
+}
+
+.addButton:hover{
+  background-color: var(--color3shadow);
+}
+
+.addIcon{
+  fill: var(--color2);
+}
+
+.filterContainer {
+  width: 15%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterButton {
+  width: 120px;
+  height: 50px;
+  border-radius: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  color: var(--color2);
+  border: 1px solid var(--color2);
+}
+
+.filterButton:hover{
+  background-color: var(--color3shadow);
+}
+
+.filterIcon {
+  fill: var(--color2);
+}
+
+.content {
+  width: 100%;
+  min-height: 90vh;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding-bottom: 20px;
+}
+
+.image {
+  margin: 0;
+  padding: 0;
+}
+
+.hoveringImageContainer{
+  position: absolute;
+  border-radius: 500px;
+  background: radial-gradient(rgba(0, 0, 0, 0.38) 30%, transparent);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.darken {
+  filter: brightness(35%);
+}
+
+.textBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+}
+
+.imgContainer{
+  height: 250px;
+  width: auto;
+  position: relative;
+  cursor: pointer;
+}

@@ -1,0 +1,12 @@
+.addCommentContainer{
+    margin-right: 10px;
+}
+
+.addComment{
+    width: 50%;
+    border: 2px solid #f2f2f2;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    outline-color: var(--color2);
+    margin-right: 10px;
+}
