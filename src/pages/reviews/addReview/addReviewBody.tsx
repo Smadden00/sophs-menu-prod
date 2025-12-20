@@ -18,14 +18,13 @@ export default function AddReviewBody() {
     const [state, setState] = useState('');
     const [city, setCity] = useState('')
     const [restaurantType, setRestaurantType] = useState('');
-    const [type, setType] = useState([]);
     const [overallRating, setOverallRating] = useState('');
     const [price, setPrice] = useState('');
     const [taste, setTaste] = useState('');
     const [experience, setExperience] = useState('');
     const [description, setDescription] = useState('');
     const [inputError, setInputError] = useState(null);
-    const [restaurantTypes, setRestaurantTypes] = useState([]);
+    const [restaurantTypes, setRestaurantTypes] = useState<string[]>([]);
     const [loadingRestaurantTypes, setLoadingRestaurantTypes] = useState(true);
 
     const state_codes=StateCodes();

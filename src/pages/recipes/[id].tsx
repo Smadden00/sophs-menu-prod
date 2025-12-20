@@ -11,25 +11,18 @@ import type { Recipe } from "../../types";
 export default function Recipe() {
     const { id } = useParams();
 
-    const [recipeData, setRecipeData] = useState<Recipe | {}>({});
+    const [recipeData, setRecipeData] = useState<Recipe | null>(null);
     const [loading, setLoading] = useState(true);
     const [usersComment, setUsersComment] = useState("");
 
-    const recipe = recipeData as Recipe;
-    const {recipe_name, ingredients, prep_time_in_min, meal, instructions, comments, averageRating} = recipe;
-    const {hours, min} = ConvertMinToHoursAndMin(prep_time_in_min);
-    const prepTime = (hours > 1) ? `${hours} hrs ${min} min` : (hours == 1) ? `${hours} hr ${min} min` : `${min} min`;
-
     //Fetch the recipe data
     useEffect(() => {
-        FetchRecipe(id, setRecipeData, setLoading);
+        if (id) {
+            FetchRecipe(Number(id), setRecipeData, setLoading);
+        }
     }, [id]);
 
-    const ingredientsListItems = Array.isArray(ingredients) ? ingredients.map((ingredient, index) => <li key={"ingredient"+index}>{ingredient}</li>) : undefined;
-    const instructionsListItems = Array.isArray(instructions) ? instructions.map((instruction, index) => <li key={"instruction"+index} >Step {index+1}: {instruction}</li>) : undefined;
-    const commentsListItems = Array.isArray(comments) ? comments.map((comment, index) => <div key={"comment"+index} className={styles.comment}>{typeof comment === 'string' ? comment : comment.comment}</div>) : undefined;
-
-    if (loading){
+    if (loading || !recipeData){
         return (
             <>
                 <Header />
@@ -41,6 +34,14 @@ export default function Recipe() {
             </>
         )
     } else {
+        const {recipe_name, ingredients, prep_time_in_min, meal, instructions, comments, averageRating} = recipeData;
+        const {hours, min} = ConvertMinToHoursAndMin(prep_time_in_min);
+        const prepTime = (hours > 1) ? `${hours} hrs ${min} min` : (hours == 1) ? `${hours} hr ${min} min` : `${min} min`;
+        
+        const ingredientsListItems = Array.isArray(ingredients) ? ingredients.map((ingredient, index) => <li key={"ingredient"+index}>{ingredient}</li>) : undefined;
+        const instructionsListItems = Array.isArray(instructions) ? instructions.map((instruction, index) => <li key={"instruction"+index} >Step {index+1}: {instruction}</li>) : undefined;
+        const commentsListItems = Array.isArray(comments) ? comments.map((comment, index) => <div key={"comment"+index} className={styles.comment}>{typeof comment === 'string' ? comment : comment.comment}</div>) : undefined;
+
         return (
             <>
                 <Header />
@@ -74,4 +75,6 @@ export default function Recipe() {
                     </div>
                 </div>
             </>
-)}}
+        )
+    }
+}

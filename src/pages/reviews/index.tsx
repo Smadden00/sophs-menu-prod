@@ -1,24 +1,25 @@
 import styles from "./Reviews.module.css";
 import Header from "../../components/header";
 import ReviewCard from "../../components/reviewCard";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import FetchAllReviews from "../../components/requests/fetchAllReviews";
 import FiltersButton from "../../components/filters/filtersButton";
 import AddClipboardIcon from "../../components/svgs/addClipboardIcon";
 import QuickSort from "../../components/functions/quickSort";
 import SortButton from "../../components/SortButton";
+import { Review } from "../../types/index"
 
 export default function ReviewsListPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [reviewsData, setReviewsData] = useState([]);
+  const [reviewsData, setReviewsData] = useState<Review[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [lowerRatingVal, setLowerRatingVal] = useState(0);
   const [upperRatingVal, setUpperRatingVal] = useState(10);
   const [lowerPriceVal, setLowerPriceVal] = useState(0);
   const [upperPriceVal, setUpperPriceVal] = useState(4);
-  const [selectedStates, setSelectedStates] = useState([]);
+  const [selectedStates, setSelectedStates] = useState<string[]>([]);
   const [sophSubmittedOnly, setSophSubmittedOnly] = useState(searchParams.get('sophOnly') === 'true');
   const [sortBy, setSortBy] = useState<[string, string]>(["Rating", "High to Low"]);
   
@@ -43,8 +44,6 @@ export default function ReviewsListPage() {
     FetchAllReviews(setReviewsData, setLoading);
   },[]);
 
-  console.log(reviewsData)
-
   //filter out reviews based on filters
   const filteredReviews = reviewsData.filter((review) => {
     const stateMatch = selectedStates.length === 0 || selectedStates.includes(review.state_code);
@@ -66,8 +65,7 @@ export default function ReviewsListPage() {
   const sortedFilteredReviews = QuickSort(filteredReviews, sortBy);
 
   //build the images of each review
-  const reviewsImages = sortedFilteredReviews.map((reviewData, i) => <ReviewCard title={reviewData.rest_name} rating={reviewData.o_rating} price={reviewData.price} id={reviewData.review_id} location={`${reviewData.city}, ${reviewData.state_code}`} restType={reviewData.rest_type || 'Not specified'} key={i} />);
-
+  const reviewsImages = sortedFilteredReviews.map((reviewData: Review, i: Key ) => <ReviewCard title={reviewData.rest_name} rating={reviewData.o_rating} price={reviewData.price} id={reviewData.review_id} location={`${reviewData.city}, ${reviewData.state_code}`} restType={reviewData.rest_type || 'Not specified'} key={i} />);
 
   return (
     <>

@@ -1,18 +1,37 @@
+/***********
+Review
+***********/
+
 export interface Recipe {
-  recipe_id?: number;
+  recipe_id: number;
   recipe_name: string;
   ingredients: string[];
   prep_time_in_min: number;
   meal: string;
   instructions: string[];
-  comments?: Comment[];
+  comments: Comment[];
   averageRating?: number;
   totalRatings?: number;
   userRating?: number;
+  recipe_img_url: string;
+  soph_submitted: boolean;
 }
 
+export interface RecipeCardView {
+  recipe_id?: number;
+  recipe_name: string;
+  prep_time_in_min: number;
+  meal: string;
+  recipe_img_url: string;
+  soph_submitted: boolean;
+}
+
+/***********
+Review
+***********/
+
 export interface Review {
-  review_id?: number;
+  review_id: number;
   rest_name: string;
   description: string;
   experience: number;
@@ -21,16 +40,30 @@ export interface Review {
   taste: number;
   city: string;
   state_code: string;
-  cuisine?: string;
-  location?: string;
-  rest_type?: string;
+  user_encrypted: string;
+  soph_submitted: boolean;
+  rest_type: string;
 }
 
+export interface ReviewCardView {
+  review_id: number;
+  rest_name: string;
+  o_rating: number;
+  city: string;
+  state_code: string;
+  soph_submitted: boolean;
+  rest_type: string;
+}
+
+/***********
+Other
+***********/
+
 export interface Comment {
-  id?: number;
+  id: number;
   comment: string;
-  author?: string;
-  created_at?: string;
+  author: string;
+  created_at: string;
 }
 
 export interface City {

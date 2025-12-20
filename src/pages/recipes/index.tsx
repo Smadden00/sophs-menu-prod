@@ -1,18 +1,19 @@
 import styles from "./Recipes.module.css";
 import Header from "../../components/header";
 import RecipeListImage from "../../components/recipeListImage";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import AddClipboardIcon from '../../components/svgs/addClipboardIcon'
 import FiltersButton from "../../components/filters/filtersButton";
 import QuickSort from "../../components/functions/quickSort";
-import SeparateSortBy from "../../components/functions/separateSortBy";
 import SortButton from "../../components/SortButton";
+import FetchAllRecipes from "../../components/requests/fetchAllRecipes";
+import { Recipe } from "../../types/index"
 
 export default function RecipesListPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [recipesData, setRecipesData] = useState([]);
+  const [recipesData, setRecipesData] = useState<Recipe[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [lowerPrepTime, setLowerPrepTime] = useState(0);
   const [upperPrepTime, setUpperPrepTime] = useState(1500);
@@ -34,22 +35,16 @@ export default function RecipesListPage() {
   //Load in all the data
   useEffect(() => {
     const fetchAllRecipes = async () => {
-      try{
-        const response = await fetch('/api/recipes');
-        if (!response.ok) {
-          throw new Error('Error in fetching all recipes.');
-        }
-        const javascriptResponse = await response.json();
-        const recipesData = javascriptResponse.body.rows;
-        setRecipesData(recipesData);
-        setLoading(false);
+      try {
+        await FetchAllRecipes(setRecipesData, setLoading);
       } catch (error) {
-        console.error('Error fetching recipes: ', error);
+        console.error('Error fetching recipes:', error);
       }
     };
-
     fetchAllRecipes();
-  },[]);
+  }, []);
+
+  console.log(recipesData);
 
   //filter out recipes based on filters
   const filteredRecipes = recipesData.filter((recipe) => {
@@ -69,7 +64,7 @@ export default function RecipesListPage() {
   const sortedFilteredRecipes = QuickSort(filteredRecipes, sortBy);
 
   //build the images of each recipe
-  const recipesImages = sortedFilteredRecipes.map((recipeData, i) => <RecipeListImage title={recipeData.recipe_name} prep_time_in_min={recipeData.prep_time_in_min} meal={recipeData.meal} id={recipeData.recipe_id} rec_img_url={recipeData.rec_img_url} key={i} />);
+  const recipesImages = sortedFilteredRecipes.map((recipeData: Recipe, i: Key ) => <RecipeListImage title={recipeData.recipe_name} prep_time_in_min={recipeData.prep_time_in_min} meal={recipeData.meal} id={recipeData.recipe_id} rec_img_url={recipeData.rec_img_url} key={i} />);
 
   return (
     <>

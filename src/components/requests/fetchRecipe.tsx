@@ -1,4 +1,6 @@
-export default async function FetchRecipe(id: number, dataCallback: (data: any) => void, loadingCallback: (loading: boolean) => void) {
+import { Recipe } from "../../types/index";
+
+export default async function FetchRecipe(id: number, dataCallback: (data: Recipe) => void, loadingCallback: (loading: boolean) => void) {
     try {
         const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${id}`);
         if (!response.ok) {

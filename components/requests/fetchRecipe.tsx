@@ -1,4 +1,10 @@
-export default async function FetchRecipe(id, dataCallback, loadingCallback) {
+import type { Recipe } from "../../types";
+
+export default async function FetchRecipe(
+    id: number, 
+    dataCallback: (data: Recipe) => void, 
+    loadingCallback: (loading: boolean) => void
+) {
     try {
         const response = await fetch(`/api/recipes/${id}`);
         if (!response.ok) {

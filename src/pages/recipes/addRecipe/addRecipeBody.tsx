@@ -19,12 +19,12 @@ export default function AddRecipeBody() {
     const [totalPrepTimeInMin, setTotalPrepTimeInMin] = useState(0);
     const [meal, setMeal] = useState('');
     const [instructions, setInstructions] = useState([]);
-    const [imageFile, setImageFile] = useState(undefined);
+    const [imageFile, setImageFile] = useState<File | undefined>(undefined);
     const [inputError, setInputError] = useState(null);
 
     //This function handles the image save
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
         if (file) {
           if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type ==='image/jpg') {
             setImageFile(file);

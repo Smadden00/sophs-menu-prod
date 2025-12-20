@@ -18,7 +18,9 @@ export default function Review() {
 
     //Fetch the review data
     useEffect(() => {
-        FetchReview(id, setReviewData, setLoading);
+        if (id) {
+            FetchReview(Number(id), setReviewData, setLoading);
+        }
     }, [id]);
 
     if (loading){
