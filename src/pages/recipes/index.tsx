@@ -44,8 +44,6 @@ export default function RecipesListPage() {
     fetchAllRecipes();
   }, []);
 
-  console.log(recipesData);
-
   //filter out recipes based on filters
   const filteredRecipes = recipesData.filter((recipe) => {
     const sophSubmittedMatch = !sophSubmittedOnly || recipe.soph_submitted === true;

@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import AddAComment from "../../components/adding/recipes/addAComment";
 import ConvertMinToHoursAndMin from "../../components/functions/convertMinToHoursAndMin";
 import FetchRecipe from "../../components/requests/fetchRecipe";
-import RecipeRating from "../../components/rating/RecipeRating";
+import LoggedInRecipeRating from "../../components/rating/LoggedInRecipeRating";
+import NotLoggedInRecipeRating from "../../components/rating/NotLoggedInRecipeRating";
 import type { Recipe } from "../../types";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -85,7 +86,7 @@ export default function Recipe() {
                         <p>Instructions:</p>
                         <ul>{instructionsListItems}</ul>
                     </div>
-                    <RecipeRating recipeId={recipeId} userAuthData={userAuthData}/>
+                    {isAuthenticated && user ? <LoggedInRecipeRating recipeId={recipeId} userAuthData={userAuthData}/> : <NotLoggedInRecipeRating />}
                     <div className={styles.commentsContainer}>
                         <p className={styles.commentsTitle}>Comments</p>
                         {isAuthenticated && user ? <AddAComment usersComment={usersComment} setUsersComment={setUsersComment} recipeId={recipeId} recipeData={recipeData} setRecipeData={setRecipeData} userAuthData={userAuthData}/>: null}
