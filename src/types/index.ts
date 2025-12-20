@@ -13,7 +13,7 @@ export interface Recipe {
   averageRating?: number;
   totalRatings?: number;
   userRating?: number;
-  recipe_img_url: string;
+  rec_img_url: string;
   soph_submitted: boolean;
 }
 
@@ -22,7 +22,7 @@ export interface RecipeCardView {
   recipe_name: string;
   prep_time_in_min: number;
   meal: string;
-  recipe_img_url: string;
+  rec_img_url: string;
   soph_submitted: boolean;
 }
 
