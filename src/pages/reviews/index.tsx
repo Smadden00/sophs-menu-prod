@@ -21,7 +21,7 @@ export default function ReviewsListPage() {
   const [upperPriceVal, setUpperPriceVal] = useState(4);
   const [selectedStates, setSelectedStates] = useState<string[]>([]);
   const [sophSubmittedOnly, setSophSubmittedOnly] = useState(searchParams.get('sophOnly') === 'true');
-  const [sortBy, setSortBy] = useState<[string, string]>(["Rating", "High to Low"]);
+  const [sortBy, setSortBy] = useState<["Price" | "Rating" | "Prep Time", "Low to High" | "High to Low"]>(["Rating", "High to Low"]);
   
   //create an object with all of the filters and filter callbacks so that it is easier to pass down 
   const filterValuesAndCallbacks = {
@@ -62,7 +62,7 @@ export default function ReviewsListPage() {
     return false
   })
 
-  const sortedFilteredReviews = QuickSort(filteredReviews, sortBy);
+  const sortedFilteredReviews = QuickSort({arr: filteredReviews, sortBy: sortBy});
 
   //build the images of each review
   const reviewsImages = sortedFilteredReviews.map((reviewData: Review, i: Key ) => <ReviewCard title={reviewData.rest_name} rating={reviewData.o_rating} price={reviewData.price} id={reviewData.review_id} location={`${reviewData.city}, ${reviewData.state_code}`} restType={reviewData.rest_type || 'Not specified'} key={i} />);

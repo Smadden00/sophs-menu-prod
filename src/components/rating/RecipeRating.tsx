@@ -12,7 +12,8 @@ interface RecipeRatingProps {
 }
 
 export default function RecipeRating({recipeId, userRating = 0 }: RecipeRatingProps) {
-    const { data: session } = useSession();
+    // const { data: session } = useSession();
+    const session = null; // Temporary: auth not implemented
 
     const [previouslySelectedRating, setPreviouslySelectedRating] = useState(0);
     const [message, setMessage] = useState('');

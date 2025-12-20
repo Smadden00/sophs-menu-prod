@@ -4,7 +4,8 @@ import SendComment from '../../components/requests/sendComment'
 
 export default function AddAComment({usersComment, setUsersComment, id, recipeData, setRecipeData}) {
 
-    const { data: session } = useSession()
+    // const { data: session } = useSession()
+    const session = null; // Temporary: auth not implemented
 
     if (session){
         return (

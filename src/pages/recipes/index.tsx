@@ -19,7 +19,7 @@ export default function RecipesListPage() {
   const [upperPrepTime, setUpperPrepTime] = useState(1500);
   const [mealFilter, setMealFilter] = useState(['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert']);
   const [sophSubmittedOnly, setSophSubmittedOnly] = useState(searchParams.get('sophOnly') === 'true');
-  const [sortBy, setSortBy] = useState<[string, string]>(['Prep Time', 'Low to High']);
+  const [sortBy, setSortBy] = useState<["Price" | "Rating" | "Prep Time", "Low to High" | "High to Low"]>(['Prep Time', 'Low to High']);
 
   const filterValuesAndCallbacks = {
     lowerPrepTime: lowerPrepTime,
@@ -61,7 +61,7 @@ export default function RecipesListPage() {
     return false
   });
 
-  const sortedFilteredRecipes = QuickSort(filteredRecipes, sortBy);
+  const sortedFilteredRecipes = QuickSort({arr: filteredRecipes, sortBy: sortBy});
 
   //build the images of each recipe
   const recipesImages = sortedFilteredRecipes.map((recipeData: Recipe, i: Key ) => <RecipeListImage title={recipeData.recipe_name} prep_time_in_min={recipeData.prep_time_in_min} meal={recipeData.meal} id={recipeData.recipe_id} rec_img_url={recipeData.rec_img_url} key={i} />);

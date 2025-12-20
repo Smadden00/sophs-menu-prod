@@ -1,3 +1,9 @@
+export default function inputCity() {
+
+  return (
+    <></>
+  )}
+
 /*import styles from './inputs.module.css'
 import { useState, useRef } from "react"
 

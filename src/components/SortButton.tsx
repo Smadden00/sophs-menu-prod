@@ -1,9 +1,13 @@
 import { useState } from "react";
 import styles from "./SortButton.module.css";
 
+type SortAttribute = "Price" | "Rating" | "Prep Time";
+type SortDirection = "Low to High" | "High to Low";
+type SortBy = [SortAttribute, SortDirection];
+
 interface SortButtonProps {
-  sortBy: [string, string];
-  setSortBy: (sortBy: [string, string]) => void;
+  sortBy: SortBy;
+  setSortBy: (sortBy: SortBy) => void;
   isReview?: boolean;
 }
 
