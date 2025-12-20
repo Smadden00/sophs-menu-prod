@@ -3,29 +3,32 @@ import React, { useState, useEffect } from 'react';
 import styles from './RecipeRating.module.css';
 import SendRating from '../../components/requests/sendRating';
 import FetchUsersRecipeRating from '../requests/fetchUsersRecipeRating';
+import { Auth0ContextInterface, User } from '@auth0/auth0-react';
 
 interface RecipeRatingProps {
-  recipeId: number | string;
+  recipeId: number;
   currentAverageRating?: number;
   userRating?: number;
   onRatingSubmitted?: () => void;
+  userAuthData: Auth0ContextInterface<User>;
 }
 
-export default function RecipeRating({recipeId, userRating = 0 }: RecipeRatingProps) {
-    // const { data: session } = useSession();
-    const session = null; // Temporary: auth not implemented
+export default function RecipeRating({recipeId, userRating = 0 , userAuthData}: RecipeRatingProps) {
 
-    const [previouslySelectedRating, setPreviouslySelectedRating] = useState(0);
+    const { user, isAuthenticated, isLoading } = userAuthData;
+
+    //FIX THE ANY BELOW 
+    const [previouslySelectedRating, setPreviouslySelectedRating] = useState<any>(0);
     const [message, setMessage] = useState('');
     const [hoveredRating, setHoveredRating] = useState(0);
     const [isUsersRatingLoading, setIsUsersRatingLoading] = useState(true);
 
     useEffect(() => {
-        if (session) {
-            // Fetch the user's rating for the recipe
-            FetchUsersRecipeRating(recipeId, setPreviouslySelectedRating, setIsUsersRatingLoading);
+        // Fetch the user's rating for the recipe
+        if (isAuthenticated && user && user.email) {
+            FetchUsersRecipeRating({recipeid: recipeId, usersRatingCallback: setPreviouslySelectedRating, loadingCallback: setIsUsersRatingLoading, userEmail: user.email});
         }
-    }, []);
+    }, [isAuthenticated]);
 
     const getStarClass = (starNumber: number) => {
         const baseClass = `${styles.star} `;
@@ -39,9 +42,9 @@ export default function RecipeRating({recipeId, userRating = 0 }: RecipeRatingPr
     };
 
     //if the user is logged in
-    if(session) {
+    if(isAuthenticated && user) {
         //if the users rating is still loading
-        if (isUsersRatingLoading){
+        if (isLoading){
             return (
                 <div className={styles.ratingContainer}>
                     <div className={styles.userRating}>

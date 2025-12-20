@@ -4,16 +4,16 @@ import { useState, useRef } from "react";
 interface NumberInputProps {
   type: string;
   inputTitle: string;
-  value: string;
-  callback: (value: string) => void;
+  value: number;
+  callback: (value: number) => void;
   subtext?: string;
 }
 
 export default function NumberInput({type, inputTitle, value, callback, subtext}: NumberInputProps) {
 
   const [textAreaFocused, setTextAreaFocused] = useState(false);
-  const myRef = useRef(null);
-  const hasVal = value !== '';
+  const myRef = useRef<HTMLInputElement>(null);
+  const hasVal = value !== -1;
 
     const getInputValue = () => {
       if (type === 'Rating 1-10'){
@@ -21,8 +21,8 @@ export default function NumberInput({type, inputTitle, value, callback, subtext}
           <input 
             type="number" 
             ref={myRef}
-            value={value} 
-            onChange={(e) => callback(e.target.value)}
+            value={value === -1 ? '' : value} 
+            onChange={(e) => callback(Number(e.target.value))}
             id={inputTitle} 
             name={inputTitle} 
             min="0" 
@@ -40,8 +40,8 @@ export default function NumberInput({type, inputTitle, value, callback, subtext}
             type="number" 
             ref={myRef}
             id={inputTitle} 
-            value={value} 
-            onChange={(e) => callback(e.target.value)}
+            value={value === -1 ? '' : value} 
+            onChange={(e) => callback(Number(e.target.value))}
             name={inputTitle} 
             min="1" 
             max="4" 
@@ -58,8 +58,8 @@ export default function NumberInput({type, inputTitle, value, callback, subtext}
             type="number" 
             ref={myRef}
             id={inputTitle} 
-            value={value} 
-            onChange={(e) => callback(e.target.value)}
+            value={value === -1 ? '' : value} 
+            onChange={(e) => callback(Number(e.target.value))}
             name={inputTitle} 
             min="1" 
             max="24" 
@@ -76,8 +76,8 @@ export default function NumberInput({type, inputTitle, value, callback, subtext}
             type="number" 
             ref={myRef}
             id={inputTitle} 
-            value={value} 
-            onChange={(e) => callback(e.target.value)}
+            value={value === -1 ? '' : value} 
+            onChange={(e) => callback(Number(e.target.value))}
             name={inputTitle} 
             min="0" 
             max="45" 
@@ -99,7 +99,7 @@ export default function NumberInput({type, inputTitle, value, callback, subtext}
     <div className={styles.inputWrapper}>
       <div className={styles.inputBox}>
           {input}
-          <h1 className={inputTitleClassName} onClick={()=>myRef.current.focus()}>{inputTitle}</h1>
+          <h1 className={inputTitleClassName} onClick={()=>myRef.current?.focus()}>{inputTitle}</h1>
           <h3 className={styles.subtext}>{subtext}</h3>
       </div>
     </div>

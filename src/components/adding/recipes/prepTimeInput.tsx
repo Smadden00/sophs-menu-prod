@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import styles from "./prepTimeInput.module.css";
-import NumberInput from "./numberInput";
+import NumberInput from "../numberInput";
 
-export default function PrepTimeInput({setTotalPrepTimeInMin}) {
+export default function PrepTimeInput({setTotalPrepTimeInMin}: {setTotalPrepTimeInMin: (time: number) => void}) {
     
-  const [prepTimeHours, setPrepTimeHours] = useState('');
-  const [prepTimeMin, setPrepTimeMin] = useState('');
+  const [prepTimeHours, setPrepTimeHours] = useState<number>(-1);
+  const [prepTimeMin, setPrepTimeMin] = useState<number>(-1);
     
   useEffect(()=> {
     const totalPrepTimeInMin = (Number(prepTimeHours)*60)+Number(prepTimeMin);

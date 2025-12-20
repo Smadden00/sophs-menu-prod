@@ -2,33 +2,53 @@ import Header from "../../components/header";
 import { useState, useEffect } from "react";
 import styles from "./Recipe.module.css";
 import { useParams } from "react-router-dom";
-import AddAComment from "../../components/adding/addAComment";
+import AddAComment from "../../components/adding/recipes/addAComment";
 import ConvertMinToHoursAndMin from "../../components/functions/convertMinToHoursAndMin";
 import FetchRecipe from "../../components/requests/fetchRecipe";
 import RecipeRating from "../../components/rating/RecipeRating";
 import type { Recipe } from "../../types";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Recipe() {
+    const userAuthData = useAuth0();
+    const { user, isAuthenticated, isLoading } = userAuthData;
     const { id } = useParams();
+    const recipeId = Number(id);
 
     const [recipeData, setRecipeData] = useState<Recipe | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [recipeLoading, setRecipeLoading] = useState(true);
     const [usersComment, setUsersComment] = useState("");
 
     //Fetch the recipe data
     useEffect(() => {
-        if (id) {
-            FetchRecipe(Number(id), setRecipeData, setLoading);
-        }
-    }, [id]);
+        const fetchData = async () => {
+            if (recipeId) {
+                await FetchRecipe({recipeId, dataCallback: setRecipeData, loadingCallback: setRecipeLoading});
+            } else {
+                setRecipeLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
 
-    if (loading || !recipeData){
+    if (recipeLoading){
         return (
             <>
                 <Header />
                 <div className={styles.container}>
                     <div className={styles.titleContainer}>
                         <h1 className={styles.title}>LOADING</h1>
+                    </div>
+                </div>
+            </>
+        )
+    } else if (!recipeData){
+        return (
+            <>
+                <Header />
+                <div className={styles.container}>
+                    <div className={styles.titleContainer}>
+                        <h1 className={styles.title}>Data not available</h1>
                     </div>
                 </div>
             </>
@@ -65,12 +85,10 @@ export default function Recipe() {
                         <p>Instructions:</p>
                         <ul>{instructionsListItems}</ul>
                     </div>
-                    <RecipeRating 
-                        recipeId={id as string}
-                    />
+                    <RecipeRating recipeId={recipeId} userAuthData={userAuthData}/>
                     <div className={styles.commentsContainer}>
                         <p className={styles.commentsTitle}>Comments</p>
-                        <AddAComment usersComment={usersComment} setUsersComment={setUsersComment} id={id} recipeData={recipeData} setRecipeData={setRecipeData} />
+                        {isAuthenticated && user ? <AddAComment usersComment={usersComment} setUsersComment={setUsersComment} recipeId={recipeId} recipeData={recipeData} setRecipeData={setRecipeData} userAuthData={userAuthData}/>: null}
                         <div className={styles.commentsTable}>{commentsListItems}</div>
                     </div>
                 </div>

@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import styles from "./addRecipe.module.css";
 import TextInput from "../../../components/adding/textInput";
-import ListInput from "../../../components/adding/listInput";
+import ListInput from "../../../components/adding/recipes/listInput";
 import { useNavigate } from "react-router-dom";
 import SendRecipe from "../../../components/requests/sendRecipe";
 import FileInput from "../../../components/adding/fileInput"
-import PrepTimeInput from "../../../components/adding/prepTimeInput";
+import PrepTimeInput from "../../../components/adding/recipes/prepTimeInput";
 import DropdownInput from "../../../components/adding/dropdownInput";
 import AddingError from "../../../components/adding/addingError";
 
@@ -14,8 +14,8 @@ export default function AddRecipeBody() {
 
     const [uploading, setUploading] = useState(false);
     const [recipeName, setRecipeName] = useState('');
-    const [ingredients, setIngredients] = useState([]);
-    const [instructions, setInstructions] = useState([]);
+    const [ingredients, setIngredients] = useState<string[]>([]);
+    const [instructions, setInstructions] = useState<string[]>([]);
     const [totalPrepTimeInMin, setTotalPrepTimeInMin] = useState(0);
     const [meal, setMeal] = useState('');
     const [imageFile, setImageFile] = useState<File | undefined>(undefined);

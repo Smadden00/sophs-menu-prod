@@ -10,7 +10,7 @@ interface FetchProfileRecipesProps {
 export default async function FetchProfileRecipes({ dataCallback, loadingCallback, userEmail }: FetchProfileRecipesProps) {
       
   try{      
-      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/profile-recipes?${userEmail}`);
+      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/profile-recipes/${userEmail}`);
       if (!response.ok) {
         throw new Error('Error in fetching profile recipes.');
       }

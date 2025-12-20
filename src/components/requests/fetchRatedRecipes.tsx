@@ -1,7 +1,6 @@
 import { RecipeRating } from "../../types/index"
 import { Dispatch, SetStateAction } from "react";
 
-
 interface FetchRatedRecipesProps {
   dataCallback: Dispatch<SetStateAction<RecipeRating[]>>;
   loadingCallback: Dispatch<SetStateAction<boolean>>;
@@ -10,7 +9,7 @@ interface FetchRatedRecipesProps {
 
 export default async function FetchRatedRecipes({ dataCallback, loadingCallback, userEmail }: FetchRatedRecipesProps) {
     try{      
-      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/rated-recipes?${userEmail}`);
+      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/rated-recipes/${userEmail}`);
       if (!response.ok) {
         throw new Error('Error in fetching rated recipes.');
       }

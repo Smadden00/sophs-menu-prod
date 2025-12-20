@@ -9,7 +9,7 @@ interface FetchProfileReviewsProps {
 
 export default async function FetchProfileReviews({ dataCallback, loadingCallback, userEmail }: FetchProfileReviewsProps) {
     try{      
-      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/reviews/profile-reviews?${userEmail}`);
+      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/reviews/profile-reviews/${userEmail}`);
       if (!response.ok) {
         throw new Error('Error in fetching profile reviews.');
       }

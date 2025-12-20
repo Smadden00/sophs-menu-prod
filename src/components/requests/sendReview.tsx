@@ -1,8 +1,29 @@
 import SendReviewSafetyChecks from "../safetyChecks/sendReviewSafetyChecks";
 import AddSingleQuoteInFrontOfSingleQuote from "../functions/addSingleQuoteInFrontOfSingleQuote";
+import { NavigateFunction } from "react-router-dom";
+import { Dispatch, SetStateAction } from "react";
+import { User } from "@auth0/auth0-react";
 
-export default async function SendReview(navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError) {
-        try { 
+interface SendReviewProps {
+    navigate: NavigateFunction;
+    restaurantName: string;
+    restaurantType: string;
+    overallRating: number;
+    price: number;
+    taste: number;
+    experience: number;
+    description: string;
+    state: string;
+    city: string;
+    setInputError: Dispatch<SetStateAction<{ field?: string; message: string; isError: boolean } | null>>;
+    user: User;
+}
+
+export default async function SendReview({ navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError, user }: SendReviewProps) {
+    
+    const userEmail = user.email;
+    
+    try { 
             const safetyResponse = SendReviewSafetyChecks(restaurantName, restaurantType, overallRating, price, taste, experience, description, city);
             if (safetyResponse.isError){
                 setInputError(safetyResponse);
@@ -12,8 +33,11 @@ export default async function SendReview(navigate, restaurantName, restaurantTyp
             const restaurantNameWithSingleQuotesEscaped = AddSingleQuoteInFrontOfSingleQuote(restaurantName);
             const descriptionWithSingleQuotesEscaped = AddSingleQuoteInFrontOfSingleQuote(description);
             
-            const response = await fetch('/api/reviews', {
+            const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/reviews/${userEmail}`, {
                 method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({
                     rest_name: restaurantNameWithSingleQuotesEscaped,
                     rest_type: restaurantType,

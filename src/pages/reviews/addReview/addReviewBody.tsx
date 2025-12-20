@@ -10,20 +10,21 @@ import SendReview from "../../../components/requests/sendReview";
 import AddingError from "../../../components/adding/addingError";
 import InputCity from "../../../components/adding/inputCity";
 import FetchRestaurantTypes from "../../../components/requests/fetchRestaurantTypes";
+import { User } from "@auth0/auth0-react";
 
-export default function AddReviewBody() {
+export default function AddReviewBody({user}: {user: User}) {
     const navigate = useNavigate();
 
     const [restaurantName, setRestaurantName] = useState('');
     const [state, setState] = useState('');
     const [city, setCity] = useState('')
     const [restaurantType, setRestaurantType] = useState('');
-    const [overallRating, setOverallRating] = useState('');
-    const [price, setPrice] = useState('');
-    const [taste, setTaste] = useState('');
-    const [experience, setExperience] = useState('');
+    const [overallRating, setOverallRating] = useState(-1);
+    const [price, setPrice] = useState(-1);
+    const [taste, setTaste] = useState(-1);
+    const [experience, setExperience] = useState(-1);
     const [description, setDescription] = useState('');
-    const [inputError, setInputError] = useState(null);
+    const [inputError, setInputError] = useState<{ field?: string; message: string; isError: boolean } | null>(null);
     const [restaurantTypes, setRestaurantTypes] = useState<string[]>([]);
     const [loadingRestaurantTypes, setLoadingRestaurantTypes] = useState(true);
 
@@ -31,7 +32,7 @@ export default function AddReviewBody() {
     
     // Fetch restaurant types from database on component mount
     useEffect(() => {
-        FetchRestaurantTypes(setRestaurantTypes, setLoadingRestaurantTypes);
+        FetchRestaurantTypes(setRestaurantTypes, setLoadingRestaurantTypes);        
     }, []);
 
     // Scroll to the top when inputError is not null
@@ -70,7 +71,7 @@ export default function AddReviewBody() {
                 value="Submit Review"
                 style={{margin: '10px'}}
                 onClick={() => {
-                    SendReview(navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError);
+                    SendReview({ navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError, user });
                 }}
             />
             {errorAlert}

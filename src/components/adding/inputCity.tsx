@@ -1,16 +1,15 @@
-export default function inputCity() {
+import styles from './inputs.module.css'
+import { useState, useRef, Dispatch, SetStateAction } from "react"
 
-  return (
-    <></>
-  )}
+interface InputCityProps {
+    currCityVal: string;
+    currCityValCallback: Dispatch<SetStateAction<string>>;
+}
 
-/*import styles from './inputs.module.css'
-import { useState, useRef } from "react"
-
-export default function inputCity({ currCityVal, currCityValCallback}) {
+export default function inputCity({ currCityVal, currCityValCallback}: InputCityProps) {
 
     const [textAreaFocused, setTextAreaFocused] = useState(false);
-    const myRef = useRef(null);
+    const myRef = useRef<HTMLInputElement>(null);
     const hasText = currCityVal.length > 0;
 
     const inputTitleClassName = textAreaFocused || hasText ? `${styles.inputTitle} ${styles.inputTitleFocused}` : `${styles.inputTitle}`;
@@ -30,8 +29,7 @@ export default function inputCity({ currCityVal, currCityValCallback}) {
                     className={styles.input}
                 />
             </div>
-            <h1 className={inputTitleClassName} onClick={()=>myRef.current.focus()}>City/Town</h1>
+            <h1 className={inputTitleClassName} onClick={()=>myRef.current?.focus()}>City/Town</h1>
         </div>
     </div>
 )}
-*/
