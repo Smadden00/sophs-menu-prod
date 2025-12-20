@@ -1,7 +1,6 @@
 import HasEmptyString from '../functions/hasEmptyStrings'
-import ListHasDoubleQuotes from '../functions/listHasDoubleQuotes'
 
-export default function SendRecipeSafetyChecks(recipeName, ingredients, prepTime, meal, instructions) {
+export default function SendRecipeSafetyChecks(recipeName: string, ingredients: string[], prepTime: number, meal: string, instructions: string[]) {
     //perform initial safety checks on the data that the client gave
     if( recipeName.trim() == '' ){
         return {field: 'Recipe Name', message: 'There must be a restaurant name.', isError: true}

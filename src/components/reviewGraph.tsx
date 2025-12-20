@@ -1,7 +1,13 @@
 import { BarChart, Bar, XAxis, LabelList, YAxis } from 'recharts';
 import DetermineFillColor from "./functions/determineFillColor";
 
-export default function ReviewGraph({o_rating, experience, taste}) {
+interface ReviewGraphProps {
+    o_rating: number;
+    experience: number;
+    taste: number;
+}
+
+export default function ReviewGraph({o_rating, experience, taste}: ReviewGraphProps) {
 
     const data = [
         {

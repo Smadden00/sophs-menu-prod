@@ -1,74 +1,128 @@
-export default function QuickSort (arr, sortBy){
-    if (arr.length <= 1) {
-      return arr;
-    }
-  
-    let pivot = arr[0];
-    let leftArr = [];
-    let rightArr = [];
+import { Recipe, Review} from "../../types/index"
 
-    //This sort by first checks if it is being sorted by low to high or high to low
-    if(sortBy[1]=== "Low to High"){
-        //if it is being sorted by low to high then it checks what attribute it is sorting by
-        //First it checks for price
-        if(sortBy[0] === "Price"){
-            for (let i = 1; i < arr.length; i++) {
-                if (arr[i].price < pivot.price) {
-                    leftArr.push(arr[i]);
-                } else {
-                    rightArr.push(arr[i]);
+type SortAttribute = "Price" | "Rating" | "Prep Time";
+type SortDirection = "Low to High" | "High to Low";
+type SortBy = [SortAttribute, SortDirection];
+
+interface QuickSortPropsRecipe {
+    arr: Recipe[];
+    sortBy: SortBy;
+}
+
+interface QuickSortPropsReview {
+    arr: Review[];
+    sortBy: SortBy;
+}
+
+type QuickSortProps = QuickSortPropsRecipe | QuickSortPropsReview;
+
+// Function overloads
+function QuickSort(props: QuickSortPropsRecipe): Recipe[];
+function QuickSort(props: QuickSortPropsReview): Review[];
+
+// Implementation
+function QuickSort({arr, sortBy}: QuickSortProps): Recipe[] | Review[] {
+        if (arr.length <= 1) {
+            return arr;
+        }
+    
+        const pivot = arr[0];
+
+        // Check if we're working with Recipe array
+        if ('prep_time_in_min' in pivot) {
+            // Handle Recipe array
+            const recipeArr = arr as Recipe[];
+            const recipePivot = pivot as Recipe;
+            const leftArr: Recipe[] = [];
+            const rightArr: Recipe[] = [];
+            
+            if(sortBy[1]=== "Low to High"){
+                if(sortBy[0] === "Prep Time"){
+                    for (let i = 1; i < recipeArr.length; i++) {
+                        if (recipeArr[i].prep_time_in_min < recipePivot.prep_time_in_min) {
+                            leftArr.push(recipeArr[i]);
+                        } else {
+                            rightArr.push(recipeArr[i]);
+                        }
+                    }
+                } else if (sortBy[0] === "Rating"){
+                    for (let i = 1; i < recipeArr.length; i++) {
+                        if (recipeArr[i].avg_rating < recipePivot.avg_rating) {
+                            leftArr.push(recipeArr[i]);
+                        } else {
+                            rightArr.push(recipeArr[i]);
+                        }
+                    }
+                }
+            } else {
+                if(sortBy[0] === "Prep Time"){
+                    for (let i = 1; i < recipeArr.length; i++) {
+                        if (recipeArr[i].prep_time_in_min > recipePivot.prep_time_in_min) {
+                            leftArr.push(recipeArr[i]);
+                        } else {
+                            rightArr.push(recipeArr[i]);
+                        }
+                    }
+                } else if (sortBy[0] === "Rating"){
+                    for (let i = 1; i < recipeArr.length; i++) {
+                        if (recipeArr[i].avg_rating > recipePivot.avg_rating) {
+                            leftArr.push(recipeArr[i]);
+                        } else {
+                            rightArr.push(recipeArr[i]);
+                        }
+                    }
                 }
             }
-        } else if (sortBy[0] === "Rating"){
-        //if it is not sorting by price then it is sorting by o_rating
-            for (let i = 1; i < arr.length; i++) {
-                if (Number(arr[i].o_rating) < Number(pivot.o_rating)) {
-                    leftArr.push(arr[i]);
-                } else {
-                    rightArr.push(arr[i]);
+            
+            return [...QuickSort({arr: leftArr, sortBy}), recipePivot, ...QuickSort({arr: rightArr, sortBy})];
+        } else {
+            // Handle Review array
+            const reviewArr = arr as Review[];
+            const reviewPivot = pivot as Review;
+            const leftArr: Review[] = [];
+            const rightArr: Review[] = [];
+            
+            if(sortBy[1]=== "Low to High"){
+                if(sortBy[0] === "Price"){
+                    for (let i = 1; i < reviewArr.length; i++) {
+                        if (reviewArr[i].price < reviewPivot.price) {
+                            leftArr.push(reviewArr[i]);
+                        } else {
+                            rightArr.push(reviewArr[i]);
+                        }
+                    }
+                } else if (sortBy[0] === "Rating"){
+                    for (let i = 1; i < reviewArr.length; i++) {
+                        if (Number(reviewArr[i].o_rating) < Number(reviewPivot.o_rating)) {
+                            leftArr.push(reviewArr[i]);
+                        } else {
+                            rightArr.push(reviewArr[i]);
+                        }
+                    }
+                }
+            } else {
+                if(sortBy[0] === "Price"){
+                    for (let i = 1; i < reviewArr.length; i++) {
+                        if (reviewArr[i].price > reviewPivot.price) {
+                            leftArr.push(reviewArr[i]);
+                        } else {
+                            rightArr.push(reviewArr[i]);
+                        }
+                    }
+                } else if (sortBy[0] === "Rating"){
+                    for (let i = 1; i < reviewArr.length; i++) {
+                        if (Number(reviewArr[i].o_rating) > Number(reviewPivot.o_rating)) {
+                            leftArr.push(reviewArr[i]);
+                        } else {
+                            rightArr.push(reviewArr[i]);
+                        }
+                    }
                 }
             }
-        } else if (sortBy[0] === "Prep Time"){
-            //if it is being sorted by prep time
-            for (let i = 1; i < arr.length; i++) {
-                if (arr[i].prep_time_in_min < pivot.prep_time_in_min) {
-                    leftArr.push(arr[i]);
-                } else {
-                    rightArr.push(arr[i]);
-                }
-            }
+            
+            return [...QuickSort({arr: leftArr, sortBy}), reviewPivot, ...QuickSort({arr: rightArr, sortBy})];
+        }
     }
-    } else { // This will be true if it is not being sorted by Low to High (it will be sorted by High to low)
-        //First it checks if it is sorting by price
-        if(sortBy[0] === "Price"){
-            for (let i = 1; i < arr.length; i++) {
-                if (arr[i].price > pivot.price) {
-                    leftArr.push(arr[i]);
-                } else {
-                    rightArr.push(arr[i]);
-                }
-            }
-        } else if (sortBy[0] === "Rating"){
-        //if it is not sorting by price then it is sorting by o_rating
-            for (let i = 1; i < arr.length; i++) {
-                if (Number(arr[i].o_rating) > Number(pivot.o_rating)) {
-                    leftArr.push(arr[i]);
-                } else {
-                    rightArr.push(arr[i]);
-                }
-            }
-        } else if (sortBy[0] === "Prep Time"){
-        //if it is not sorting by price then it is sorting by o_rating
-            for (let i = 1; i < arr.length; i++) {
-                if (arr[i].prep_time_in_min > pivot.prep_time_in_min) {
-                    leftArr.push(arr[i]);
-                } else {
-                    rightArr.push(arr[i]);
-                }
-            }
-    }
-    }
-  
-    return [...QuickSort(leftArr, sortBy), pivot, ...QuickSort(rightArr, sortBy)];
-  };
+
+export default QuickSort;
   

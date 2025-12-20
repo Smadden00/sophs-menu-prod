@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from "./profileTable.module.css";
 import { useNavigate } from "react-router-dom";
+import { Recipe } from "../../types/index"
 
-export default function ProfileRecipesTable({profileRecipesData, profileRecipesLoading}){
+export default function ProfileRecipesTable({profileRecipesData, profileRecipesLoading}: {profileRecipesData: Recipe[], profileRecipesLoading: boolean}){
 
     const navigate = useNavigate();
 

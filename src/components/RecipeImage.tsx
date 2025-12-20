@@ -1,8 +1,13 @@
 // Example hybrid approach for recipe images
 import { useState, useEffect } from 'react';
 
+interface RecipeImageProps {
+  recipeId: number;
+  alt: string;
+  fallback?: string;
+}
 
-export function RecipeImage({ recipeId, alt, fallback = "/images/smallImgs/salad.jpg" }) {
+export function RecipeImage({ recipeId, alt, fallback = "/images/smallImgs/salad.jpg" }: RecipeImageProps) {
   const [imageSrc, setImageSrc] = useState(fallback);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,14 +28,12 @@ export function RecipeImage({ recipeId, alt, fallback = "/images/smallImgs/salad
   }, [recipeId, fallback]);
 
   return (
-    <Image
+    <img
       src={imageSrc}
       alt={alt}
       width={350}
       height={350}
       loading="lazy"
-      placeholder="blur"
-      blurDataURL={fallback}
       className={isLoading ? 'opacity-50' : 'opacity-100'}
     />
   );

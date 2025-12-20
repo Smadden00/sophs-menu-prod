@@ -1,7 +1,17 @@
 import styles from "./minMaxSliders.module.css"
-import { useState, useEffect } from "react"
+import { Dispatch, SetStateAction } from 'react';
 
-export default function MinMaxSliders({lowerVal, setLowerVal, upperVal, setUpperVal, min, max, step}) {
+interface MinMaxSlidersProps {
+  lowerVal: number;
+  setLowerVal: Dispatch<SetStateAction<number>>;
+  upperVal: number;
+  setUpperVal: Dispatch<SetStateAction<number>>;
+  min: number;
+  max: number;
+  step: number;
+}
+
+export default function MinMaxSliders({lowerVal, setLowerVal, upperVal, setUpperVal, min, max, step}: MinMaxSlidersProps) {
         
   return (
     <div className={styles.container}>
@@ -39,11 +49,3 @@ export default function MinMaxSliders({lowerVal, setLowerVal, upperVal, setUpper
         </div>
     </div>
 )}
-
-/*
-            className="thumb thumb--left"
-            style={{ zIndex: lowerVal > max - 100 && "5" }}
-
-            className="thumb thumb--right"
-
-*/

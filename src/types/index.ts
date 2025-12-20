@@ -1,5 +1,5 @@
 /***********
-Review
+Recipe
 ***********/
 
 export interface Recipe {
@@ -10,7 +10,7 @@ export interface Recipe {
   meal: string;
   instructions: string[];
   comments: Comment[];
-  averageRating?: number;
+  avg_rating: number;
   totalRatings?: number;
   userRating?: number;
   rec_img_url: string;
@@ -24,6 +24,13 @@ export interface RecipeCardView {
   meal: string;
   rec_img_url: string;
   soph_submitted: boolean;
+}
+
+export interface RecipeRating {
+  recipe_id: number;
+  recipe_name: string;
+  rating: number;
+  user_encrypted: string;
 }
 
 /***********

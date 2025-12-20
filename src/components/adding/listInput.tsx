@@ -1,12 +1,20 @@
+import { Dispatch, SetStateAction } from 'react';
 import styles from './listInput.module.css'
 import TextInput from "./textInput"
 
-export default function ListInput({listTitle, array, callback}) {
+interface ListInputProps {
+    listTitle: string;
+    array: string[];
+    callback: Dispatch<SetStateAction<string[]>>;
+}
+
+export default function ListInput({listTitle, array, callback}: ListInputProps) {
 
     const individualInputTitle = listTitle == "Instructions" ? "Step" : listTitle.slice(0, -1);
 
     //This function will be passed to each individual text input to update the main array
-    const updateArray = (newValue, index) => {
+    const updateArray = (newValue: string, index?: number) => {
+        if (index === undefined) return;
         const newArray = [...array];
         newArray[index] = newValue;
         callback(newArray);
@@ -19,7 +27,7 @@ export default function ListInput({listTitle, array, callback}) {
     }
 
     // New: Remove an item at a given index
-    const removeValueFromArray = (index) => {
+    const removeValueFromArray = (index: number) => {
         const newArray = array.filter((_, i) => i !== index);
         callback(newArray);
     }

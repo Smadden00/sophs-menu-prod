@@ -3,7 +3,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ConvertMinToHoursAndMin from '../components/functions/convertMinToHoursAndMin';
 
-export default function RecipeListImage({title, prep_time_in_min, meal, id, rec_img_url}) {
+interface RecipeListImageProps {
+  title: string;
+  prep_time_in_min: number;
+  meal: string;
+  id: number;
+  rec_img_url: string;
+}
+
+export default function RecipeListImage({title, prep_time_in_min, meal, id, rec_img_url}: RecipeListImageProps) {
   const navigate = useNavigate();
   const [hover, setHover] = useState(false);
   const {hours, min} = ConvertMinToHoursAndMin(prep_time_in_min);

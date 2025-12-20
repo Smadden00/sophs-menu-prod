@@ -2,7 +2,16 @@ import styles from "./reviewCard.module.css";
 import { useNavigate } from "react-router-dom";
 import BuildPriceSigns from "./functions/buildPriceSigns";
 
-export default function ReviewCard({title, location, restType, price, rating, id}) {
+interface ReviewCardProps {
+  title: string;
+  location: string;
+  restType: string;
+  price: number;
+  rating: number;
+  id: number;
+}
+
+export default function ReviewCard({title, location, restType, price, rating, id}: ReviewCardProps) {
   const navigate = useNavigate();
 
   const priceSigns=BuildPriceSigns(price);

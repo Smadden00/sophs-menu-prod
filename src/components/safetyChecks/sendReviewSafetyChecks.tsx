@@ -1,4 +1,4 @@
-export default function SendReviewSafetyChecks(restaurantName, restaurantType, overallRating, price, taste, experience, description, city) {
+export default function SendReviewSafetyChecks(restaurantName: string, restaurantType: string, overallRating: number, price: number, taste: number, experience: number, description: string, city: string) {
         //perform initial safety checks on the data that the client gave
         if( restaurantName.trim() == '' ){
             return {field: 'Restaurant Name', message: 'There must be a restaurant name.', isError: true}

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./addRecipe.module.css";
 import TextInput from "../../../components/adding/textInput";
-import NumberInput from "../../../components/adding/numberInput";
 import ListInput from "../../../components/adding/listInput";
 import { useNavigate } from "react-router-dom";
 import SendRecipe from "../../../components/requests/sendRecipe";
@@ -16,9 +15,9 @@ export default function AddRecipeBody() {
     const [uploading, setUploading] = useState(false);
     const [recipeName, setRecipeName] = useState('');
     const [ingredients, setIngredients] = useState([]);
+    const [instructions, setInstructions] = useState([]);
     const [totalPrepTimeInMin, setTotalPrepTimeInMin] = useState(0);
     const [meal, setMeal] = useState('');
-    const [instructions, setInstructions] = useState([]);
     const [imageFile, setImageFile] = useState<File | undefined>(undefined);
     const [inputError, setInputError] = useState(null);
 

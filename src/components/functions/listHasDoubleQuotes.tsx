@@ -1,6 +1,6 @@
-export default function ListHasDoubleQuotes(list) {
+export default function ListHasDoubleQuotes(list: string[]) {
     for (let string of list) {
-        if (string.contains('"')) {
+        if (string.includes('"')) {
             return true;
         }
     }

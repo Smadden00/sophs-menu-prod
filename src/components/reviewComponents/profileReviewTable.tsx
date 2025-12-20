@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from "./profileTable.module.css";
 import { useNavigate } from "react-router-dom";
+import { Review } from "../../types/index"
 
-
-export default function ProfileReviewTable({profileRestReviewsData, profileRestReviewsLoading}){
+export default function ProfileReviewTable({profileRestReviewsData, profileRestReviewsLoading}: {profileRestReviewsData: Review[], profileRestReviewsLoading: boolean}){
 
     const navigate = useNavigate();
 
