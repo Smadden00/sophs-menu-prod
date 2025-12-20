@@ -1,4 +1,6 @@
-export default async function FetchAllReviews(dataCallback: (data: any[]) => void, loadingCallback: (loading: boolean) => void) {
+import { Review } from "../../types/index"
+
+export default async function FetchAllReviews(dataCallback: (data: Review[]) => void, loadingCallback: (loading: boolean) => void) {
         try{
           const response = await fetch('https://sophsdatabasedomain.duckdns.org/api/reviews/');
           if (!response.ok) {

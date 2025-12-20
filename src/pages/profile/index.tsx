@@ -1,17 +1,18 @@
 import Header from "../../components/header";
 import LogInBody from "../../components/logIn/logInBody"
-// TODO: Replace with your auth solution
-// import { useSession } from "next-auth/react"
+import { useAuth0 } from "@auth0/auth0-react";
 import LoggedInProfileBody from "./loggedInProfileBody";
 
 export default function Profile() {
-  // TODO: Replace with your auth hook
-  // const { data: session, status } = useSession()
-  const session = null; // Placeholder - implement auth
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div className="loading-text">Loading profile...</div>;
+  }
 
   return (
     <>
         <Header />
-        {session ? <LoggedInProfileBody /> : <LogInBody pagePurpose={"view your profile"}/>}
+        {isAuthenticated && user ? <LoggedInProfileBody user={user}/> : <LogInBody pagePurpose={"view your profile"}/>}
     </>
 )}

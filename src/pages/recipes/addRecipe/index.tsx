@@ -1,17 +1,18 @@
 import Header from "../../../components/header";
 import AddRecipeBody from "./addRecipeBody";
 import LogInBody from "../../../components/logIn/logInBody";
-// TODO: Replace with your auth solution
-// import { useSession } from "next-auth/react"
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AddRecipe() {
-    // TODO: Replace with your auth hook
-    // const { data: session } = useSession()
-    const session = null; // Placeholder - implement auth
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div className="loading-text">Loading profile...</div>;
+  }
     
   return (
     <>
         <Header />
-        {session ? <AddRecipeBody /> : <LogInBody pagePurpose={"add a recipe"}/>}
+        {isAuthenticated && user ? <AddRecipeBody /> : <LogInBody pagePurpose={"add a recipe"}/>}
     </>
 )}

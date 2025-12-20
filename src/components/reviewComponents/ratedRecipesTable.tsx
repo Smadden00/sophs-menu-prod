@@ -3,7 +3,12 @@ import styles from "./profileTable.module.css";
 import { useNavigate } from "react-router-dom";
 import { RecipeRating } from "../../types/index"
 
-export default function RatedRecipesTable({ratedRecipesData, ratedRecipesLoading}: {ratedRecipesData: RecipeRating[], ratedRecipesLoading: boolean}){
+interface RatedRecipesTableProps {
+    ratedRecipesData: RecipeRating[];
+    ratedRecipesLoading: boolean;
+}
+
+export default function RatedRecipesTable({ratedRecipesData, ratedRecipesLoading}: RatedRecipesTableProps){
 
     const navigate = useNavigate();
 

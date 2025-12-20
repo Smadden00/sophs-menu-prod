@@ -10,6 +10,7 @@
     "reboot:pm2": "./scripts/pm2_reboot.sh"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.11.0",
     "aws-sdk": "^2.1542.0",
     "cryptography": "^1.2.3",
     "dotenv": "^16.3.1",

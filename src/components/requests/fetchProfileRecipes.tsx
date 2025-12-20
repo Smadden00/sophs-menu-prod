@@ -1,6 +1,16 @@
-export default async function FetchProfileRecipes(dataCallback: (data: any[]) => void, loadingCallback: (loading: boolean) => void) {
-    try{      
-      const response = await fetch(`/api/recipes/profileRecipes`);
+import { Recipe } from "../../types/index"
+import { Dispatch, SetStateAction } from "react";
+
+interface FetchProfileRecipesProps {
+  dataCallback: Dispatch<SetStateAction<Recipe[]>>;
+  loadingCallback: Dispatch<SetStateAction<boolean>>;
+  userEmail: string;
+}
+
+export default async function FetchProfileRecipes({ dataCallback, loadingCallback, userEmail }: FetchProfileRecipesProps) {
+      
+  try{      
+      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/profile-recipes?${userEmail}`);
       if (!response.ok) {
         throw new Error('Error in fetching profile recipes.');
       }

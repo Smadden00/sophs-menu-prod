@@ -1,40 +1,34 @@
 import { useState, useEffect } from "react";
 import styles from "./profile.module.css";
-// TODO: Replace next-auth with your chosen auth solution
-// import { useSession } from "next-auth/react"
 import ProfileReviewTable from "../../components/reviewComponents/profileReviewTable";
 import ProfileRecipesTable from "../../components/reviewComponents/profileRecipesTable";
 import RatedRecipesTable from "../../components/reviewComponents/ratedRecipesTable";
-import FetchProfileReviews from "../../components/requests/fetchProfileReviews";
+import FetchProfileReviews from "../../components/requests/fetchProfileReviews"
 import FetchProfileRecipes from "../../components/requests/fetchProfileRecipes";
 import FetchRatedRecipes from "../../components/requests/fetchRatedRecipes";
 import { useNavigate } from "react-router-dom";
+import { User } from "@auth0/auth0-react";
+import { Review, Recipe, RecipeRating } from "../../types/index"
 
-export default function LoggedInProfileBody({}) {
-    const navigate = useNavigate();
-
-    // TODO: Replace with your auth solution
-    // const {data: session} = useSession();
-    const session = true;
-
-    const [profileRestReviewsData, setProfileRestReviewsData] = useState();
+export default function LoggedInProfileBody({user}: {user: User}) {
+    const [profileRestReviewsData, setProfileRestReviewsData] = useState<Review[]>([]);
     const [profileRestReviewsLoading, setProfileRestReviewsLoading] = useState(true);
 
-    const [profileRecipesData, setProfileRecipesData] = useState();
+    const [profileRecipesData, setProfileRecipesData] = useState<Recipe[]>([]);
     const [profileRecipesLoading, setProfileRecipesLoading] = useState(true);
 
-    const [ratedRecipesData, setRatedRecipesData] = useState();
+    const [ratedRecipesData, setRatedRecipesData] = useState<RecipeRating[]>([]);
     const [ratedRecipesLoading, setRatedRecipesLoading] = useState(true);
 
     useEffect(() => {
-        if (session){
-            FetchProfileReviews(setProfileRestReviewsData, setProfileRestReviewsLoading);
-            FetchProfileRecipes(setProfileRecipesData, setProfileRecipesLoading);
-            FetchRatedRecipes(setRatedRecipesData, setRatedRecipesLoading);
+        if (user.email){
+            FetchProfileReviews({ dataCallback: setProfileRestReviewsData, loadingCallback: setProfileRestReviewsLoading, userEmail: user.email });
+            FetchProfileRecipes({ dataCallback: setProfileRecipesData, loadingCallback: setProfileRecipesLoading, userEmail: user.email });
+            FetchRatedRecipes({ dataCallback: setRatedRecipesData, loadingCallback: setRatedRecipesLoading, userEmail: user.email });
         }
-    }, [session])
+    }, [user.email])
 
-    const name = session ? session.user.name : undefined;
+    const name = user.name;
 
     return (
             <div className={styles.container}>
