@@ -27,8 +27,8 @@ export default function LoggedInRecipeRating({recipeId, userRating = 0 , userAut
 
     useEffect(() => {
         // Fetch the user's rating for the recipe
-        if (isAuthenticated && user && user.email) {
-            FetchUsersRecipeRating({recipeid: recipeId, usersRatingCallback: setPreviouslySelectedRating, loadingCallback: setIsUsersRatingLoading, userEmail: user.email, getAccessTokenSilently});
+        if (isAuthenticated && user) {
+            FetchUsersRecipeRating({recipeid: recipeId, usersRatingCallback: setPreviouslySelectedRating, loadingCallback: setIsUsersRatingLoading, getAccessTokenSilently});
         }
     }, [isAuthenticated, getAccessTokenSilently]);
 
@@ -102,7 +102,7 @@ export default function LoggedInRecipeRating({recipeId, userRating = 0 , userAut
                         <span
                         key={star}
                         className={getStarClass(star)}
-                        onClick={() => SendRating({recipeId, rating: star, ratingCallback: setPreviouslySelectedRating, setMessage, userAuthData, getAccessTokenSilently})}
+                        onClick={() => SendRating({recipeId, rating: star, ratingCallback: setPreviouslySelectedRating, setMessage, getAccessTokenSilently})}
                         onMouseEnter={() => setHoveredRating(star)}
                         style={{ cursor: 'pointer' }}
                         >★</span>
@@ -111,11 +111,11 @@ export default function LoggedInRecipeRating({recipeId, userRating = 0 , userAut
                         {hoveredRating > 0 ? hoveredRating : previouslySelectedRating}/5
                     </span>
                 </div>
-                {/*userRating > 0 && (
+                {userRating > 0 && (
                     <p className={styles.currentRatingText}>
                     Your current rating: {previouslySelectedRating}/5
                     </p>
-                )*/}
+                )}
                 </div>
                 {message && (
                     <p className={`${styles.message} ${message.includes('success') ? styles.success : styles.error}`}>

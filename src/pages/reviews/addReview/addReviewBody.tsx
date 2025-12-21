@@ -10,9 +10,9 @@ import SendReview from "../../../components/requests/sendReview";
 import AddingError from "../../../components/adding/addingError";
 import InputCity from "../../../components/adding/inputCity";
 import FetchRestaurantTypes from "../../../components/requests/fetchRestaurantTypes";
-import { User, useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function AddReviewBody({user}: {user: User}) {
+export default function AddReviewBody() {
     const navigate = useNavigate();
     const { getAccessTokenSilently } = useAuth0();
 
@@ -72,7 +72,7 @@ export default function AddReviewBody({user}: {user: User}) {
                 value="Submit Review"
                 style={{margin: '10px'}}
                 onClick={() => {
-                    SendReview({ navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError, user, getAccessTokenSilently });
+                    SendReview({ navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError, getAccessTokenSilently });
                 }}
             />
             {errorAlert}

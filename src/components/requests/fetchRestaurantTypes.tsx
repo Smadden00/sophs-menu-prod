@@ -21,6 +21,7 @@ export default async function FetchRestaurantTypes({ dataCallback, loadingCallba
         }
         const javascriptResponse = await response.json();
         const restaurantTypesData = javascriptResponse.body;
+
         dataCallback(restaurantTypesData);
         if (loadingCallback) {
             loadingCallback(false);

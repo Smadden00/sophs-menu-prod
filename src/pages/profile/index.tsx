@@ -13,6 +13,6 @@ export default function Profile() {
   return (
     <>
         <Header />
-        {isAuthenticated && user ? <LoggedInProfileBody user={user}/> : <LogInBody pagePurpose={"view your profile"}/>}
+        {isAuthenticated && user ? <LoggedInProfileBody userName={user.name}/> : <LogInBody pagePurpose={"view your profile"}/>}
     </>
 )}

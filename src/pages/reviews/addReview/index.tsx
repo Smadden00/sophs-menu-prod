@@ -13,6 +13,6 @@ export default function Reviews() {
   return (
     <>
         <Header />
-        {isAuthenticated && user ? <AddReviewBody user={user}/> : <LogInBody pagePurpose={"add a review"}/>}
+        {isAuthenticated && user ? <AddReviewBody /> : <LogInBody pagePurpose={"add a review"}/>}
     </>
 )}

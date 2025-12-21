@@ -89,7 +89,7 @@ export default function Recipe() {
                     {isAuthenticated && user ? <LoggedInRecipeRating recipeId={recipeId} userAuthData={userAuthData}/> : <NotLoggedInRecipeRating />}
                     <div className={styles.commentsContainer}>
                         <p className={styles.commentsTitle}>Comments</p>
-                        {isAuthenticated && user ? <AddAComment usersComment={usersComment} setUsersComment={setUsersComment} recipeId={recipeId} recipeData={recipeData} setRecipeData={setRecipeData} userAuthData={userAuthData}/>: null}
+                        {isAuthenticated && user ? <AddAComment usersComment={usersComment} setUsersComment={setUsersComment} recipeId={recipeId} recipeData={recipeData} setRecipeData={setRecipeData} />: null}
                         <div className={styles.commentsTable}>{commentsListItems}</div>
                     </div>
                 </div>

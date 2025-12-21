@@ -4,16 +4,15 @@ import { Dispatch, SetStateAction } from "react";
 interface FetchRatedRecipesProps {
   dataCallback: Dispatch<SetStateAction<RecipeRating[]>>;
   loadingCallback: Dispatch<SetStateAction<boolean>>;
-  userEmail: string;
   getAccessTokenSilently: () => Promise<string>;
 }
 
-export default async function FetchRatedRecipes({ dataCallback, loadingCallback, userEmail, getAccessTokenSilently }: FetchRatedRecipesProps) {
+export default async function FetchRatedRecipes({ dataCallback, loadingCallback, getAccessTokenSilently }: FetchRatedRecipesProps) {
     try{      
 
       const token = await getAccessTokenSilently();
 
-      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/rated-recipes/${userEmail}`, {
+      const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/rated-recipes`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

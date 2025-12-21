@@ -5,15 +5,14 @@ interface FetchUsersRecipeRatingProps {
     recipeid: number;
     usersRatingCallback: Dispatch<SetStateAction<RecipeRating[]>>;
     loadingCallback: Dispatch<SetStateAction<boolean>>;
-    userEmail: string;
     getAccessTokenSilently: () => Promise<string>;
 }
 
-export default async function FetchUsersRecipeRating({recipeid, usersRatingCallback, loadingCallback, userEmail, getAccessTokenSilently}: FetchUsersRecipeRatingProps) {
+export default async function FetchUsersRecipeRating({recipeid, usersRatingCallback, loadingCallback, getAccessTokenSilently}: FetchUsersRecipeRatingProps) {
     try {
         const token = await getAccessTokenSilently();
 
-        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeid}/rating/${userEmail}`, {
+        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeid}/rating`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

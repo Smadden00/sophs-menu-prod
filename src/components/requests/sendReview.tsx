@@ -16,14 +16,11 @@ interface SendReviewProps {
     state: string;
     city: string;
     setInputError: Dispatch<SetStateAction<{ field?: string; message: string; isError: boolean } | null>>;
-    user: User;
     getAccessTokenSilently: () => Promise<string>;
 }
 
-export default async function SendReview({ navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError, user, getAccessTokenSilently }: SendReviewProps) {
-    
-    const userEmail = user.email;
-    
+export default async function SendReview({ navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError, getAccessTokenSilently }: SendReviewProps) {
+        
     try { 
 
         const token = await getAccessTokenSilently();
@@ -37,7 +34,7 @@ export default async function SendReview({ navigate, restaurantName, restaurantT
         const restaurantNameWithSingleQuotesEscaped = AddSingleQuoteInFrontOfSingleQuote(restaurantName);
         const descriptionWithSingleQuotesEscaped = AddSingleQuoteInFrontOfSingleQuote(description);
         
-        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/reviews/${userEmail}`, {
+        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/reviews`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

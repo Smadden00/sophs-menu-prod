@@ -9,10 +9,9 @@ interface FetchUsersRecipeRatingProps {
     recipeId: number;
     recipeData: any;//??????
     setRecipeData: Dispatch<SetStateAction<any>>;
-    userAuthData: Auth0ContextInterface<User>;
 }
 
-export default function AddAComment({usersComment, setUsersComment, recipeId, recipeData, setRecipeData, userAuthData}: FetchUsersRecipeRatingProps) {
+export default function AddAComment({usersComment, setUsersComment, recipeId, recipeData, setRecipeData}: FetchUsersRecipeRatingProps) {
 
     const { getAccessTokenSilently } = useAuth0();
 
@@ -26,7 +25,7 @@ export default function AddAComment({usersComment, setUsersComment, recipeId, re
                 value={usersComment}
                 onChange={(e) => setUsersComment(e.target.value)}
             />
-            <button onClick={() => SendComment({recipeId, usersComment, commentCallback: setUsersComment, recipeData, recipeDataCallback: setRecipeData, userAuthData, getAccessTokenSilently})}>
+            <button onClick={() => SendComment({recipeId, usersComment, commentCallback: setUsersComment, recipeData, recipeDataCallback: setRecipeData, getAccessTokenSilently})}>
                 Add Comment
             </button>
         </div>

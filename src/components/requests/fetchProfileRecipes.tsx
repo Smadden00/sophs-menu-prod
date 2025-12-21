@@ -4,16 +4,15 @@ import { Dispatch, SetStateAction } from "react";
 interface FetchProfileRecipesProps {
   dataCallback: Dispatch<SetStateAction<Recipe[]>>;
   loadingCallback: Dispatch<SetStateAction<boolean>>;
-  userEmail: string;
   getAccessTokenSilently: () => Promise<string>;
 }
 
-export default async function FetchProfileRecipes({ dataCallback, loadingCallback, userEmail, getAccessTokenSilently }: FetchProfileRecipesProps) {
+export default async function FetchProfileRecipes({ dataCallback, loadingCallback, getAccessTokenSilently }: FetchProfileRecipesProps) {
   
   try{      
     const token = await getAccessTokenSilently();
 
-    const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/profile-recipes/${userEmail}`, {
+    const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/profile-recipes`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

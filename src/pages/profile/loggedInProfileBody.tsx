@@ -7,10 +7,10 @@ import FetchProfileReviews from "../../components/requests/fetchProfileReviews"
 import FetchProfileRecipes from "../../components/requests/fetchProfileRecipes";
 import FetchRatedRecipes from "../../components/requests/fetchRatedRecipes";
 import { useNavigate } from "react-router-dom";
-import { User, useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Review, Recipe, RecipeRating } from "../../types/index"
 
-export default function LoggedInProfileBody({user}: {user: User}) {
+export default function LoggedInProfileBody({userName}:{userName: string | undefined}) {
     const { getAccessTokenSilently } = useAuth0();
     const [profileRestReviewsData, setProfileRestReviewsData] = useState<Review[]>([]);
     const [profileRestReviewsLoading, setProfileRestReviewsLoading] = useState(true);
@@ -22,19 +22,15 @@ export default function LoggedInProfileBody({user}: {user: User}) {
     const [ratedRecipesLoading, setRatedRecipesLoading] = useState(true);
 
     useEffect(() => {
-        if (user.email){
-            FetchProfileReviews({ dataCallback: setProfileRestReviewsData, loadingCallback: setProfileRestReviewsLoading, userEmail: user.email, getAccessTokenSilently });
-            FetchProfileRecipes({ dataCallback: setProfileRecipesData, loadingCallback: setProfileRecipesLoading, userEmail: user.email, getAccessTokenSilently });
-            FetchRatedRecipes({ dataCallback: setRatedRecipesData, loadingCallback: setRatedRecipesLoading, userEmail: user.email, getAccessTokenSilently });
-        }
-    }, [user.email, getAccessTokenSilently])
-
-    const name = user.name;
+        FetchProfileReviews({ dataCallback: setProfileRestReviewsData, loadingCallback: setProfileRestReviewsLoading, getAccessTokenSilently });
+        FetchProfileRecipes({ dataCallback: setProfileRecipesData, loadingCallback: setProfileRecipesLoading, getAccessTokenSilently });
+        FetchRatedRecipes({ dataCallback: setRatedRecipesData, loadingCallback: setRatedRecipesLoading, getAccessTokenSilently });
+    }, [getAccessTokenSilently])
 
     return (
             <div className={styles.container}>
                 <div className={styles.titleContainer}>
-                    <h1 className={styles.title}>{name}</h1>
+                    <h1 className={styles.title}>{userName ? userName : "undefined"}</h1>
                 </div>
 
                 <div className={styles.contentContainer}>
