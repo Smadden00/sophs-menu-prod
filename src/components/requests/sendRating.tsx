@@ -14,13 +14,13 @@ export default async function SendRating({recipeId, rating, ratingCallback, setM
 
     try {
 
-        const token = getAccessTokenSilently();
+        const token = await getAccessTokenSilently();
 
         const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeId}/rating`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({ recipeId, rating })
         });
