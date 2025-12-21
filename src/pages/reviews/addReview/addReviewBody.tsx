@@ -10,10 +10,11 @@ import SendReview from "../../../components/requests/sendReview";
 import AddingError from "../../../components/adding/addingError";
 import InputCity from "../../../components/adding/inputCity";
 import FetchRestaurantTypes from "../../../components/requests/fetchRestaurantTypes";
-import { User } from "@auth0/auth0-react";
+import { User, useAuth0 } from "@auth0/auth0-react";
 
 export default function AddReviewBody({user}: {user: User}) {
     const navigate = useNavigate();
+    const { getAccessTokenSilently } = useAuth0();
 
     const [restaurantName, setRestaurantName] = useState('');
     const [state, setState] = useState('');
@@ -32,8 +33,8 @@ export default function AddReviewBody({user}: {user: User}) {
     
     // Fetch restaurant types from database on component mount
     useEffect(() => {
-        FetchRestaurantTypes(setRestaurantTypes, setLoadingRestaurantTypes);        
-    }, []);
+        FetchRestaurantTypes({dataCallback: setRestaurantTypes, loadingCallback: setLoadingRestaurantTypes, getAccessTokenSilently});        
+    }, [getAccessTokenSilently]);
 
     // Scroll to the top when inputError is not null
     useEffect(() => {
@@ -71,7 +72,7 @@ export default function AddReviewBody({user}: {user: User}) {
                 value="Submit Review"
                 style={{margin: '10px'}}
                 onClick={() => {
-                    SendReview({ navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError, user });
+                    SendReview({ navigate, restaurantName, restaurantType, overallRating, price, taste, experience, description, state, city, setInputError, user, getAccessTokenSilently });
                 }}
             />
             {errorAlert}

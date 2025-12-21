@@ -8,18 +8,23 @@ interface SendCommentProps {
     recipeData: any//??????
     recipeDataCallback: Dispatch<SetStateAction<any>>;
     userAuthData: Auth0ContextInterface<User>;
+    getAccessTokenSilently: () => Promise<string>;
 }
 
-export default async function SendComment({recipeId, usersComment, commentCallback, recipeData, recipeDataCallback, userAuthData}: SendCommentProps) {
+export default async function SendComment({recipeId, usersComment, commentCallback, recipeData, recipeDataCallback, userAuthData, getAccessTokenSilently}: SendCommentProps) {
 
     const {user} = userAuthData;
 
     try {
+
+        const token = await getAccessTokenSilently();
+        
         if(user && user.email){        
             const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeId}/${user.email}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({ comment: usersComment })
             });

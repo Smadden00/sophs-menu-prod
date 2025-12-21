@@ -8,18 +8,23 @@ interface SendRatingProps {
     ratingCallback: Dispatch<SetStateAction<number>>;
     setMessage: Dispatch<SetStateAction<string>>;
     userAuthData: Auth0ContextInterface<User>;
+    getAccessTokenSilently: () => Promise<string>;
 }
 
-export default async function SendRating({recipeId, rating, ratingCallback, setMessage, userAuthData}: SendRatingProps) {
+export default async function SendRating({recipeId, rating, ratingCallback, setMessage, userAuthData, getAccessTokenSilently}: SendRatingProps) {
 
     const { user } = userAuthData;
 
     try {
+
+        const token = getAccessTokenSilently();
+
         if(user && user.email){
             const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeId}/rating/${user.email}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({ recipeId, rating })
             });

@@ -6,11 +6,18 @@ interface FetchUsersRecipeRatingProps {
     usersRatingCallback: Dispatch<SetStateAction<RecipeRating[]>>;
     loadingCallback: Dispatch<SetStateAction<boolean>>;
     userEmail: string;
+    getAccessTokenSilently: () => Promise<string>;
 }
 
-export default async function FetchUsersRecipeRating({recipeid, usersRatingCallback, loadingCallback, userEmail}: FetchUsersRecipeRatingProps) {
+export default async function FetchUsersRecipeRating({recipeid, usersRatingCallback, loadingCallback, userEmail, getAccessTokenSilently}: FetchUsersRecipeRatingProps) {
     try {
-        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeid}/rating/${userEmail}`);
+        const token = await getAccessTokenSilently();
+
+        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeid}/rating/${userEmail}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+    });
         if (!response.ok) {
             throw new Error('Error while fetching the users rating data.');
         }

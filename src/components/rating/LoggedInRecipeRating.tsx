@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './RecipeRating.module.css';
 import SendRating from '../../components/requests/sendRating';
 import FetchUsersRecipeRating from '../requests/fetchUsersRecipeRating';
-import { Auth0ContextInterface, User } from '@auth0/auth0-react';
+import { Auth0ContextInterface, User, useAuth0 } from '@auth0/auth0-react';
 
 interface LoggedInRecipeRatingProps {
   recipeId: number;
@@ -16,6 +16,8 @@ interface LoggedInRecipeRatingProps {
 export default function LoggedInRecipeRating({recipeId, userRating = 0 , userAuthData}: LoggedInRecipeRatingProps) {
 
     const { user, isAuthenticated, isLoading } = userAuthData;
+    const { getAccessTokenSilently } = useAuth0();
+
 
     //FIX THE ANY BELOW 
     const [previouslySelectedRating, setPreviouslySelectedRating] = useState<any>(0);
@@ -26,9 +28,9 @@ export default function LoggedInRecipeRating({recipeId, userRating = 0 , userAut
     useEffect(() => {
         // Fetch the user's rating for the recipe
         if (isAuthenticated && user && user.email) {
-            FetchUsersRecipeRating({recipeid: recipeId, usersRatingCallback: setPreviouslySelectedRating, loadingCallback: setIsUsersRatingLoading, userEmail: user.email});
+            FetchUsersRecipeRating({recipeid: recipeId, usersRatingCallback: setPreviouslySelectedRating, loadingCallback: setIsUsersRatingLoading, userEmail: user.email, getAccessTokenSilently});
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, getAccessTokenSilently]);
 
     const getStarClass = (starNumber: number) => {
         const baseClass = `${styles.star} `;
@@ -100,7 +102,7 @@ export default function LoggedInRecipeRating({recipeId, userRating = 0 , userAut
                         <span
                         key={star}
                         className={getStarClass(star)}
-                        onClick={() => SendRating({recipeId, rating: star, ratingCallback: setPreviouslySelectedRating, setMessage, userAuthData})}
+                        onClick={() => SendRating({recipeId, rating: star, ratingCallback: setPreviouslySelectedRating, setMessage, userAuthData, getAccessTokenSilently})}
                         onMouseEnter={() => setHoveredRating(star)}
                         style={{ cursor: 'pointer' }}
                         >★</span>
@@ -109,11 +111,11 @@ export default function LoggedInRecipeRating({recipeId, userRating = 0 , userAut
                         {hoveredRating > 0 ? hoveredRating : previouslySelectedRating}/5
                     </span>
                 </div>
-                {userRating > 0 && (
+                {/*userRating > 0 && (
                     <p className={styles.currentRatingText}>
                     Your current rating: {previouslySelectedRating}/5
                     </p>
-                )}
+                )*/}
                 </div>
                 {message && (
                     <p className={`${styles.message} ${message.includes('success') ? styles.success : styles.error}`}>

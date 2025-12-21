@@ -7,10 +7,11 @@ import FetchProfileReviews from "../../components/requests/fetchProfileReviews"
 import FetchProfileRecipes from "../../components/requests/fetchProfileRecipes";
 import FetchRatedRecipes from "../../components/requests/fetchRatedRecipes";
 import { useNavigate } from "react-router-dom";
-import { User } from "@auth0/auth0-react";
+import { User, useAuth0 } from "@auth0/auth0-react";
 import { Review, Recipe, RecipeRating } from "../../types/index"
 
 export default function LoggedInProfileBody({user}: {user: User}) {
+    const { getAccessTokenSilently } = useAuth0();
     const [profileRestReviewsData, setProfileRestReviewsData] = useState<Review[]>([]);
     const [profileRestReviewsLoading, setProfileRestReviewsLoading] = useState(true);
 
@@ -22,11 +23,11 @@ export default function LoggedInProfileBody({user}: {user: User}) {
 
     useEffect(() => {
         if (user.email){
-            FetchProfileReviews({ dataCallback: setProfileRestReviewsData, loadingCallback: setProfileRestReviewsLoading, userEmail: user.email });
-            FetchProfileRecipes({ dataCallback: setProfileRecipesData, loadingCallback: setProfileRecipesLoading, userEmail: user.email });
-            FetchRatedRecipes({ dataCallback: setRatedRecipesData, loadingCallback: setRatedRecipesLoading, userEmail: user.email });
+            FetchProfileReviews({ dataCallback: setProfileRestReviewsData, loadingCallback: setProfileRestReviewsLoading, userEmail: user.email, getAccessTokenSilently });
+            FetchProfileRecipes({ dataCallback: setProfileRecipesData, loadingCallback: setProfileRecipesLoading, userEmail: user.email, getAccessTokenSilently });
+            FetchRatedRecipes({ dataCallback: setRatedRecipesData, loadingCallback: setRatedRecipesLoading, userEmail: user.email, getAccessTokenSilently });
         }
-    }, [user.email])
+    }, [user.email, getAccessTokenSilently])
 
     const name = user.name;
 

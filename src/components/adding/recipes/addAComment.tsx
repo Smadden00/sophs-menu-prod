@@ -1,7 +1,7 @@
 import styles from './addAComment.module.css'
 import SendComment from '../../requests/sendComment'
 import { Dispatch, SetStateAction } from "react";
-import { Auth0ContextInterface, User } from '@auth0/auth0-react';
+import { Auth0ContextInterface, User, useAuth0 } from '@auth0/auth0-react';
 
 interface FetchUsersRecipeRatingProps {
     usersComment: string;
@@ -14,6 +14,8 @@ interface FetchUsersRecipeRatingProps {
 
 export default function AddAComment({usersComment, setUsersComment, recipeId, recipeData, setRecipeData, userAuthData}: FetchUsersRecipeRatingProps) {
 
+    const { getAccessTokenSilently } = useAuth0();
+
     return (
         <div className={styles.addCommentContainer}> 
             <input
@@ -24,7 +26,7 @@ export default function AddAComment({usersComment, setUsersComment, recipeId, re
                 value={usersComment}
                 onChange={(e) => setUsersComment(e.target.value)}
             />
-            <button onClick={() => SendComment({recipeId, usersComment, commentCallback: setUsersComment, recipeData, recipeDataCallback: setRecipeData, userAuthData})}>
+            <button onClick={() => SendComment({recipeId, usersComment, commentCallback: setUsersComment, recipeData, recipeDataCallback: setRecipeData, userAuthData, getAccessTokenSilently})}>
                 Add Comment
             </button>
         </div>

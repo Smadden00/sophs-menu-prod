@@ -1,6 +1,21 @@
-export default async function FetchRestaurantTypes(dataCallback: (data: any[]) => void, loadingCallback: (loading: boolean) => void) {
+import { Dispatch, SetStateAction } from "react";
+
+interface FetchRestaurantTypesProps {
+    dataCallback: Dispatch<SetStateAction<string[]>>;
+    loadingCallback: Dispatch<SetStateAction<boolean>>;
+    getAccessTokenSilently: () => Promise<string>;
+}
+
+export default async function FetchRestaurantTypes({ dataCallback, loadingCallback, getAccessTokenSilently }: FetchRestaurantTypesProps) {
     try {      
-        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/restaurant-types/`);
+
+        const token = await getAccessTokenSilently();
+
+        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/restaurant-types/`, {
+            headers: {
+            Authorization: `Bearer ${token}`
+            }
+         });
         if (!response.ok) {
             throw new Error('Error in fetching restaurant types.');
         }
