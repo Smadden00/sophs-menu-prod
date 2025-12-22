@@ -12,7 +12,7 @@ export default async function FetchUsersRecipeRating({recipeid, usersRatingCallb
     try {
         const token = await getAccessTokenSilently();
 
-        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeid}/rating`, {
+        const response = await fetch(`https://sophsdatabasedomain.duckdns.org/api/recipes/${recipeid}/rating/`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

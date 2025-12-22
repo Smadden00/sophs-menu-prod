@@ -34,7 +34,7 @@ export default function ListInput({listTitle, array, callback}: ListInputProps) 
 
     const inputs = array.map((arrayItem, i) => (
         <div key={`${individualInputTitle} ${i+1}`} className={styles.inputRow}>
-            <TextInput inputTitle={`${individualInputTitle} ${i+1}`} value={arrayItem} callback={updateArray as any} index={i} isDescriptionBox={false}/>
+            <TextInput inputTitle={`${individualInputTitle} ${i+1}`} value={arrayItem} callback={updateArray} index={i} isDescriptionBox={false}/>
             <button
                 type="button"
                 className={styles.deleteButton}

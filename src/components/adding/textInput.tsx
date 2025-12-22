@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from 'react';
 interface TextInputProps {
   inputTitle: string;
   value: string;
-  callback: Dispatch<SetStateAction<string>>;
+  callback: (newValue: string, index?: number) => void;
   index?: number;
   isDescriptionBox: boolean;
 }
@@ -41,11 +41,11 @@ export default function TextInput({inputTitle, value, callback, index, isDescrip
             onBlurCapture={() => setTextAreaFocused(false)}
             onChange={(e)=> {
                 //This allows for the text input to update only a certain value of a given array if necessary
-                if (index||index===0) {
-                    callback(e.target.value) //was callback(e.target.value, index)
+                if (index !== undefined) {
+                    callback(e.target.value, index);
                 } else {
                 //if the value is not part of an array (indicated by the presence of index) then it will just callback with the normal value
-                    callback(e.target.value)
+                    callback(e.target.value);
                 }
             }}
         />;
