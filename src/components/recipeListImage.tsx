@@ -41,7 +41,7 @@ export default function RecipeListImage({title, prep_time_in_min, meal, id, rec_
           height={250}
           width={250}
           className={hover ? styles.darken : undefined}
-          src={rec_img_url ? rec_img_url : `https://sophs-menu-bucket.s3.us-east-2.amazonaws.com/${id}`}
+          src={rec_img_url}
           alt={title || "Food"}
       />
       {hover ? textBox : undefined}
