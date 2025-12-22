@@ -12,19 +12,25 @@ export function RecipeImage({ recipeId, alt, fallback = "/images/smallImgs/salad
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Try to load S3 image, fallback to local if it fails
-    const s3Url = `https://sophs-menu-bucket.s3.amazonaws.com/${recipeId}`;
+    // Try to load CloudFront image, fallback to local if it fails
+    const imageUrl = `${import.meta.env.VITE_CLOUDFRONT_IMG_BASE_URL}/${recipeId}`;
     
     const img = new window.Image();
     img.onload = () => {
-      setImageSrc(s3Url);
+      setImageSrc(imageUrl);
       setIsLoading(false);
     };
     img.onerror = () => {
       setImageSrc(fallback);
       setIsLoading(false);
     };
-    img.src = s3Url;
+    img.src = imageUrl;
+
+    // Cleanup to prevent memory leaks
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
   }, [recipeId, fallback]);
 
   return (
@@ -34,7 +40,7 @@ export function RecipeImage({ recipeId, alt, fallback = "/images/smallImgs/salad
       width={350}
       height={350}
       loading="lazy"
-      className={isLoading ? 'opacity-50' : 'opacity-100'}
+      style={{ opacity: isLoading ? 0.5 : 1, transition: 'opacity 0.3s ease-in-out' }}
     />
   );
 }
