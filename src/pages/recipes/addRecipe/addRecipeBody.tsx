@@ -8,9 +8,12 @@ import FileInput from "../../../components/adding/fileInput"
 import PrepTimeInput from "../../../components/adding/recipes/prepTimeInput";
 import DropdownInput from "../../../components/adding/dropdownInput";
 import AddingError from "../../../components/adding/addingError";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AddRecipeBody() {
     const navigate = useNavigate();
+
+    const { getAccessTokenSilently } = useAuth0();
 
     const [uploading, setUploading] = useState(false);
     const [recipeName, setRecipeName] = useState('');
@@ -19,7 +22,7 @@ export default function AddRecipeBody() {
     const [totalPrepTimeInMin, setTotalPrepTimeInMin] = useState(0);
     const [meal, setMeal] = useState('');
     const [imageFile, setImageFile] = useState<File | undefined>(undefined);
-    const [inputError, setInputError] = useState(null);
+    const [inputError, setInputError] = useState<{ isError: boolean; message: string; } | null>(null);
 
     //This function handles the image save
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +42,18 @@ export default function AddRecipeBody() {
           window.scrollTo(0, 0);
       }
     }, [inputError]);
+
+    const handleSubmit = () => {
+      if (!imageFile) {
+        setInputError({
+          isError: true,
+          message: 'Please upload an image for the recipe.'
+        });
+        return;
+      }
+      
+      SendRecipe({navigate, recipeName, ingredients, prepTime: totalPrepTimeInMin, meal, instructions, imageFile, setUploading, setInputError, getAccessTokenSilently});
+    };
     
       const errorAlert = inputError ? <AddingError error={inputError} setInputError={setInputError} /> : null;
 
@@ -73,9 +88,7 @@ export default function AddRecipeBody() {
                 type="button" 
                 value="Submit Recipe"
                 style={{margin: '10px'}}
-                onClick={() => {
-                  SendRecipe(navigate, recipeName, ingredients, totalPrepTimeInMin, meal, instructions, imageFile, setUploading, setInputError);
-                }}
+                onClick={handleSubmit}
             />
             {errorAlert}
         </div>

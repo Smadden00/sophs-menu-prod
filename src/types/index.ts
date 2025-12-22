@@ -33,6 +33,11 @@ export interface RecipeRating {
   user_encrypted: string;
 }
 
+export interface PresignedImgUploadResponse {
+  imgUploadUrl: string;
+  imgPublicUrl: string;
+}
+
 /***********
 Review
 ***********/
