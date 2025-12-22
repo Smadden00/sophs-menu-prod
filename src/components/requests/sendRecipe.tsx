@@ -94,7 +94,7 @@ export default async function SendRecipe({navigate, recipeName, ingredients, pre
                 prep_time: prepTime, 
                 meal: meal, 
                 instructions: instructionsWithSingleQuotesEscaped,
-                imgPublicUrl: imgPublicUrl,
+                img_public_url: imgPublicUrl,
                 soph_submitted: false,
             })
         });
