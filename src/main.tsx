@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         redirect_uri: window.location.origin,
         audience
       }}
-      cacheLocation='memory'//may be unecessary -- if seeing this and i dont remember, delete
+      cacheLocation='localstorage'
       useRefreshTokens={true}
     >
       <App />
