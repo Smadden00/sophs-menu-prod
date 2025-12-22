@@ -17,6 +17,6 @@ export default function SendRecipeSafetyChecks(recipeName: string, ingredients: 
     } else if (HasEmptyString(ingredients)){
         return {field: 'Ingredients', message: 'You cannot have any blank ingredients.', isError: true}
     } else {
-        return {message: 'No Errors', isError: false}
+        return {message: 'No Errors', isError: false, field: "N/A"}
     }
 };

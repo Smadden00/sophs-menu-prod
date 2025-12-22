@@ -15,7 +15,7 @@ interface SendReviewProps {
     description: string;
     state: string;
     city: string;
-    setInputError: Dispatch<SetStateAction<{ field?: string; message: string; isError: boolean } | null>>;
+    setInputError: Dispatch<SetStateAction<{ field: string; message: string; isError: boolean} | null>>;
     getAccessTokenSilently: () => Promise<string>;
 }
 

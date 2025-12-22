@@ -15,6 +15,6 @@ export default function SendReviewSafetyChecks(restaurantName: string, restauran
         }else if( description.trim() == '' ){
             return {field: 'Description', message: 'You must input a value in description.', isError: true}
         } else {
-            return {message: 'No errors', isError: false}
+            return {message: 'No errors', isError: false, field: "N/A"}
         }
     };

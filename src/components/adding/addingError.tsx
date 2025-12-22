@@ -1,8 +1,9 @@
 import styles from './addingError.module.css'
+import { Dispatch, SetStateAction } from 'react'
 
 interface AddingErrorProps {
   error: {field: string, message: string};
-  setInputError: (value: number | null) => void;
+  setInputError: Dispatch<SetStateAction<{ field: string; message: string; isError: boolean} | null>>;
 }
 
 

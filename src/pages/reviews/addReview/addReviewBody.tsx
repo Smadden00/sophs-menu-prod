@@ -25,7 +25,7 @@ export default function AddReviewBody() {
     const [taste, setTaste] = useState(-1);
     const [experience, setExperience] = useState(-1);
     const [description, setDescription] = useState('');
-    const [inputError, setInputError] = useState<{ field?: string; message: string; isError: boolean } | null>(null);
+    const [inputError, setInputError] = useState<{ field: string; message: string; isError: boolean} | null>(null);
     const [restaurantTypes, setRestaurantTypes] = useState<string[]>([]);
     const [loadingRestaurantTypes, setLoadingRestaurantTypes] = useState(true);
 

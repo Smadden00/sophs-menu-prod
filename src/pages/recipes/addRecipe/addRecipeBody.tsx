@@ -22,7 +22,7 @@ export default function AddRecipeBody() {
     const [totalPrepTimeInMin, setTotalPrepTimeInMin] = useState(0);
     const [meal, setMeal] = useState('');
     const [imageFile, setImageFile] = useState<File | undefined>(undefined);
-    const [inputError, setInputError] = useState<{ isError: boolean; message: string; } | null>(null);
+    const [inputError, setInputError] = useState<{ field: string; message: string; isError: boolean} | null>(null);
 
     //This function handles the image save
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +47,8 @@ export default function AddRecipeBody() {
       if (!imageFile) {
         setInputError({
           isError: true,
-          message: 'Please upload an image for the recipe.'
+          message: 'Please upload an image for the recipe.',
+          field: "image"
         });
         return;
       }

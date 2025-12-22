@@ -13,7 +13,7 @@ interface SendRecipeProps {
     instructions: string[];
     imageFile: File;
     setUploading: Dispatch<SetStateAction<boolean>>;
-    setInputError: Dispatch<SetStateAction<{ isError: boolean; message: string } | null>>;
+    setInputError: Dispatch<SetStateAction<{ field: string; message: string; isError: boolean} | null>>;    
     getAccessTokenSilently: () => Promise<string>;
 }
 
@@ -141,7 +141,8 @@ export default async function SendRecipe({navigate, recipeName, ingredients, pre
         setUploading(false);
         setInputError({
             isError: true,
-            message: error instanceof Error ? error.message : 'Failed to upload recipe. Please try again.'
+            message: 'Failed during upload. See console for more details',
+            field: "unknown"
         });
     }
 }
