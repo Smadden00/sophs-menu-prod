@@ -1,7 +1,21 @@
 import styles from './filters.module.css'
 import MinMaxSliders from "../minMaxSliders";
 
-export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShowDropdown}) {
+interface RecipeFiltersDropdownProps {
+    filterValuesAndCallbacks: {
+        lowerPrepTime: number;
+        setLowerPrepTime: React.Dispatch<React.SetStateAction<number>>;
+        upperPrepTime: number;
+        setUpperPrepTime: React.Dispatch<React.SetStateAction<number>>;
+        mealFilter: string[];
+        setMealFilter: React.Dispatch<React.SetStateAction<string[]>>;
+        sophSubmittedOnly: boolean;
+        setSophSubmittedOnly: React.Dispatch<React.SetStateAction<boolean>>;
+    };
+    setShowDropdown: (value: boolean) => void;
+}
+
+export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShowDropdown}: RecipeFiltersDropdownProps) {
     const {
         lowerPrepTime: lowerPrepTime, 
         setLowerPrepTime: setLowerPrepTime, 
@@ -15,7 +29,7 @@ export default function RecipeFiltersDropdown({filterValuesAndCallbacks, setShow
 
     const meals = ['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert'];
 
-    const handleCheckboxChange = (e) => {
+    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedMeal = e.target.value;
         const isChecked = e.target.checked;
     

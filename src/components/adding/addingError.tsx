@@ -1,6 +1,12 @@
 import styles from './addingError.module.css'
 
-export default function AddingError({error, setInputError}) {
+interface AddingErrorProps {
+  error: {field: string, message: string};
+  setInputError: (value: number | null) => void;
+}
+
+
+export default function AddingError({error, setInputError}: AddingErrorProps) {
 
 
   return (

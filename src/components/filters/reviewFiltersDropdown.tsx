@@ -2,7 +2,25 @@ import styles from './filters.module.css';
 import MinMaxSliders from "../minMaxSliders";
 import StateCodes from "../consts/state_codes";
 
-export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShowDropdown}) {
+interface ReviewFiltersDropdownProps {
+    filterValuesAndCallbacks: {
+        lowerRatingVal: number;
+        setLowerRatingVal: React.Dispatch<React.SetStateAction<number>>;
+        upperRatingVal: number;
+        setUpperRatingVal: React.Dispatch<React.SetStateAction<number>>;
+        lowerPriceVal: number;
+        setLowerPriceVal: React.Dispatch<React.SetStateAction<number>>;
+        upperPriceVal: number;
+        setUpperPriceVal: React.Dispatch<React.SetStateAction<number>>;
+        selectedStates: string[];
+        setSelectedStates: React.Dispatch<React.SetStateAction<string[]>>;
+        sophSubmittedOnly: boolean;
+        setSophSubmittedOnly: React.Dispatch<React.SetStateAction<boolean>>;
+    };
+    setShowDropdown: (value: boolean) => void;
+}
+
+export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShowDropdown}: ReviewFiltersDropdownProps) {
     const {
         lowerRatingVal: lowerRatingVal, 
         setLowerRatingVal: setLowerRatingVal, 
@@ -20,7 +38,7 @@ export default function ReviewFiltersDropdown({filterValuesAndCallbacks, setShow
 
     const stateCodes = StateCodes();
 
-    const handleStateChange = (stateCode) => {
+    const handleStateChange = (stateCode: string) => {
         if (selectedStates.includes(stateCode)) {
             setSelectedStates(selectedStates.filter(state => state !== stateCode));
         } else {
